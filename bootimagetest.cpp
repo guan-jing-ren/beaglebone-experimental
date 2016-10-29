@@ -29,5 +29,4 @@ volatile unsigned char configuration_header_settings[] = {
 // AM335x Rev O 26.1.9.2 p.5007
 volatile std::uint32_t size = 42;
 volatile std::uint32_t destination = 43;
-
-int main() { return 0; }
+extern "C" void start() { size = size + destination; }
