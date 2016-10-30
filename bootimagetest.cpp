@@ -20,11 +20,11 @@ struct {
   };
 
   // AM335x Rev O 26.1.7.5.5.1 p.4989
-  const unsigned char configuration_header_settings[0xe + 1] = {
-      0xC0, 0xC0, 0xC0, 0xC1,                // Section keys
-      0,                                     // Valid
-      1,                                     // Version
-      0,    0,    0,    0,    0, 0, 0, 0, 0, // Reserved
+  const unsigned char configuration_header_settings[0xe0 + 1] = {
+      0xC0, 0xC0, 0xC0, 0xC1, // Section keys
+      0,                      // Valid
+      1,                      // Version
+      0,                      // Reserved
   };
 
   // AM335x Rev O 26.1.9.2 p.5007
