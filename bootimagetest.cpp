@@ -29,8 +29,8 @@ struct {
 
   // AM335x Rev O 26.1.9.2 p.5007
   struct {
-    std::uint32_t size = 42;
-    std::uint32_t destination = 43;
+    std::uint32_t size = 0x4030B800 - 0x402F0400;
+    std::uint32_t destination = 0x402F0400;
   } gp_header;
 
 } volatile boot_header;

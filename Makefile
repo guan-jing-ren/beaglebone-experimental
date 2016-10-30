@@ -11,4 +11,4 @@ bootimagetest: bootimagetest.cpp experiment.ld
 	$(CC) $(LANG_VER) $(DIAG_FLAGS) $(LINK_FLAGS) $(DEBUG_FLAGS) $(ARCH_FLAGS) -o $@ bootimagetest.cpp
 
 bootimagetest.bin: bootimagetest
-	$(COPY) -O binary -j .data -j .text bootimagetest $@
+	$(COPY) -O binary -j .data -j .text --pad-to 111616 bootimagetest $@
