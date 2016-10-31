@@ -79,6 +79,27 @@ template <std::uint32_t O, std::uint32_t R = 0> struct pins {
 };
 }
 
+enum class REVISION {
+  MINOR,
+  CUSTOM,
+  MAJOR,
+  RTL,
+  FUNC,
+  RESERVED = -1,
+  SCHEME,
+  offset = 0,
+  reset = 0x50600801
+};
+enum class SYSCONFIG {
+  AUTOIDLE,
+  SOFTRESET,
+  ENAWAKEUP,
+  IDLEMODE,
+  RESERVED = -1,
+  offset = 0x10,
+  reset = 0
+};
+enum class EOI { DMAEvent_Ack, RESERVED, offset = 0x20, reset = 0 };
 using IRQSTATUS_RAW_0 = detail::pins<0x24>::spec;
 using IRQSTATUS_RAW_1 = detail::pins<0x28>::spec;
 using IRQSTATUS_0 = detail::pins<0x2C>::spec;
@@ -89,12 +110,25 @@ using IRQSTATUS_CLR_0 = detail::pins<0x3C>::spec;
 using IRQSTATUS_CLR_1 = detail::pins<0x40>::spec;
 using IRQWAKEN_0 = detail::pins<0x44>::spec;
 using IRQWAKEN_1 = detail::pins<0x48>::spec;
-using IRQLEVELDETECT_0 = detail::pins<0x140>::spec;
-using IRQLEVELDETECT_1 = detail::pins<0x144>::spec;
-using IRQRISINGDETECT_0 = detail::pins<0x148>::spec;
-using IRQFALLINGDETECT_1 = detail::pins<0x14C>::spec;
-using IRQCLEARDATAOUT_0 = detail::pins<0x190>::spec;
-using IRQCLEARDATAOUT_! = detail::pins<0x194>::spec;
+enum class SYSSTATUS { RESETDONE, RESERVED = -1, offset = 0x114, reset = 0 };
+enum class CTRL {
+  DISABLEMODULE,
+  GATINGRATION,
+  RESERVED = -1,
+  offset = 0x130,
+  reset = 0
+};
+using OE = detail::pins<0x134, 0xFFFFFFFF>::spec;
+using DATAIN = detail::pins<0x138>::spec;
+using DATAOUT = detail::pins<0x13C>::spec;
+using LEVELDETECT_0 = detail::pins<0x140>::spec;
+using LEVELDETECT_1 = detail::pins<0x144>::spec;
+using RISINGDETECT_0 = detail::pins<0x148>::spec;
+using FALLINGDETECT_1 = detail::pins<0x14C>::spec;
+using DEBOUNCENABLE = detail::pins<0x150>::spec;
+enum class DEBOUNCINGTIME { DEBOUNCETIME, offset = 0x154, reset = 0 };
+using CLEARDATAOUT = detail::pins<0x190>::spec;
+using SETDATAOUT = detail::pins<0x194>::spec;
 }
 
 extern "C" void start() {}
