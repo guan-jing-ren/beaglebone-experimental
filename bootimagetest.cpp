@@ -1,4 +1,5 @@
 #include <cstdint>
+#include "../fundamental-machines/basic_register.hpp"
 
 struct {
   // AM335x Rev O 26.1.7.5.5.1 p.4988-4989
@@ -76,6 +77,9 @@ template <std::uint32_t O, std::uint32_t R = 0> struct pins {
     offset = O,
     reset = R
   };
+  using layout = fm::memory_mapped_register<spec, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1>;
 };
 }
 
@@ -129,6 +133,33 @@ using DEBOUNCENABLE = detail::pins<0x150>::spec;
 enum class DEBOUNCINGTIME { DEBOUNCETIME, offset = 0x154, reset = 0 };
 using CLEARDATAOUT = detail::pins<0x190>::spec;
 using SETDATAOUT = detail::pins<0x194>::spec;
+
+using REVISION_REG = fm::memory_mapped_register<REVISION, 6, 2, 3, 5, 10, 2, 2>;
+using SYSCONFIG_REG = fm::memory_mapped_register<SYSCONFIG, 1, 1, 1, 2, 27>;
+using EOI_REG = fm::memory_mapped_register<EOI, 1, 31>;
+using IRQSTATUS_RAW_0_REG = detail::pins<0x24>::layout;
+using IRQSTATUS_RAW_1_REG = detail::pins<0x28>::layout;
+using IRQSTATUS_0_REG = detail::pins<0x2C>::layout;
+using IRQSTATUS_1_REG = detail::pins<0x30>::layout;
+using IRQSTATUS_SET_0_REG = detail::pins<0x34>::layout;
+using IRQSTATUS_SET_1_REG = detail::pins<0x38>::layout;
+using IRQSTATUS_CLR_0_REG = detail::pins<0x3C>::layout;
+using IRQSTATUS_CLR_1_REG = detail::pins<0x40>::layout;
+using IRQWAKEN_0_REG = detail::pins<0x44>::layout;
+using IRQWAKEN_1_REG = detail::pins<0x48>::layout;
+using SYSSTATUS_REG = fm::memory_mapped_register<SYSSTATUS, 1, 21>;
+using CTRL_REG = fm::memory_mapped_register<CTRL, 1, 2, 29>;
+using OE_REG = detail::pins<0x134, 0xFFFFFFFF>::layout;
+using DATAIN_REG = detail::pins<0x138>::layout;
+using DATAOUT_REG = detail::pins<0x13C>::layout;
+using LEVELDETECT_0_REG = detail::pins<0x140>::layout;
+using LEVELDETECT_1_REG = detail::pins<0x144>::layout;
+using RISINGDETECT_0_REG = detail::pins<0x148>::layout;
+using FALLINGDETECT_1_REG = detail::pins<0x14C>::layout;
+using DEBOUNCENABLE_REG = detail::pins<0x150>::layout;
+using DEBOUNCINGTIME_REG = fm::memory_mapped_register<DEBOUNCINGTIME, 8, 24>;
+using CLEARDATAOUT_REG = detail::pins<0x190>::layout;
+using SETDATAOUT_REG = detail::pins<0x194>::layout;
 }
 
 extern "C" void start() {}
