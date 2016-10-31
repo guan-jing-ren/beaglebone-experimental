@@ -20,7 +20,7 @@ struct {
   };
 
   // AM335x Rev O 26.1.7.5.5.1 p.4989
-  const unsigned char configuration_header_settings[0xe0 + 1] = {
+  const unsigned char configuration_header_settings[0xE0] = {
       0xC0, 0xC0, 0xC0, 0xC1, // Section keys
       0,                      // Valid
       1,                      // Version
@@ -29,13 +29,12 @@ struct {
 
   // AM335x Rev O 26.1.9.2 p.5007
   struct {
-    std::uint32_t size = 0x4030B800 - 0x402F0400;
-    std::uint32_t destination = 0x402F0400;
+    // Works out to 111,616, or 109Ki
+    std::uint32_t size =
+        0x4030B800 - 0x402F0400;            // AM335x Rev O 26.1.3.2 p.4957
+    std::uint32_t destination = 0x402F0400; // AM335x Rev O 26.1.3.2 p.4957
   } gp_header;
 
 } volatile boot_header;
 
-extern "C" void start() {
-  boot_header.gp_header.size =
-      boot_header.gp_header.size + boot_header.gp_header.destination;
-}
+extern "C" void start() {}
