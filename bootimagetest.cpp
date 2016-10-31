@@ -87,6 +87,14 @@ using IRQSTATUS_SET_0 = detail::pins<0x34>::spec;
 using IRQSTATUS_SET_1 = detail::pins<0x38>::spec;
 using IRQSTATUS_CLR_0 = detail::pins<0x3C>::spec;
 using IRQSTATUS_CLR_1 = detail::pins<0x40>::spec;
+using IRQWAKEN_0 = detail::pins<0x44>::spec;
+using IRQWAKEN_1 = detail::pins<0x48>::spec;
+using IRQLEVELDETECT_0 = detail::pins<0x140>::spec;
+using IRQLEVELDETECT_1 = detail::pins<0x144>::spec;
+using IRQRISINGDETECT_0 = detail::pins<0x148>::spec;
+using IRQFALLINGDETECT_1 = detail::pins<0x14C>::spec;
+using IRQCLEARDATAOUT_0 = detail::pins<0x190>::spec;
+using IRQCLEARDATAOUT_! = detail::pins<0x194>::spec;
 }
 
 extern "C" void start() {}
