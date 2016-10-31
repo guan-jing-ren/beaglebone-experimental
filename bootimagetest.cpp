@@ -37,4 +37,56 @@ struct {
 
 } volatile boot_header;
 
+namespace GPIO {
+namespace detail {
+template <std::uint32_t O, std::uint32_t R = 0> struct pins {
+  enum class spec : std::uint32_t {
+    _0,
+    _1,
+    _2,
+    _3,
+    _4,
+    _5,
+    _6,
+    _7,
+    _8,
+    _9,
+    _10,
+    _11,
+    _12,
+    _13,
+    _14,
+    _15,
+    _16,
+    _17,
+    _18,
+    _19,
+    _20,
+    _21,
+    _22,
+    _23,
+    _24,
+    _25,
+    _26,
+    _27,
+    _28,
+    _29,
+    _30,
+    _31,
+    offset = O,
+    reset = R
+  };
+};
+}
+
+using IRQSTATUS_RAW_0 = detail::pins<0x24>::spec;
+using IRQSTATUS_RAW_1 = detail::pins<0x28>::spec;
+using IRQSTATUS_0 = detail::pins<0x2C>::spec;
+using IRQSTATUS_1 = detail::pins<0x30>::spec;
+using IRQSTATUS_SET_0 = detail::pins<0x34>::spec;
+using IRQSTATUS_SET_1 = detail::pins<0x38>::spec;
+using IRQSTATUS_CLR_0 = detail::pins<0x3C>::spec;
+using IRQSTATUS_CLR_1 = detail::pins<0x40>::spec;
+}
+
 extern "C" void start() {}
