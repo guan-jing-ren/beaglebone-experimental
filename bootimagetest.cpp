@@ -1,4 +1,5 @@
 #include <cstdint>
+#include <new>
 #include "../fundamental-machines/basic_register.hpp"
 
 struct {
@@ -180,5 +181,5 @@ extern "C" void start() {
   asm volatile("movw sp, %0" ::"i"(0));
   GPIO::OE_REG oe = 0x44E07000u;
   oe.set<GPIO::OE::_12>(1);
-  oe.set<GPIO::OE::_12>(oe.get<GPIO::OE::_12>());
+  oe.get<GPIO::OE::_12>();
 }

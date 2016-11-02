@@ -7,7 +7,7 @@ LINK_FLAGS = -ffreestanding -nostartfiles -nodefaultlibs -fno-rtti -static -T ex
 DEBUG_FLAGS = -gsplit-dwarf -g3 -gdwarf-4 -fdump-translation-unit
 ARCH_FLAGS =  -march=armv7-a -mtune=cortex-a8
 
-bootimagetest: bootimagetest.cpp experiment.ld
+bootimagetest: bootimagetest.cpp ../fundamental-machines/basic_register.hpp experiment.ld
 	$(CC) $(LANG_VER) $(DIAG_FLAGS) $(LINK_FLAGS) $(DEBUG_FLAGS) $(ARCH_FLAGS) -o $@ bootimagetest.cpp
 
 bootimagetest.bin: bootimagetest
