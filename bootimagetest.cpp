@@ -34,9 +34,9 @@ struct {
     std::uint32_t size =
         0x4030B800 - 0x402F0400;            // AM335x Rev O 26.1.3.2 p.4957
     std::uint32_t destination = 0x402F0400; // AM335x Rev O 26.1.3.2 p.4957
-  } gp_header;
+  } const gp_header;
 
-} volatile boot_header;
+} const volatile boot_header;
 
 namespace GPIO {
 namespace detail {
@@ -77,9 +77,23 @@ template <std::uint32_t O, std::uint32_t R = 0> struct pins {
     offset = O,
     reset = R
   };
-  using layout = fm::memory_mapped_register<spec, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-                                            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1>;
+  struct layout
+      : public fm::memory_mapped_register<spec, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                          1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                          1, 1, 1, 1, 1, 1, 1, 1> {
+    layout(std::underlying_type_t<spec> t)
+        : fm::memory_mapped_register<spec, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                                     1, 1, 1, 1, 1, 1>(
+              static_cast<std::underlying_type_t<spec>>(spec::offset) + t) {}
+  };
+};
+
+template <typename E, std::size_t... fields>
+struct offset_register : public fm::memory_mapped_register<E, fields...> {
+  template <typename T>
+  offset_register(T t)
+      : fm::memory_mapped_register<E, fields...>(E::offset + t) {}
 };
 }
 
@@ -134,9 +148,9 @@ enum class DEBOUNCINGTIME { DEBOUNCETIME, offset = 0x154, reset = 0 };
 using CLEARDATAOUT = detail::pins<0x190>::spec;
 using SETDATAOUT = detail::pins<0x194>::spec;
 
-using REVISION_REG = fm::memory_mapped_register<REVISION, 6, 2, 3, 5, 10, 2, 2>;
-using SYSCONFIG_REG = fm::memory_mapped_register<SYSCONFIG, 1, 1, 1, 2, 27>;
-using EOI_REG = fm::memory_mapped_register<EOI, 1, 31>;
+using REVISION_REG = detail::offset_register<REVISION, 6, 2, 3, 5, 10, 2, 2>;
+using SYSCONFIG_REG = detail::offset_register<SYSCONFIG, 1, 1, 1, 2, 27>;
+using EOI_REG = detail::offset_register<EOI, 1, 31>;
 using IRQSTATUS_RAW_0_REG = detail::pins<0x24>::layout;
 using IRQSTATUS_RAW_1_REG = detail::pins<0x28>::layout;
 using IRQSTATUS_0_REG = detail::pins<0x2C>::layout;
@@ -147,8 +161,8 @@ using IRQSTATUS_CLR_0_REG = detail::pins<0x3C>::layout;
 using IRQSTATUS_CLR_1_REG = detail::pins<0x40>::layout;
 using IRQWAKEN_0_REG = detail::pins<0x44>::layout;
 using IRQWAKEN_1_REG = detail::pins<0x48>::layout;
-using SYSSTATUS_REG = fm::memory_mapped_register<SYSSTATUS, 1, 21>;
-using CTRL_REG = fm::memory_mapped_register<CTRL, 1, 2, 29>;
+using SYSSTATUS_REG = detail::offset_register<SYSSTATUS, 1, 21>;
+using CTRL_REG = detail::offset_register<CTRL, 1, 2, 29>;
 using OE_REG = detail::pins<0x134, 0xFFFFFFFF>::layout;
 using DATAIN_REG = detail::pins<0x138>::layout;
 using DATAOUT_REG = detail::pins<0x13C>::layout;
@@ -157,9 +171,14 @@ using LEVELDETECT_1_REG = detail::pins<0x144>::layout;
 using RISINGDETECT_0_REG = detail::pins<0x148>::layout;
 using FALLINGDETECT_1_REG = detail::pins<0x14C>::layout;
 using DEBOUNCENABLE_REG = detail::pins<0x150>::layout;
-using DEBOUNCINGTIME_REG = fm::memory_mapped_register<DEBOUNCINGTIME, 8, 24>;
+using DEBOUNCINGTIME_REG = detail::offset_register<DEBOUNCINGTIME, 8, 24>;
 using CLEARDATAOUT_REG = detail::pins<0x190>::layout;
 using SETDATAOUT_REG = detail::pins<0x194>::layout;
 }
 
-extern "C" void start() {}
+extern "C" void start() {
+  asm volatile("movw sp, %0" ::"i"(0));
+  GPIO::OE_REG oe = 0x44E07000u;
+  oe.set<GPIO::OE::_12>(1);
+  oe.set<GPIO::OE::_12>(oe.get<GPIO::OE::_12>());
+}
