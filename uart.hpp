@@ -343,6 +343,60 @@ enum class TX_DMA_THRESHOLD {
   offset = 0x84,
   reset = 0
 };
+
+using THR_REG = offset_register<THR, 8, 8>;
+using RHR_REG = offset_register<RHR, 8, 8>;
+using DLL_REG = offset_register<DLL, 8, 8>;
+using IER_IRDA_REG = offset_register<IER_IRDA, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using IER_CIR_REG = offset_register<IER_CIR, 1, 1, 1, 1, 1, 1, 10>;
+using IER_UART_REG = offset_register<IER_UART, 1, 1, 1, 1, 1, 1, 1, 8>;
+using DLH_REG = offset_register<DLH, 8, 8>;
+using EFR_REG = offset_register<EFR, 4, 1, 1, 1, 1, 8>;
+using IIR_UART_REG = offset_register<IIR_UART, 1, 5, 2, 8>;
+using IIR_CIR_REG = offset_register<IIR_CIR, 1, 1, 1, 1, 1, 1, 10>;
+using FCR_REG = offset_register<FCR, 1, 1, 1, 1, 2, 2, 8>;
+using IIR_IRDA_REG = offset_register<IIR_IRDA, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using LCR_REG = offset_register<LCR, 2, 1, 1, 1, 1, 1, 1, 8>;
+using MCR_REG = offset_register<MCR, 1, 1, 1, 1, 1, 1, 1, 9>;
+using XON1_ADDR1_REG = offset_register<XON1_ADDR1, 8, 8>;
+using XON2_ADDR2_REG = offset_register<XON2_ADDR2, 8, 8>;
+using LSR_CIR_REG = offset_register<LSR_CIR, 1, 4, 1, 1, 1, 8>;
+using LSR_IRDA_REG = offset_register<LSR_IRDA, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using LSR_UART_REG = offset_register<LSR_UART, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using TCR_REG = offset_register<TCR, 4, 4, 8>;
+using MSR_REG = offset_register<MSR, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using XOFF1_REG = offset_register<XOFF1, 8, 8>;
+using SPR_REG = offset_register<SPR, 8, 8>;
+using TLR_REG = offset_register<TLR, 4, 4, 8>;
+using XOFF2_REG = offset_register<XOFF2, 8, 8>;
+using MDR1_REG = offset_register<MDR1, 3, 1, 1, 1, 1, 1, 8>;
+using MDR2_REG = offset_register<MDR2, 1, 2, 1, 2, 1, 1, 8>;
+using TXFLL_REG = offset_register<TXFLL, 8, 8>;
+using SFLSR_REG = offset_register<SFLSR, 5, 11>;
+using RESUME_REG = offset_register<RESUME, 8, 8>;
+using TXFLH_REG = offset_register<TXFLH, 5, 11>;
+using RXFLL_REG = offset_register<RXFLL, 8, 8>;
+using SFREGL_REG = offset_register<SFREGL, 8, 8>;
+using SFREGH_REG = offset_register<SFREGH, 4, 12>;
+using RXFLH_REG = offset_register<RXFLH, 4, 12>;
+using BLR_REG = offset_register<BLR, 6, 1, 1, 8>;
+using UASR_REG = offset_register<UASR, 5, 1, 2, 8>;
+using ACREG_REG = offset_register<ACREG, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using SCR_REG = offset_register<SCR, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using SSR_REG = offset_register<SSR, 1, 1, 1, 13>;
+using EBLR_REG = offset_register<EBLR, 8, 8>;
+using MVR_REG = offset_register<MVR, 6, 2, 3, 5>;
+using SYSC_REG = offset_register<SYSC, 1, 1, 1, 2, 11>;
+using SYSS_REG = offset_register<SYSS, 1, 15>;
+using WER_REG = offset_register<WER, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using CFPS_REG = offset_register<CFPS, 8, 8>;
+using RXFIFO_LVL_REG = offset_register<RXFIFO_LVL, 8, 8>;
+using TXFIFO_LVL_REG = offset_register<TXFIFO_LVL, 8, 8>;
+using IER2_REG = offset_register<IER2, 1, 1, 14>;
+using ISR2_REG = offset_register<ISR2, 1, 1, 14>;
+using FREQ_SEL_REG = offset_register<FREQ_SEL, 8, 8>;
+using MDR3_REG = offset_register<MDR3, 1, 1, 1, 12>;
+using TX_DMA_THRESHOLD_REG = offset_register<TX_DMA_THRESHOLD, 6, 10>;
 }
 
 #endif
