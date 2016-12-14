@@ -1,3 +1,6 @@
+#ifndef _GPIO_H
+#define _GPIO_H
+
 #include "../fundamental-machines/basic_register.hpp"
 
 namespace GPIO {
@@ -137,3 +140,5 @@ using DEBOUNCINGTIME_REG = detail::offset_register<DEBOUNCINGTIME, 8, 24>;
 using CLEARDATAOUT_REG = detail::pins<0x190>::layout;
 using SETDATAOUT_REG = detail::pins<0x194>::layout;
 }
+
+#endif
