@@ -39,6 +39,7 @@ struct {
 } const volatile boot_header;
 
 #include "gpio.hpp"
+#include "uart.hpp"
 
 extern "C" void start() {
   asm volatile("movw sp, %0" ::"i"(0));
