@@ -238,7 +238,111 @@ enum class BLR {
   offset = 0x38,
   reset = 0x40
 };
-enum class UASR {SPEED,BITBYCHAR,PARITYTYPE,RESERVED=-1,offset=0x38,reset=0};
+enum class UASR {
+  SPEED,
+  BITBYCHAR,
+  PARITYTYPE,
+  RESERVED = -1,
+  offset = 0x38,
+  reset = 0
+};
+enum class ACREG {
+  EOTEN,
+  ABORTEN,
+  SCTXEN,
+  SENDSIP,
+  DISTXUNDERRUN,
+  DISIRRX,
+  SDMOD,
+  PULSETYPE,
+  RESERVED = -1,
+  offset = 0x3C,
+  reset = 0
+};
+enum class SCR {
+  DMAMODECTL,
+  DMAMODE2,
+  TXEMPTYCTLIT,
+  RXCTSDSRWAKEUPENABLE,
+  DSRIT,
+  TXTRIGGRANU1,
+  RXTRIGGRANU1,
+  RESERVED = -1,
+  offset = 0x40,
+  reset = 0
+};
+enum class SSR {
+  TXFIFOFULL,
+  RXCTSDSRWAKEUPSTS,
+  DMACOUNTERRST,
+  RESERVED = -1,
+  offset = 0x44,
+  reset = 4
+};
+enum class EBLR { EBLR, RESERVED = -1, offset = 0x48, reset = 0 };
+enum class MVR {
+  MINORREV,
+  RESERVED0,
+  MAJORREV,
+  RESERVED = -1,
+  offset = 0x50,
+  reset = 0
+};
+enum class SYSC {
+  AUTOIDLE,
+  SOFTRESET,
+  ENAWAKEUP,
+  IDLEMODE,
+  RESERVED = -1,
+  offset = 0x54,
+  reset = 0
+};
+enum class SYSS { RESETDONE, RESERVED = -1, offset = 0x58, reset = 0 };
+enum class WER {
+  CTS_ACTIVITY,
+  DSR_ACTIVITY,
+  RI_ACTIVITY,
+  DCD_ACTIVITY,
+  RX_ACTIVITY,
+  RHR_INTERRUPT,
+  RLS_INTERRUPT,
+  TXWAKEUPEN,
+  RESERVED = -1,
+  offset = 0x5C,
+  reset = 0xFF
+};
+enum class CFPS { CFPS, RESERVED = -1, offset = 0x60, reset = 0x69 };
+enum class RXFIFO_LVL { RXFIFO_LVL, RESERVED = -1, offset = 0x64, reset = 0 };
+enum class TXFIFO_LVL { TXFIFO_LVL, RESERVED = -1, offset = 0x68, reset = 0 };
+enum class IER2 {
+  EN_RXFIFO_EMPTY,
+  EN_TXFIFO_EMPTY,
+  RESERVED = -1,
+  offset = 0x6C,
+  reset = 0
+};
+enum class ISR2 {
+  RXFIFO_EMPTY_STS,
+  TXFIFO_EMPTY_STS,
+  RESERVED = -1,
+  offset = 0x70,
+  reset = 0
+};
+enum class FREQ_SEL { FREQ_SEL, RESERVED = -1, offset = 0x74, reset = 0 };
+enum class MDR3 {
+  DISABLE_CIR_RX_DEMOD,
+  NONDEFAULT_FREQ,
+  SET_DMA_TX_THRESHOLD,
+  RESERVED = -1,
+  offset = 0x80,
+  reset = 0
+};
+enum class TX_DMA_THRESHOLD {
+  TX_DMA_THRESHOLD,
+  RESERVED = -1,
+  offset = 0x84,
+  reset = 0
+};
 }
 
 #endif
