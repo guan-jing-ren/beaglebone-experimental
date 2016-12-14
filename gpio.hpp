@@ -1,5 +1,5 @@
-#ifndef _GPIO_H
-#define _GPIO_H
+#ifndef _GPIO_HPP_
+#define _GPIO_HPP_
 
 #include "../fundamental-machines/basic_register.hpp"
 
