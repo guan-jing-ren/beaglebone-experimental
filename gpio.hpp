@@ -2,6 +2,7 @@
 #define _GPIO_HPP_
 
 #include "../fundamental-machines/basic_register.hpp"
+#include "offset_register.hpp"
 
 namespace GPIO {
 namespace detail {
@@ -53,15 +54,9 @@ template <std::uint32_t O, std::uint32_t R = 0> struct pins {
               static_cast<std::underlying_type_t<spec>>(spec::offset) + t) {}
   };
 };
-
-template <typename E, std::size_t... fields>
-struct offset_register : public fm::memory_mapped_register<E, fields...> {
-  template <typename T>
-  offset_register(T t)
-      : fm::memory_mapped_register<E, fields...>(E::offset + t) {}
-};
 }
 
+/* Defines the fields and special values of the registers */
 enum class REVISION {
   MINOR,
   CUSTOM,
@@ -113,9 +108,10 @@ enum class DEBOUNCINGTIME { DEBOUNCETIME, offset = 0x154, reset = 0 };
 using CLEARDATAOUT = detail::pins<0x190>::spec;
 using SETDATAOUT = detail::pins<0x194>::spec;
 
-using REVISION_REG = detail::offset_register<REVISION, 6, 2, 3, 5, 10, 2, 2>;
-using SYSCONFIG_REG = detail::offset_register<SYSCONFIG, 1, 1, 1, 2, 27>;
-using EOI_REG = detail::offset_register<EOI, 1, 31>;
+/* Register definitions  */
+using REVISION_REG = offset_register<REVISION, 6, 2, 3, 5, 10, 2, 2>;
+using SYSCONFIG_REG = offset_register<SYSCONFIG, 1, 1, 1, 2, 27>;
+using EOI_REG = offset_register<EOI, 1, 31>;
 using IRQSTATUS_RAW_0_REG = detail::pins<0x24>::layout;
 using IRQSTATUS_RAW_1_REG = detail::pins<0x28>::layout;
 using IRQSTATUS_0_REG = detail::pins<0x2C>::layout;
@@ -126,8 +122,8 @@ using IRQSTATUS_CLR_0_REG = detail::pins<0x3C>::layout;
 using IRQSTATUS_CLR_1_REG = detail::pins<0x40>::layout;
 using IRQWAKEN_0_REG = detail::pins<0x44>::layout;
 using IRQWAKEN_1_REG = detail::pins<0x48>::layout;
-using SYSSTATUS_REG = detail::offset_register<SYSSTATUS, 1, 21>;
-using CTRL_REG = detail::offset_register<CTRL, 1, 2, 29>;
+using SYSSTATUS_REG = offset_register<SYSSTATUS, 1, 21>;
+using CTRL_REG = offset_register<CTRL, 1, 2, 29>;
 using OE_REG = detail::pins<0x134, 0xFFFFFFFF>::layout;
 using DATAIN_REG = detail::pins<0x138>::layout;
 using DATAOUT_REG = detail::pins<0x13C>::layout;
@@ -136,7 +132,7 @@ using LEVELDETECT_1_REG = detail::pins<0x144>::layout;
 using RISINGDETECT_0_REG = detail::pins<0x148>::layout;
 using FALLINGDETECT_1_REG = detail::pins<0x14C>::layout;
 using DEBOUNCENABLE_REG = detail::pins<0x150>::layout;
-using DEBOUNCINGTIME_REG = detail::offset_register<DEBOUNCINGTIME, 8, 24>;
+using DEBOUNCINGTIME_REG = offset_register<DEBOUNCINGTIME, 8, 24>;
 using CLEARDATAOUT_REG = detail::pins<0x190>::layout;
 using SETDATAOUT_REG = detail::pins<0x194>::layout;
 }
