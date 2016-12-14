@@ -397,6 +397,7 @@ using ISR2_REG = offset_register<ISR2, 1, 1, 14>;
 using FREQ_SEL_REG = offset_register<FREQ_SEL, 8, 8>;
 using MDR3_REG = offset_register<MDR3, 1, 1, 1, 12>;
 using TX_DMA_THRESHOLD_REG = offset_register<TX_DMA_THRESHOLD, 6, 10>;
+
 constexpr std::uintptr_t UART0 = 0x0'44E0'9000;
 constexpr std::uintptr_t UART1 = 0x0'4802'2000;
 constexpr std::uintptr_t UART2 = 0x0'4802'4000;

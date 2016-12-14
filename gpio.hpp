@@ -135,6 +135,11 @@ using DEBOUNCENABLE_REG = detail::pins<0x150>::layout;
 using DEBOUNCINGTIME_REG = offset_register<DEBOUNCINGTIME, 8, 24>;
 using CLEARDATAOUT_REG = detail::pins<0x190>::layout;
 using SETDATAOUT_REG = detail::pins<0x194>::layout;
+
+constexpr std::uintptr_t GPIO0 = 0x0'44E0'7000;
+constexpr std::uintptr_t GPIO1 = 0x0'4804'C000;
+constexpr std::uintptr_t GPIO2 = 0x0'481A'C000;
+constexpr std::uintptr_t GPIO3 = 0x0'481A'E000;
 }
 
 #endif
