@@ -77,7 +77,7 @@ enum class SYSCONFIG {
   offset = 0x10,
   reset = 0
 };
-enum class EOI { DMAEvent_Ack, RESERVED, offset = 0x20, reset = 0 };
+enum class EOI { DMAEvent_Ack, RESERVED = -1, offset = 0x20, reset = 0 };
 using IRQSTATUS_RAW_0 = detail::pins<0x24>::spec;
 using IRQSTATUS_RAW_1 = detail::pins<0x28>::spec;
 using IRQSTATUS_0 = detail::pins<0x2C>::spec;
