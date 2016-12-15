@@ -38,6 +38,7 @@ struct {
 
 } const volatile boot_header;
 
+#include "clocks.hpp"
 #include "gpio.hpp"
 #include "uart.hpp"
 
