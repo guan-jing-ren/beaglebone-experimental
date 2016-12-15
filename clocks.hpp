@@ -627,6 +627,197 @@ using CM_PER_CLKDIV32K_CLKCTRL_REG =
 using CM_PER_CLK_24MHZ_CLKSTCTRL_REG =
     offset_register<CM_PER_CLK_24MHZ_CLKSTCTRL, 2, 2, 1, 27>;
 
+enum class CM_WKUP_CLKSTCTRL {
+  CLKTRCTRL,
+  CLKACTIVITY_L4_WKUP_GCLK,
+  CLKACTIVITY_SR_SYSCLK,
+  CLKACTIVITY_WDT1_GCLK,
+  RESERVED0,
+  CLKACTIVITY_GPIO0_GDBCLK,
+  RESERVED1,
+  CLKACTIVITY_TIMER0_GCLK,
+  CLKACTIVITY_I2C0_GFCLK,
+  CLKACTIVITY_UART0_GFCLK,
+  CLKACTIVITY_TIMER1_GCLK,
+  CLKACTIVITY_ADC_FCLK,
+  RESERVED = -1,
+  offset = 0,
+  reset = 6;
+}
+enum class CM_WKUP_CONTROL_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 4,
+  reset = 0x30000
+};
+enum class CM_WKUP_GPIO0_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  OPTFCLKEN_GPIO0_GDBCLK,
+  RESERVED = -1,
+  offset = 8,
+  reset = 0x30000
+};
+enum class CM_WKUP_L4WKUP_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xC,
+  reset = 2
+};
+enum class CM_WKUP_TIMER0_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0x10,
+  reset = 0x52580002
+};
+enum class CM_WKUP_DEBUGSS_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  STBYST,
+  OPTFCLKEN_DBGSYSCLK,
+  TRC_PMD_CLKSEL,
+  STM_PMD_CLKSEL,
+  TRC_PMD_CLKDIVSEL,
+  STM_PMD_CLKDIVSEL,
+  OPTCLK_DEBUG_CLKA,
+  RESERVED = -1,
+  offset = 0x14,
+  reset = 0x52580002
+};
+enum class CM_L3_AON_CLKSTCTRL {
+  CLKTRCTRL,
+  CLKACTIVITY_DBGSYSCLK,
+  CLKACTIVITY_L3_AON_GCLK,
+  CLKACTIVITY_DEBUG_CLKA,
+  RESERVED = -1,
+  offset = 0x18,
+  reset = 0x1A
+};
+enum class CM_AUTOIDLE_DPLL_MPU {
+  AUTO_DPLL_MODE,
+  RESERVED - 1,
+  offset = 0x1C,
+  reset = 0
+};
+enum class CM_IDLEST_DPLL_MPU {
+  ST_DPLL_CLK,
+  RESERVED0,
+  ST_MN_BYPASS,
+  RESERVED = -1,
+  offset = 0x20,
+  reset = 0
+};
+enum class CM_SSC_DELTAMSTEP_DPLL_MPU {
+  DELTAMSTEP_FRACTION,
+  DELTAMSTEP_INTEGER,
+  RESERVED = -1,
+  offset = 0x24,
+  reset = 0
+};
+enum class CM_SSC_MODFREQDIV_DPLL_MPU {
+  MODFREQDIV_MANTISSA,
+  RESERVED0,
+  MODFREQDIV_EXPONENT,
+  RESERVED = -1,
+  offset = 0x28,
+  reset = 0
+};
+enum class CM_CLKSEL_DPLL_MPU {
+  DPLL_DIV,
+  RESERVED0,
+  DPLL_MULT,
+  RESERVED1,
+  DPLL_BYP_CLKSEL,
+  RESERVED = -1,
+  offset = 0x2C,
+  reset = 0
+};
+enum class CM_AUTOIDLE_DPLL_DDR {
+  AUTO_DPLL_MODE,
+  RESERVED = -1,
+  offset = 0x30,
+  reset = 0
+};
+enum class CM_IDLEST_DPLL_DDR {
+  ST_DPLL_CLK,
+  RESERVED0,
+  ST_MN_BYPASS,
+  RESERVED = -1,
+  offset = 0x34,
+  reset = 0
+};
+enum class CM_SSC_DELTAMSTEP_DPLL_DDR {
+  DELTAMSTEP_FRACTION,
+  DELTAMSTEP_INTEGER,
+  RESERVED = -1,
+  offset = 0x38,
+  reset = 0
+};
+enum class CM_SSC_MODFREQDIV_DPLL_DDR {
+  MODFREQDIV_MANTISSA,
+  RESERVED0,
+  MODFREQDIV_EXPONENT,
+  RESERVED = -1,
+  offset = 0x3C,
+  reset = 0
+};
+enum class CM_CLKSEL_DPLL_DDR {
+  DPLL_DIV,
+  RESERVED0,
+  DPLL_MULT,
+  RESERVED1,
+  DPLL_BYP_CLKSEL,
+  RESERVED = -1,
+  offset = 0x40,
+  reset = 0
+};
+enum class CM_AUTOIDLE_DPLL_DISP {
+  AUTO_DPLL_MODE,
+  RESERVED = -1,
+  offset = 0x44,
+  reset = 0
+};
+
+using CM_WKUP_CLKSTCTRL_REG =
+    offset_register<CM_WKUP_CLKSTCTRL, 2, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 15>;
+using CM_WKUP_CONTROL_CLKCTRL_REG =
+    offset_register<CM_WKUP_CONTROL_CLKCTRL, 2, 14, 2, 14>;
+using CM_WKUP_GPIO0_CLKCTRL_REG =
+    offset_register < CM_WKUP_GPIO0_CLKCTRL<2, 14, 2, 1, 13>;
+using CM_WKUP_L4WKUP_CLKCTRL_REG =
+    offset_register<CM_WKUP_L4WKUP_CLKCTRL, 2, 14, 2, 14>;
+using CM_WKUP_TIMER0_CLKCTRL_REG =
+    offset_register<CM_WKUP_TIMER0_CLKCTRL, 2, 14, 2, 14>;
+using CM_WKUP_DEBUGSS_CLKCTRL_REG =
+    offset_register<CM_WKUP_DEBUGSS_CLKCTRL, 2, 14, 2, 1, 1, 2, 2, 3, 3, 1, 1>;
+using CM_L3_AON_CLKSTCTRL_REG =
+    offset_register<CM_L3_AON_CLKSTCTRL, 2, 1, 1, 1, 27>;
+using CM_AUTOIDLE_DPLL_MPU_REG = offset_register<CM_AUTOIDLE_DPLL_MPU, 3, 29>;
+using CM_IDLEST_DPLL_MPU_REG = offset_register<CM_IDLEST_DPLL_MPU, 1, 7, 1, 23>;
+using CM_SSC_DELTAMSTEP_DPLL_MPU_REG =
+    offset_register<CM_SSC_DELTAMSTEP_DPLL_MPU, 18, 2, 12>;
+using CM_SSC_MODFREQDIV_DPLL_MPU_REG =
+    offset_register<CM_SSC_MODFREQDIV_DPLL_MPU, 7, 1, 3, 21>;
+using CM_CLKSEL_DPLL_MPU_REG =
+    offset_register<CM_CLKSEL_DPLL_MPU, 7, 1, 11, 4, 1, 8>;
+using CM_AUTOIDLE_DPLL_DDR_REG = offset_register<CM_AUTOIDLE_DPLL_DDR, 3, 29>;
+using CM_IDLEST_DPLL_DDR_REG = offset_register<CM_IDLEST_DPLL_DDR, 1, 7, 1, 23>;
+using CM_SSC_DELTAMSTEP_DPLL_DDR_REG =
+    offset_register<CM_SSC_DELTAMSTEP_DPLL_DDR, 18, 2, 12>;
+using CM_SSC_MODFREQDIV_DPLL_DDR_REG =
+    offset_register<CM_SSC_MODFREQDIV_DPLL_DDR, 7, 1, 3, 21>;
+using CM_CLKSEL_DPLL_DDR_REG =
+    offset_register<CM_CLKSEL_DPLL_DDR, 7, 1, 11, 4, 1, 8>;
+using CM_AUTOIDLE_DPLL_DISP_REG = offset_register<CM_AUTOIDLE_DPLL_DISP, 3, 29>;
+
 constexpr std::uintptr_t CM_PER = 0x0'44E0'0000;
 constexpr std::uintptr_t CM_WKUP = 0x0'44E0'0400;
 constexpr std::uintptr_t CM_DPLL = 0x0'44E0'0500;
