@@ -56,6 +56,7 @@ template <std::uint32_t O, std::uint32_t R = 0> struct pins {
 };
 }
 
+// AM335x Rev O 25.4.1 p.4925-4951
 /* Defines the fields and special values of the registers */
 enum class REVISION {
   MINOR,
@@ -136,10 +137,10 @@ using DEBOUNCINGTIME_REG = offset_register<DEBOUNCINGTIME, 8, 24>;
 using CLEARDATAOUT_REG = detail::pins<0x190>::layout;
 using SETDATAOUT_REG = detail::pins<0x194>::layout;
 
-constexpr std::uintptr_t GPIO0 = 0x0'44E0'7000;
-constexpr std::uintptr_t GPIO1 = 0x0'4804'C000;
-constexpr std::uintptr_t GPIO2 = 0x0'481A'C000;
-constexpr std::uintptr_t GPIO3 = 0x0'481A'E000;
+constexpr std::uintptr_t GPIO0 = 0x0'44E0'7000; // AM335x Rev O 2.1 p.178
+constexpr std::uintptr_t GPIO1 = 0x0'4804'C000; // AM335x Rev O 2.1 p.180
+constexpr std::uintptr_t GPIO2 = 0x0'481A'C000; // AM335x Rev O 2.1 p.181
+constexpr std::uintptr_t GPIO3 = 0x0'481A'E000; // AM335x Rev O 2.1 p.181
 }
 
 #endif
