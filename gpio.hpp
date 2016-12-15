@@ -64,7 +64,7 @@ enum class REVISION {
   MAJOR,
   RTL,
   FUNC,
-  RESERVED = -1,
+  RESERVED0,
   SCHEME,
   offset = 0,
   reset = 0x50600801
