@@ -5,6 +5,7 @@
 #include "offset_register.hpp"
 
 namespace clocks {
+// AM335x Rev O 8.1.12.1 p.1206-1266
 enum class CM_PER_L4LS_CLKSTCTRL {
   CLKTRCTRL,
   RESERVED0,
@@ -307,6 +308,210 @@ enum class CM_PER_DCAN1_CLKCTRL {
   offset = 0xC4,
   reset = 0x30000
 };
+enum class CM_PER_EPWMSS1_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xCC,
+  reset = 0x30000
+};
+enum class CM_PER_EPWMSS0_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xD4,
+  reset = 0x30000
+};
+enum class CM_PER_EPWMSS2_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xD8,
+  reset = 0x30000
+};
+enum class CM_PER_L3_INSTR_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xDC,
+  reset = 2
+};
+enum class CM_PER_L3_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xE0,
+  reset = 2
+};
+enum class CM_PER_IEEE5000_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  STBYST,
+  RESERVED = -1,
+  offset = 0xE4,
+  reset = 0x70002
+};
+enum class CM_PER_PRU_ICSS_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  STBYST,
+  RESERVED = -1,
+  offset = 0xE8,
+  reset = 0x70000
+};
+enum class CM_PER_TIMER5_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xEC,
+  reset = 0x30000
+};
+enum class CM_PER_TIMER6_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xF0,
+  reset = 0x30000
+};
+enum class CM_PER_MMC1_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xF4,
+  reset = 0x30000
+};
+enum class CM_PER_MMC2_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0xF8,
+  reset = 0x30000
+};
+enum class CM_PER_TPTC1_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  STBYST,
+  RESERVED = -1,
+  offset = 0xFC,
+  reset = 0x70000
+};
+enum class CM_PER_TPTC2_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  STBYST,
+  RESERVED = -1,
+  offset = 0x100,
+  reset = 0x70000
+};
+enum class CM_PER_SPINLOCK_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0x10C,
+  reset = 0x30000
+};
+enum class CM_PER_MAILBOX0_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0x110,
+  reset = 0x30000
+};
+enum class CM_PER_L4HS_CLKSTCTRL {
+  CLKTRCTRL,
+  RESERVED0,
+  CLKACTIVITY_L4HS_GCLK,
+  CLKACTIVITY_CPSW_250MHZ_GCLK,
+  CLKACTIVITY_CPSW_50MHZ_GCLK,
+  CLKACTIVITY_CPSW_5MHZ_GCLK,
+  RESERVED = -1,
+  offset = 0x11C,
+  reset = 0x7A
+};
+enum class CM_PER_L4HS_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0x120,
+  reset = 2
+};
+enum class CM_PER_OCPWP_L3_CLKSTCTRL {
+  CLKTRCTRL,
+  RESERVED0,
+  CLKACTIVITY_OCPWP_L3_GCLK,
+  CLKACTIVITY_OCPWP_L4_GCLK,
+  RESERVED = -1,
+  offset = 0x12C,
+  reset = 2
+};
+enum class CM_PER_OCPWP_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  STBYST,
+  RESERVED = -1,
+  offset = 0x130,
+  reset = 0x70002
+};
+enum class CM_PER_PRU_ICSS_CLKSTCTRL {
+  CLKTRCTRL,
+  RESERVED0,
+  CLKACTIVITY_PRU_ICSS_OCP_GCLK,
+  CLKACTIVITY_PRU_ICSS_IEP_GCLK,
+  CLKACTIVITY_PRU_ICSS_UART_GCLK,
+  RESERVED = -1,
+  offset = 0x140,
+  reset = 2
+};
+enum class CM_PER_CPSW_CLKSTCTRL {
+  CLKTRCTRL,
+  RESERVED0,
+  CLKACTIVITY_CPSW_125MHz_GCLK,
+  RESERVED = -1,
+  offset = 0x144,
+  reset = 2
+};
+enum class CM_PER_LCDC_CLKSTCTRL {
+  CLKTRCTRL,
+  RESERVED0,
+  CLKACTIVITY_LCDC_L3_OCP_GCLK,
+  CLKACTIVITY_LCDC_L4_OCP_GCLK,
+  RESERVED = -1,
+  offset = 0x148,
+  reset = 2
+};
+enum class CM_PER_CLKDIV32K_CLKCTRL {
+  MODULEMODE,
+  RESERVED0,
+  IDLEST,
+  RESERVED = -1,
+  offset = 0x14C,
+  reset = 0x30000
+};
+enum class CM_PER_CLK_24MHZ_CLKSTCTRL {
+  CLKTRCTRL,
+  RESERVED0,
+  CLKACTIVITY_CLK_24MHZ_GCLK,
+  RESERVED = -1,
+  offset = 0x150,
+  reset = 2
+};
 using CM_PER_L4LS_CLKSTCTRL_REG =
     offset_register<CM_PER_L4LS_CLKSTCTRL, 2, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3>;
@@ -374,6 +579,53 @@ using CM_PER_DCAN0_CLKCTRL_REG =
     offset_register<CM_PER_DCAN0_CLKCTRL, 2, 14, 2, 14>;
 using CM_PER_DCAN1_CLKCTRL_REG =
     offset_register<CM_PER_DCAN1_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_EPWMSS1_CLKCTRL_REG =
+    offset_register<CM_PER_EPWMSS1_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_EPWMSS0_CLKCTRL_REG =
+    offset_register<CM_PER_EPWMSS0_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_EPWMSS2_CLKCTRL_REG =
+    offset_register<CM_PER_EPWMSS2_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_L3_INSTR_CLKCTRL_REG =
+    offset_register<CM_PER_L3_INSTR_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_L3_CLKCTRL_REG = offset_register<CM_PER_L3_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_IEEE5000_CLKCTRL_REG =
+    offset_register<CM_PER_IEEE5000_CLKCTRL, 2, 14, 2, 1, 13>;
+using CM_PER_PRU_ICSS_CLKCTRL_REG =
+    offset_register<CM_PER_PRU_ICSS_CLKCTRL, 2, 14, 2, 1, 13>;
+using CM_PER_TIMER5_CLKCTRL_REG =
+    offset_register<CM_PER_TIMER5_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_TIMER6_CLKCTRL_REG =
+    offset_register<CM_PER_TIMER6_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_MMC1_CLKCTRL_REG =
+    offset_register<CM_PER_MMC1_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_MMC2_CLKCTRL_REG =
+    offset_register<CM_PER_MMC2_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_TPTC1_CLKCTRL_REG =
+    offset_register<CM_PER_TPTC1_CLKCTRL, 2, 14, 2, 1, 13>;
+using CM_PER_TPTC2_CLKCTRL_REG =
+    offset_register<CM_PER_TPTC2_CLKCTRL, 2, 14, 2, 1, 13>;
+using CM_PER_SPINLOCK_CLKCTRL_REG =
+    offset_register<CM_PER_SPINLOCK_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_MAILBOX0_CLKCTRL_REG =
+    offset_register<CM_PER_MAILBOX0_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_L4HS_CLKSTCTRL_REG =
+    offset_register<CM_PER_L4HS_CLKSTCTRL, 2, 1, 1, 1, 1, 1, 25>;
+using CM_PER_L4HS_CLKCTRL_REG =
+    offset_register<CM_PER_L4HS_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_OCPWP_L3_CLKSTCTRL_REG =
+    offset_register<CM_PER_OCPWP_L3_CLKSTCTRL, 2, 2, 1, 1, 26>;
+using CM_PER_OCPWP_CLKCTRL_REG =
+    offset_register<CM_PER_OCPWP_CLKCTRL, 2, 14, 2, 1, 13>;
+using CM_PER_PRU_ICSS_CLKSTCTRL_REG =
+    offset_register<CM_PER_PRU_ICSS_CLKSTCTRL, 2, 2, 1, 1, 1, 25>;
+using CM_PER_CPSW_CLKSTCTRL_REG =
+    offset_register<CM_PER_CPSW_CLKSTCTRL, 2, 2, 1, 27>;
+using CM_PER_LCDC_CLKSTCTRL_REG =
+    offset_register<CM_PER_LCDC_CLKSTCTRL, 2, 2, 1, 1, 26>;
+using CM_PER_CLKDIV32K_CLKCTRL_REG =
+    offset_register<CM_PER_CLKDIV32K_CLKCTRL, 2, 14, 2, 14>;
+using CM_PER_CLK_24MHZ_CLKSTCTRL_REG =
+    offset_register<CM_PER_CLK_24MHZ_CLKSTCTRL, 2, 2, 1, 27>;
 
 constexpr std::uintptr_t CM_PER = 0x0'44E0'0000;
 constexpr std::uintptr_t CM_WKUP = 0x0'44E0'0400;
