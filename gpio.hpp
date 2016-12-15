@@ -110,7 +110,7 @@ using CLEARDATAOUT = detail::pins<0x190>::spec;
 using SETDATAOUT = detail::pins<0x194>::spec;
 
 /* Register definitions  */
-using REVISION_REG = offset_register<REVISION, 6, 2, 3, 5, 10, 2, 2>;
+using REVISION_REG = offset_register<REVISION, 6, 2, 3, 5, 12, 2, 2>;
 using SYSCONFIG_REG = offset_register<SYSCONFIG, 1, 1, 1, 2, 27>;
 using EOI_REG = offset_register<EOI, 1, 31>;
 using IRQSTATUS_RAW_0_REG = detail::pins<0x24>::layout;
