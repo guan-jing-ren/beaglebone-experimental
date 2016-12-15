@@ -43,8 +43,19 @@ struct {
 #include "uart.hpp"
 
 extern "C" void start() {
+  fm::memory_mapped_register<GPIO::OE, 1> s = 0;
+  (void)s;
   asm volatile("movw sp, %0" ::"i"(0));
   GPIO::OE_REG oe = GPIO::GPIO0;
-  oe.set<GPIO::OE::_12, GPIO::OE::_2>(1,1);
+  oe.set<GPIO::OE::_12, GPIO::OE::_2>(1, 1);
   oe.get<GPIO::OE::_12>();
+
+  GPIO::REVISION_REG rev = GPIO::GPIO1;
+  (void)rev;
+
+  UART::THR_REG thr = UART::UART0;
+  (void)thr;
+
+  clocks::CM_PER_L4LS_CLKSTCTRL_REG l4ls = clocks::CM_PER;
+  (void)l4ls;
 }
