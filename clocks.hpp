@@ -1230,34 +1230,87 @@ using CM_DIV_M6_DPLL_CORE_REG =
 enum class CLKSEL_TIMER7_CLK { CLKSEL, RESERVED = -1, offset = 4, reset = 1 };
 enum class CLKSEL_TIMER2_CLK { CLKSEL, RESERVED = -1, offset = 8, reset = 1 };
 enum class CLKSEL_TIMER3_CLK { CLKSEL, RESERVED = -1, offset = 0xC, reset = 1 };
-enum class CLKSEL_TIMER4_CLK { CLKSEL, RESERVED = -1, offset = 0x10, reset = 1 };
-enum class CM_MAC_CLKSEL {RESERVED0, MII_CLK_SEL, RESERVED = -1, offset = 0x14, reset = 4 };
-enum class CLKSEL_TIMER5_CLK { CLKSEL, RESERVED = -1, offset = 0x18, reset = 1 };
-enum class CLKSEL_TIMER6_CLK { CLKSEL, RESERVED = -1, offset = 0x1C, reset = 1 };
-enum class CM_CPTS_RFT_CLKSEL { CLKSEL, RESERVED = -1, offset = 0x20, reset = 0 };
-enum class CLKSEL_TIMER1MS_CLK { CLKSEL, RESERVED = -1, offset = 0x24, reset = 0 };
-enum class CLKSEL_GFX_FCLK{
-CLKDIV_SEL_GFX_FCLK,CLKSEL_GFX_FCLK,RESERVED=-1,offset=0x2C,reset=0
+enum class CLKSEL_TIMER4_CLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x10,
+  reset = 1
 };
-enum class CLKSEL_PRU_ICSS_OCP_CLK { CLKSEL, RESERVED = -1, offset = 0x30, reset = 0 };
-enum class CLKSEL_LCDC_PIXEL_CLK { CLKSEL, RESERVED = -1, offset = 0x34, reset = 0 };
+enum class CM_MAC_CLKSEL {
+  RESERVED0,
+  MII_CLK_SEL,
+  RESERVED = -1,
+  offset = 0x14,
+  reset = 4
+};
+enum class CLKSEL_TIMER5_CLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x18,
+  reset = 1
+};
+enum class CLKSEL_TIMER6_CLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x1C,
+  reset = 1
+};
+enum class CM_CPTS_RFT_CLKSEL {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x20,
+  reset = 0
+};
+enum class CLKSEL_TIMER1MS_CLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x24,
+  reset = 0
+};
+enum class CLKSEL_GFX_FCLK {
+  CLKDIV_SEL_GFX_FCLK,
+  CLKSEL_GFX_FCLK,
+  RESERVED = -1,
+  offset = 0x2C,
+  reset = 0
+};
+enum class CLKSEL_PRU_ICSS_OCP_CLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x30,
+  reset = 0
+};
+enum class CLKSEL_LCDC_PIXEL_CLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x34,
+  reset = 0
+};
 enum class CLKSEL_WDT1_CLK { CLKSEL, RESERVED = -1, offset = 0x38, reset = 0 };
-enum class CLKSEL_GPIO0_DBCLK { CLKSEL, RESERVED = -1, offset = 0x3C, reset = 0 };
+enum class CLKSEL_GPIO0_DBCLK {
+  CLKSEL,
+  RESERVED = -1,
+  offset = 0x3C,
+  reset = 0
+};
 
 using CLKSEL_TIMER7_CLK_REG = offset_register<CLKSEL_TIMER7_CLK, 2, 30>;
 using CLKSEL_TIMER2_CLK_REG = offset_register<CLKSEL_TIMER2_CLK, 2, 30>;
 using CLKSEL_TIMER3_CLK_REG = offset_register<CLKSEL_TIMER3_CLK, 2, 30>;
 using CLKSEL_TIMER4_CLK_REG = offset_register<CLKSEL_TIMER4_CLK, 2, 30>;
-using CM_MAC_CLKSEL_REG = offset_register<CM_MAC_CLKSEL, 2,1,29>;
+using CM_MAC_CLKSEL_REG = offset_register<CM_MAC_CLKSEL, 2, 1, 29>;
 using CLKSEL_TIMER5_CLK_REG = offset_register<CLKSEL_TIMER5_CLK, 2, 30>;
 using CLKSEL_TIMER6_CLK_REG = offset_register<CLKSEL_TIMER6_CLK, 2, 30>;
 using CM_CPTS_RFT_CLKSEL_REG = offset_register<CM_CPTS_RFT_CLKSEL, 1, 31>;
 using CLKSEL_TIMER1MS_CLK_REG = offset_register<CLKSEL_TIMER1MS_CLK, 2, 30>;
-using CLKSEL_GFX_FCLK_REG=offset_register<CLKSEL_GFX_FCLK,1,1,30>;
-using CLKSEL_PRU_ICSS_OCP_CLK_REG = offset_register<CLKSEL_PRU_ICSS_OCP_CLK, 1, 31>;
+using CLKSEL_GFX_FCLK_REG = offset_register<CLKSEL_GFX_FCLK, 1, 1, 30>;
+using CLKSEL_PRU_ICSS_OCP_CLK_REG =
+    offset_register<CLKSEL_PRU_ICSS_OCP_CLK, 1, 31>;
 using CLKSEL_LCDC_PIXEL_CLK_REG = offset_register<CLKSEL_LCDC_PIXEL_CLK, 2, 30>;
 using CLKSEL_WDT1_CLK_REG = offset_register<CLKSEL_WDT1_CLK, 1, 31>;
 using CLKSEL_GPIO0_DBCLK_REG = offset_register<CLKSEL_GPIO0_DBCLK, 2, 30>;
+
+// AM335x Rev O 8.1.12.4 p.1344-1345
 
 constexpr std::uintptr_t CM_PER = 0x0'44E0'0000;
 constexpr std::uintptr_t CM_WKUP = 0x0'44E0'0400;
