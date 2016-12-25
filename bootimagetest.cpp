@@ -1,6 +1,9 @@
 #include <cstdint>
 #include <new>
 
+constexpr std::uintptr_t BOOT_STACK_BASE =
+    0x4030B800; // AM335x Rev O 26.1.3.2 p.4957
+
 struct {
   // AM335x Rev O 26.1.7.5.5.1 p.4988-4989
   const unsigned char configuration_header_toc[0x3C + 4] = {
@@ -32,7 +35,7 @@ struct {
   struct {
     // Works out to 111,616, or 109Ki
     std::uint32_t size =
-        0x4030B800 - 0x402F0400;            // AM335x Rev O 26.1.3.2 p.4957
+        BOOT_STACK_BASE - 0x402F0400;       // AM335x Rev O 26.1.3.2 p.4957
     std::uint32_t destination = 0x402F0400; // AM335x Rev O 26.1.3.2 p.4957
   } const gp_header;
 
@@ -42,10 +45,15 @@ struct {
 #include "gpio.hpp"
 #include "uart.hpp"
 
+inline void set_stack_pointer() {
+  asm volatile(R"(ldr sp, =%0)" ::"i"(BOOT_STACK_BASE));
+}
+
 extern "C" void start() {
+  set_stack_pointer();
+
   fm::memory_mapped_register<GPIO::OE, 1> s = 0;
   (void)s;
-  asm volatile("movw sp, %0" ::"i"(0));
   GPIO::OE_REG oe = GPIO::GPIO0;
   oe.set<GPIO::OE::_12, GPIO::OE::_2>(1, 1);
   oe.get<GPIO::OE::_12>();
