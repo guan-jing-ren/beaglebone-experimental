@@ -4,6 +4,7 @@
 #include "offset_register.hpp"
 
 namespace control_module {
+// AM335x Rev O 9.3.1.1 p.1416-1513
 enum class CONTROL_REVISION {
   IP_REV_MINOR,
   IP_REV_CUSTOM,
@@ -2371,5 +2372,7 @@ using DDR_DATA0_IOCTRL_REG =
     offset_register<DDR_DATA0_IOCTRL, 3, 2, 3, 2, 8, 1, 1, 8, 1, 1, 2>;
 using DDR_DATA1_IOCTRL_REG =
     offset_register<DDR_DATA1_IOCTRL, 3, 2, 3, 2, 8, 1, 1, 8, 1, 1, 2>;
+
+constexpr std::uintptr_t CONTROL_REGISTERS = 0x0'44E1'0000;
 }
 #endif
