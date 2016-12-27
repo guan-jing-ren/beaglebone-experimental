@@ -2097,56 +2097,71 @@ enum class DDR_DATA1_IOCTRL {
   reset = 0
 };
 
-using CONTROL_REVISION_REG = offset_register<CONTROL_REVISION, 1>;
-using CONTROL_HWINFO_REG = offset_register<CONTROL_HWINFO, 1>;
-using CONTROL_SYSCONFIG_REG = offset_register<CONTROL_SYSCONFIG, 1>;
-using CONTROL_STATUS_REG = offset_register<CONTROL_STATUS, 1>;
+using CONTROL_REVISION_REG =
+    offset_register<CONTROL_REVISION, 6, 2, 3, 5, 12, 2, 2>;
+using CONTROL_HWINFO_REG = offset_register<CONTROL_HWINFO, 32>;
+using CONTROL_SYSCONFIG_REG =
+    offset_register<CONTROL_SYSCONFIG, 1, 1, 2, 2, 26>;
+using CONTROL_STATUS_REG =
+    offset_register<CONTROL_STATUS, 8, 3, 5, 1, 1, 2, 2, 2, 8>;
 using CONTROL_EMIF_SDRAM_CONFIG_REG =
-    offset_register<CONTROL_EMIF_SDRAM_CONFIG, 1>;
-using CORE_SLDO_CTRL_REG = offset_register<CORE_SLDO_CTRL, 1>;
-using MPU_SLDO_CTRL_REG = offset_register<MPU_SLDO_CTRL, 1>;
-using CLK32KDIVRATIO_CTRL_REG = offset_register<CLK32KDIVRATIO_CTRL, 1>;
-using BANDGAP_CTRL_REG = offset_register<BANDGAP_CTRL, 1>;
-using BANDGAP_TRIM_REG = offset_register<BANDGAP_TRIM, 1>;
-using PLL_CLKINPULOW_CTRL_REG = offset_register<PLL_CLKINPULOW_CTRL, 1>;
-using MOSC_CTRL_REG = offset_register<MOSC_CTRL, 1>;
-using DEEPSLEEP_CTRL_REG = offset_register<DEEPSLEEP_CTRL, 1>;
-using DPLL_PWR_SW_STATUS_REG = offset_register<DPLL_PWR_SW_STATUS, 1>;
-using DEVICE_ID_REG = offset_register<DEVICE_ID, 1>;
-using DEV_FEATURE_REG = offset_register<DEV_FEATURE, 1>;
-using INIT_PRIORITY_0_REG = offset_register<INIT_PRIORITY_0, 1>;
-using INIT_PRIORITY_1_REG = offset_register<INIT_PRIORITY_1, 1>;
-using TPTC_CFG_REG = offset_register<TPTC_CFG, 1>;
-using USB_CTRL0_REG = offset_register<USB_CTRL0, 1>;
-using USB_STS0_REG = offset_register<USB_STS0, 1>;
-using USB_CTRL1_REG = offset_register<USB_CTRL1, 1>;
-using USB_STS1_REG = offset_register<USB_STS1, 1>;
-using MAC_ID0_LO_REG = offset_register<MAC_ID0_LO, 1>;
-using MAC_ID0_HI_REG = offset_register<MAC_ID0_HI, 1>;
-using MAC_ID1_LO_REG = offset_register<MAC_ID1_LO, 1>;
-using MAC_ID1_HI_REG = offset_register<MAC_ID1_HI, 1>;
-using DCAN_RAMINIT_REG = offset_register<DCAN_RAMINIT, 1>;
-using USB_WKUP_CTRL_REG = offset_register<USB_WKUP_CTRL, 1>;
-using GMII_SEL_REG = offset_register<GMII_SEL, 1>;
-using PWMSS_CTRL_REG = offset_register<PWMSS_CTRL, 1>;
-using MREQPRIO_0_REG = offset_register<MREQPRIO_0, 1>;
-using MREQPRIO_1_REG = offset_register<MREQPRIO_1, 1>;
-using HW_EVENT_SEL_GRP1_REG = offset_register<HW_EVENT_SEL_GRP1, 1>;
-using HW_EVENT_SEL_GRP2_REG = offset_register<HW_EVENT_SEL_GRP2, 1>;
-using HW_EVENT_SEL_GRP3_REG = offset_register<HW_EVENT_SEL_GRP3, 1>;
-using HW_EVENT_SEL_GRP4_REG = offset_register<HW_EVENT_SEL_GRP4, 1>;
-using SMRT_CTRL_REG = offset_register<SMRT_CTRL, 1>;
-using MPUSS_HW_DEBUG_SEL_REG = offset_register<MPUSS_HW_DEBUG_SEL, 1>;
-using MPUSS_HW_DBG_INFO_REG = offset_register<MPUSS_HW_DBG_INFO, 1>;
-using VDD_MPU_OPP_050_REG = offset_register<VDD_MPU_OPP_050, 1>;
-using VDD_MPU_OPP_100_REG = offset_register<VDD_MPU_OPP_100, 1>;
-using VDD_MPU_OPP_120_REG = offset_register<VDD_MPU_OPP_120, 1>;
-using VDD_MPU_OPP_TURBO_REG = offset_register<VDD_MPU_OPP_TURBO, 1>;
-using VDD_CORE_OPP_050_REG = offset_register<VDD_CORE_OPP_050, 1>;
-using VDD_CORE_OPP_100_REG = offset_register<VDD_CORE_OPP_100, 1>;
-using BB_SCALE_REG = offset_register<BB_SCALE, 1>;
-using USB_VID_PID_REG = offset_register<USB_VID_PID, 1>;
-using EFUSE_SMA_REG = offset_register<EFUSE_SMA, 1>;
+    offset_register<CONTROL_EMIF_SDRAM_CONFIG, 3, 1, 3, 3, 4, 2, 2, 2, 1, 2, 1,
+                    3, 2, 3>;
+using CORE_SLDO_CTRL_REG = offset_register<CORE_SLDO_CTRL, 16, 10, 6>;
+using MPU_SLDO_CTRL_REG = offset_register<MPU_SLDO_CTRL, 16, 10, 6>;
+using CLK32KDIVRATIO_CTRL_REG = offset_register<CLK32KDIVRATIO_CTRL, 1, 31>;
+using BANDGAP_CTRL_REG =
+    offset_register<BANDGAP_CTRL, 1, 1, 1, 1, 1, 1, 1, 1, 8, 16>;
+using BANDGAP_TRIM_REG = offset_register<BANDGAP_TRIM, 8, 8, 8, 8>;
+using PLL_CLKINPULOW_CTRL_REG =
+    offset_register<PLL_CLKINPULOW_CTRL, 1, 1, 1, 29>;
+using MOSC_CTRL_REG = offset_register<MOSC_CTRL, 1, 31>;
+using DEEPSLEEP_CTRL_REG = offset_register<DEEPSLEEP_CTRL, 16, 1, 1, 14>;
+using DPLL_PWR_SW_STATUS_REG =
+    offset_register<DPLL_PWR_SW_STATUS, 8, 1, 1, 6, 1, 1, 6, 1, 1, 6>;
+using DEVICE_ID_REG = offset_register<DEVICE_ID, 1, 11, 16, 4>;
+using DEV_FEATURE_REG = offset_register<DEV_FEATURE, 32>;
+using INIT_PRIORITY_0_REG =
+    offset_register<INIT_PRIORITY_0, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 4>;
+using INIT_PRIORITY_1_REG =
+    offset_register<INIT_PRIORITY_1, 2, 2, 2, 2, 6, 2, 2, 2, 2, 2, 2, 2, 4>;
+using TPTC_CFG_REG = offset_register<TPTC_CFG, 2, 2, 2, 26>;
+using USB_CTRL0_REG =
+    offset_register<USB_CTRL0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using USB_STS0_REG = offset_register<USB_STS0, 1, 1, 1, 1, 1, 3, 24>;
+using USB_CTRL1_REG =
+    offset_register<USB_CTRL1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 8>;
+using USB_STS1_REG = offset_register<USB_STS1, 1, 1, 1, 1, 1, 3, 24>;
+using MAC_ID0_LO_REG = offset_register<MAC_ID0_LO, 8, 8, 16>;
+using MAC_ID0_HI_REG = offset_register<MAC_ID0_HI, 8, 8, 8, 8>;
+using MAC_ID1_LO_REG = offset_register<MAC_ID1_LO, 8, 8, 16>;
+using MAC_ID1_HI_REG = offset_register<MAC_ID1_HI, 8, 8, 8, 8>;
+using DCAN_RAMINIT_REG = offset_register<DCAN_RAMINIT, 1, 1, 6, 1, 1, 22>;
+using USB_WKUP_CTRL_REG = offset_register<USB_WKUP_CTRL, 1, 7, 1, 23>;
+using GMII_SEL_REG = offset_register<GMII_SEL, 2, 2, 1, 1, 1, 1, 24>;
+using PWMSS_CTRL_REG = offset_register<PWMSS_CTRL, 1, 1, 1, 29>;
+using MREQPRIO_0_REG =
+    offset_register<MREQPRIO_0, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1>;
+using MREQPRIO_1_REG = offset_register<MREQPRIO_1, 32>;
+using HW_EVENT_SEL_GRP1_REG = offset_register<HW_EVENT_SEL_GRP1, 8, 8, 8, 8>;
+using HW_EVENT_SEL_GRP2_REG = offset_register<HW_EVENT_SEL_GRP2, 8, 8, 8, 8>;
+using HW_EVENT_SEL_GRP3_REG = offset_register<HW_EVENT_SEL_GRP3, 8, 8, 8, 8>;
+using HW_EVENT_SEL_GRP4_REG = offset_register<HW_EVENT_SEL_GRP4, 8, 8, 8, 8>;
+using SMRT_CTRL_REG = offset_register<SMRT_CTRL, 1, 1, 30>;
+using MPUSS_HW_DEBUG_SEL_REG =
+    offset_register<MPUSS_HW_DEBUG_SEL, 4, 4, 1, 1, 22>;
+using MPUSS_HW_DBG_INFO_REG = offset_register<MPUSS_HW_DBG_INFO, 32>;
+using VDD_MPU_OPP_050_REG = offset_register<VDD_MPU_OPP_050, 24, 8>;
+using VDD_MPU_OPP_100_REG = offset_register<VDD_MPU_OPP_100, 24, 8>;
+using VDD_MPU_OPP_120_REG = offset_register<VDD_MPU_OPP_120, 24, 8>;
+using VDD_MPU_OPP_TURBO_REG = offset_register<VDD_MPU_OPP_TURBO, 24, 8>;
+using VDD_CORE_OPP_050_REG = offset_register<VDD_CORE_OPP_050, 24, 8>;
+using VDD_CORE_OPP_100_REG = offset_register<VDD_CORE_OPP_100, 24, 8>;
+using BB_SCALE_REG = offset_register<BB_SCALE, 2, 6, 4, 20>;
+using USB_VID_PID_REG = offset_register<USB_VID_PID, 16, 16>;
+using EFUSE_SMA_REG = offset_register<EFUSE_SMA, 13, 3, 2, 14>;
 using CONF_GPMC_AD0_REG = offset_register<CONF_GPMC_AD0, 3, 1, 1, 1, 1, 25>;
 using CONF_GPMC_AD1_REG = offset_register<CONF_GPMC_AD1, 3, 1, 1, 1, 1, 25>;
 using CONF_GPMC_AD2_REG = offset_register<CONF_GPMC_AD2, 3, 1, 1, 1, 1, 25>;
@@ -2291,10 +2306,11 @@ using CONF_USB0_DRVVBUS_REG =
     offset_register<CONF_USB0_DRVVBUS, 3, 1, 1, 1, 1, 25>;
 using CONF_USB1_DRVVBUS_REG =
     offset_register<CONF_USB1_DRVVBUS, 3, 1, 1, 1, 1, 25>;
-using CQDETECT_STATUS_REG = offset_register<CQDETECT_STATUS, 1>;
-using DDR_IO_CTRL_REG = offset_register<DDR_IO_CTRL, 1>;
-using VTP_CTRL_REG = offset_register<VTP_CTRL, 1>;
-using VREF_CTRL_REG = offset_register<VREF_CTRL, 1>;
+using CQDETECT_STATUS_REG = offset_register<CQDETECT_STATUS, 1, 1, 1, 1, 1, 1,
+                                            2, 1, 1, 1, 1, 1, 1, 2, 16>;
+using DDR_IO_CTRL_REG = offset_register<DDR_IO_CTRL, 28, 1, 1, 1, 1>;
+using VTP_CTRL_REG = offset_register<VTP_CTRL, 1, 3, 1, 1, 1, 1, 7, 1, 7, 9>;
+using VREF_CTRL_REG = offset_register<VREF_CTRL, 1, 2, 2, 27>;
 using TPCC_EVT_MUX_0_3_REG =
     offset_register<TPCC_EVT_MUX_0_3, 6, 2, 6, 2, 6, 2, 6, 2>;
 using TPCC_EVT_MUX_4_7_REG =
@@ -2327,14 +2343,16 @@ using TPCC_EVT_MUX_56_59_REG =
     offset_register<TPCC_EVT_MUX_56_59, 6, 2, 6, 2, 6, 2, 6, 2>;
 using TPCC_EVT_MUX_60_63_REG =
     offset_register<TPCC_EVT_MUX_60_63, 6, 2, 6, 2, 6, 2, 6, 2>;
-using TIMER_EVT_CAPT_REG = offset_register<TIMER_EVT_CAPT, 1>;
-using ECAP_EVT_CAPT_REG = offset_register<ECAP_EVT_CAPT, 1>;
-using ADC_EVT_CAPT_REG = offset_register<ADC_EVT_CAPT, 1>;
-using RESET_ISO_REG = offset_register<RESET_ISO, 1>;
-using DPLL_PWR_SW_CTRL_REG = offset_register<DPLL_PWR_SW_CTRL, 1>;
-using DDR_CKE_CTRL_REG = offset_register<DDR_CKE_CTRL, 1>;
-using SMA2_REG = offset_register<SMA2, 1>;
-using M3_TXEV_EOI_REG = offset_register<M3_TXEV_EOI, 1>;
+using TIMER_EVT_CAPT_REG = offset_register<TIMER_EVT_CAPT, 5, 3, 5, 3, 5, 11>;
+using ECAP_EVT_CAPT_REG = offset_register<ECAP_EVT_CAPT, 5, 3, 5, 3, 5, 11>;
+using ADC_EVT_CAPT_REG = offset_register<ADC_EVT_CAPT, 4, 28>;
+using RESET_ISO_REG = offset_register<RESET_ISO, 1, 31>;
+using DPLL_PWR_SW_CTRL_REG =
+    offset_register<DPLL_PWR_SW_CTRL, 8, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+                    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1>;
+using DDR_CKE_CTRL_REG = offset_register<DDR_CKE_CTRL, 1, 31>;
+using SMA2_REG = offset_register<SMA2, 1, 1, 30>;
+using M3_TXEV_EOI_REG = offset_register<M3_TXEV_EOI, 1, 30>;
 using IPC_MSG_REG0_REG = offset_register<IPC_MSG_REG0, 32>;
 using IPC_MSG_REG1_REG = offset_register<IPC_MSG_REG1, 32>;
 using IPC_MSG_REG2_REG = offset_register<IPC_MSG_REG2, 32>;
@@ -2343,10 +2361,15 @@ using IPC_MSG_REG4_REG = offset_register<IPC_MSG_REG4, 32>;
 using IPC_MSG_REG5_REG = offset_register<IPC_MSG_REG5, 32>;
 using IPC_MSG_REG6_REG = offset_register<IPC_MSG_REG6, 32>;
 using IPC_MSG_REG7_REG = offset_register<IPC_MSG_REG7, 32>;
-using DDR_CMD0_IOCTRL_REG = offset_register<DDR_CMD0_IOCTRL, 1>;
-using DDR_CMD1_IOCTRL_REG = offset_register<DDR_CMD1_IOCTRL, 1>;
-using DDR_CMD2_IOCTRL_REG = offset_register<DDR_CMD2_IOCTRL, 1>;
-using DDR_DATA0_IOCTRL_REG = offset_register<DDR_DATA0_IOCTRL, 1>;
-using DDR_DATA1_IOCTRL_REG = offset_register<DDR_DATA1_IOCTRL, 1>;
+using DDR_CMD0_IOCTRL_REG =
+    offset_register<DDR_CMD0_IOCTRL, 3, 2, 3, 2, 11, 11>;
+using DDR_CMD1_IOCTRL_REG =
+    offset_register<DDR_CMD1_IOCTRL, 3, 2, 3, 2, 11, 11>;
+using DDR_CMD2_IOCTRL_REG =
+    offset_register<DDR_CMD2_IOCTRL, 3, 2, 3, 2, 11, 11>;
+using DDR_DATA0_IOCTRL_REG =
+    offset_register<DDR_DATA0_IOCTRL, 3, 2, 3, 2, 8, 1, 1, 8, 1, 1, 2>;
+using DDR_DATA1_IOCTRL_REG =
+    offset_register<DDR_DATA1_IOCTRL, 3, 2, 3, 2, 8, 1, 1, 8, 1, 1, 2>;
 }
 #endif
