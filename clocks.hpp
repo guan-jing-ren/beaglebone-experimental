@@ -1,7 +1,6 @@
 #ifndef _CLOCKS_HPP
 #define _CLOCKS_HPP
 
-#include "../fundamental-machines/basic_register.hpp"
 #include "offset_register.hpp"
 
 namespace clocks {
