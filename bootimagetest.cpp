@@ -118,10 +118,40 @@ extern "C" void start() {
     // Configure MPU PLL
     clock_configure<CM_CLKMODE_DPLL_MPU_REG, CM_IDLEST_DPLL_PER_REG,
                     CM_MPU>([]() {
+      //   auto package_type =
+      //   control_module::EFUSE_SMA_REG{control_module::CONTROL_REGISTERS}
+      //   .get<control_module::EFUSE_SMA::PACKAGE_TYPE>();
+      auto max_frequency =
+          control_module::EFUSE_SMA_REG{control_module::CONTROL_REGISTERS}
+              .get<control_module::EFUSE_SMA::ARM_MPU_MAX_FREQ>();
+      switch (max_frequency) {
+      case 0x1FEF:
+        max_frequency = 300;
+        break;
+      case 0x1FAF:
+        max_frequency = 600;
+        break;
+      case 0x1F2F:
+        max_frequency = 720;
+        break;
+      case 0x1E2F:
+        max_frequency = 800;
+        break;
+      case 0x1C2F:
+        max_frequency = 1000;
+        break;
+      case 0x1FDF:
+        max_frequency = 300;
+        break;
+      case 0x1F9F:
+        max_frequency = 600;
+        break;
+      };
+
       // OPP100
       CM_CLKSEL_DPLL_MPU_REG{CM_MPU}
           .set<CM_CLKSEL_DPLL_MPU::DPLL_MULT, CM_CLKSEL_DPLL_MPU::DPLL_DIV>(
-              1000, // AM335x Rev O 9.2.1.49 p.1467
+              max_frequency, // AM335x Rev O 9.2.1.49 p.1467
               // Get max freq from efuse_sma, figure out voltage requirements
               24      // AM335x Rev O 8.1.6.7 p.1183
                   - 1 // AM335x Rev 0 8.1.12.2.27 p.1297
