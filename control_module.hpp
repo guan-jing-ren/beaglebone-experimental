@@ -4,1708 +4,1708 @@
 #include "offset_register.hpp"
 
 namespace control_module {
-enum class control_revision { RESERVED = -1, offset = 0, reset = 0 };
-enum class control_hwinfo { RESERVED = -1, offset = 4, reset = 0 };
-enum class control_sysconfig { RESERVED = -1, offset = 0x10, reset = 0 };
-enum class control_status { RESERVED = -1, offset = 0x40, reset = 0 };
-enum class control_emif_sdram_config {
-  RESERVED = -1,
-  offset = 0x110,
-  reset = 0
-};
-enum class core_sldo_ctrl { RESERVED = -1, offset = 0x428, reset = 0 };
-enum class mpu_sldo_ctrl { RESERVED = -1, offset = 0x42C, reset = 0 };
-enum class clk32kdivratio_ctrl { RESERVED = -1, offset = 0x444, reset = 0 };
-enum class bandgap_ctrl { RESERVED = -1, offset = 0x448, reset = 0 };
-enum class bandgap_trim { RESERVED = -1, offset = 0x44C, reset = 0 };
-enum class pll_clkinpulow_ctrl { RESERVED = -1, offset = 0x458, reset = 0 };
-enum class mosc_ctrl { RESERVED = -1, offset = 0x468, reset = 0 };
-enum class deepsleep_ctrl { RESERVED = -1, offset = 0x470, reset = 0 };
-enum class dpll_pwr_sw_status { RESERVED = -1, offset = 0x50C, reset = 0 };
-enum class device_id { RESERVED = -1, offset = 0x600, reset = 0 };
-enum class dev_feature { RESERVED = -1, offset = 0x604, reset = 0 };
-enum class init_priority_0 { RESERVED = -1, offset = 0x608, reset = 0 };
-enum class init_priority_1 { RESERVED = -1, offset = 0x60C, reset = 0 };
-enum class tptc_cfg { RESERVED = -1, offset = 0x614, reset = 0 };
-enum class usb_ctrl0 { RESERVED = -1, offset = 0x620, reset = 0 };
-enum class usb_sts0 { RESERVED = -1, offset = 0x624, reset = 0 };
-enum class usb_ctrl1 { RESERVED = -1, offset = 0x628, reset = 0 };
-enum class usb_sts1 { RESERVED = -1, offset = 0x62C, reset = 0 };
-enum class mac_id0_lo { RESERVED = -1, offset = 0x630, reset = 0 };
-enum class mac_id0_hi { RESERVED = -1, offset = 0x634, reset = 0 };
-enum class mac_id1_lo { RESERVED = -1, offset = 0x638, reset = 0 };
-enum class mac_id1_hi { RESERVED = -1, offset = 0x63C, reset = 0 };
-enum class dcan_raminit { RESERVED = -1, offset = 0x644, reset = 0 };
-enum class usb_wkup_ctrl { RESERVED = -1, offset = 0x648, reset = 0 };
-enum class gmii_sel { RESERVED = -1, offset = 0x650, reset = 0 };
-enum class pwmss_ctrl { RESERVED = -1, offset = 0x664, reset = 0 };
-enum class mreqprio_0 { RESERVED = -1, offset = 0x670, reset = 0 };
-enum class mreqprio_1 { RESERVED = -1, offset = 0x674, reset = 0 };
-enum class hw_event_sel_grp1 { RESERVED = -1, offset = 0x690, reset = 0 };
-enum class hw_event_sel_grp2 { RESERVED = -1, offset = 0x694, reset = 0 };
-enum class hw_event_sel_grp3 { RESERVED = -1, offset = 0x698, reset = 0 };
-enum class hw_event_sel_grp4 { RESERVED = -1, offset = 0x69C, reset = 0 };
-enum class smrt_ctrl { RESERVED = -1, offset = 0x6A0, reset = 0 };
-enum class mpuss_hw_debug_sel { RESERVED = -1, offset = 0x6A4, reset = 0 };
-enum class mpuss_hw_dbg_info { RESERVED = -1, offset = 0x6A8, reset = 0 };
-enum class vdd_mpu_opp_050 { RESERVED = -1, offset = 0x770, reset = 0 };
-enum class vdd_mpu_opp_100 { RESERVED = -1, offset = 0x774, reset = 0 };
-enum class vdd_mpu_opp_120 { RESERVED = -1, offset = 0x778, reset = 0 };
-enum class vdd_mpu_opp_turbo { RESERVED = -1, offset = 0x77C, reset = 0 };
-enum class vdd_core_opp_050 { RESERVED = -1, offset = 0x7B8, reset = 0 };
-enum class vdd_core_opp_100 { RESERVED = -1, offset = 0x7BC, reset = 0 };
-enum class bb_scale { RESERVED = -1, offset = 0x7D0, reset = 0 };
-enum class usb_vid_pid { RESERVED = -1, offset = 0x7F4, reset = 0 };
-enum class efuse_sma { RESERVED = -1, offset = 0x7FC, reset = 0 };
-enum class conf_conf_gpmc_ad0_gpmc {
-  conf_gpmc_ad0_mmode,
-  conf_gpmc_ad0_puden,
-  conf_gpmc_ad0_putypesel,
-  conf_gpmc_ad0_rxactive,
-  conf_gpmc_ad0_slewctrl,
-  RESERVED = -1,
-  offset = 0x800,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad1_gpmc {
-  conf_gpmc_ad1_mmode,
-  conf_gpmc_ad1_puden,
-  conf_gpmc_ad1_putypesel,
-  conf_gpmc_ad1_rxactive,
-  conf_gpmc_ad1_slewctrl,
-  RESERVED = -1,
-  offset = 0x804,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad2_gpmc {
-  conf_gpmc_ad2_mmode,
-  conf_gpmc_ad2_puden,
-  conf_gpmc_ad2_putypesel,
-  conf_gpmc_ad2_rxactive,
-  conf_gpmc_ad2_slewctrl,
-  RESERVED = -1,
-  offset = 0x808,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad3_gpmc {
-  conf_gpmc_ad3_mmode,
-  conf_gpmc_ad3_puden,
-  conf_gpmc_ad3_putypesel,
-  conf_gpmc_ad3_rxactive,
-  conf_gpmc_ad3_slewctrl,
-  RESERVED = -1,
-  offset = 0x80C,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad4_gpmc {
-  conf_gpmc_ad4_mmode,
-  conf_gpmc_ad4_puden,
-  conf_gpmc_ad4_putypesel,
-  conf_gpmc_ad4_rxactive,
-  conf_gpmc_ad4_slewctrl,
-  RESERVED = -1,
-  offset = 0x810,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad5_gpmc {
-  conf_gpmc_ad5_mmode,
-  conf_gpmc_ad5_puden,
-  conf_gpmc_ad5_putypesel,
-  conf_gpmc_ad5_rxactive,
-  conf_gpmc_ad5_slewctrl,
-  RESERVED = -1,
-  offset = 0x814,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad6_gpmc {
-  conf_gpmc_ad6_mmode,
-  conf_gpmc_ad6_puden,
-  conf_gpmc_ad6_putypesel,
-  conf_gpmc_ad6_rxactive,
-  conf_gpmc_ad6_slewctrl,
-  RESERVED = -1,
-  offset = 0x818,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad7_gpmc {
-  conf_gpmc_ad7_mmode,
-  conf_gpmc_ad7_puden,
-  conf_gpmc_ad7_putypesel,
-  conf_gpmc_ad7_rxactive,
-  conf_gpmc_ad7_slewctrl,
-  RESERVED = -1,
-  offset = 0x81C,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad8_gpmc {
-  conf_gpmc_ad8_mmode,
-  conf_gpmc_ad8_puden,
-  conf_gpmc_ad8_putypesel,
-  conf_gpmc_ad8_rxactive,
-  conf_gpmc_ad8_slewctrl,
-  RESERVED = -1,
-  offset = 0x820,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad9_gpmc {
-  conf_gpmc_ad9_mmode,
-  conf_gpmc_ad9_puden,
-  conf_gpmc_ad9_putypesel,
-  conf_gpmc_ad9_rxactive,
-  conf_gpmc_ad9_slewctrl,
-  RESERVED = -1,
-  offset = 0x824,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad10_gpmc {
-  conf_gpmc_ad10_mmode,
-  conf_gpmc_ad10_puden,
-  conf_gpmc_ad10_putypesel,
-  conf_gpmc_ad10_rxactive,
-  conf_gpmc_ad10_slewctrl,
-  RESERVED = -1,
-  offset = 0x828,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad11_gpmc {
-  conf_gpmc_ad11_mmode,
-  conf_gpmc_ad11_puden,
-  conf_gpmc_ad11_putypesel,
-  conf_gpmc_ad11_rxactive,
-  conf_gpmc_ad11_slewctrl,
-  RESERVED = -1,
-  offset = 0x82C,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad12_gpmc {
-  conf_gpmc_ad12_mmode,
-  conf_gpmc_ad12_puden,
-  conf_gpmc_ad12_putypesel,
-  conf_gpmc_ad12_rxactive,
-  conf_gpmc_ad12_slewctrl,
-  RESERVED = -1,
-  offset = 0x830,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad13_gpmc {
-  conf_gpmc_ad13_mmode,
-  conf_gpmc_ad13_puden,
-  conf_gpmc_ad13_putypesel,
-  conf_gpmc_ad13_rxactive,
-  conf_gpmc_ad13_slewctrl,
-  RESERVED = -1,
-  offset = 0x834,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad14_gpmc {
-  conf_gpmc_ad14_mmode,
-  conf_gpmc_ad14_puden,
-  conf_gpmc_ad14_putypesel,
-  conf_gpmc_ad14_rxactive,
-  conf_gpmc_ad14_slewctrl,
-  RESERVED = -1,
-  offset = 0x838,
-  reset = 0
-};
-enum class conf_conf_gpmc_ad15_gpmc {
-  conf_gpmc_ad15_mmode,
-  conf_gpmc_ad15_puden,
-  conf_gpmc_ad15_putypesel,
-  conf_gpmc_ad15_rxactive,
-  conf_gpmc_ad15_slewctrl,
-  RESERVED = -1,
-  offset = 0x83C,
-  reset = 0
-};
-enum class conf_conf_gpmc_a0_gpmc {
-  conf_gpmc_a0_mmode,
-  conf_gpmc_a0_puden,
-  conf_gpmc_a0_putypesel,
-  conf_gpmc_a0_rxactive,
-  conf_gpmc_a0_slewctrl,
-  RESERVED = -1,
-  offset = 0x840,
-  reset = 0
-};
-enum class conf_conf_gpmc_a1_gpmc {
-  conf_gpmc_a1_mmode,
-  conf_gpmc_a1_puden,
-  conf_gpmc_a1_putypesel,
-  conf_gpmc_a1_rxactive,
-  conf_gpmc_a1_slewctrl,
-  RESERVED = -1,
-  offset = 0x844,
-  reset = 0
-};
-enum class conf_conf_gpmc_a2_gpmc {
-  conf_gpmc_a2_mmode,
-  conf_gpmc_a2_puden,
-  conf_gpmc_a2_putypesel,
-  conf_gpmc_a2_rxactive,
-  conf_gpmc_a2_slewctrl,
-  RESERVED = -1,
-  offset = 0x848,
-  reset = 0
-};
-enum class conf_conf_gpmc_a3_gpmc {
-  conf_gpmc_a3_mmode,
-  conf_gpmc_a3_puden,
-  conf_gpmc_a3_putypesel,
-  conf_gpmc_a3_rxactive,
-  conf_gpmc_a3_slewctrl,
-  RESERVED = -1,
-  offset = 0x84C,
-  reset = 0
-};
-enum class conf_conf_gpmc_a4_gpmc {
-  conf_gpmc_a4_mmode,
-  conf_gpmc_a4_puden,
-  conf_gpmc_a4_putypesel,
-  conf_gpmc_a4_rxactive,
-  conf_gpmc_a4_slewctrl,
-  RESERVED = -1,
-  offset = 0x850,
-  reset = 0
-};
-enum class conf_conf_gpmc_a5_gpmc {
-  conf_gpmc_a5_mmode,
-  conf_gpmc_a5_puden,
-  conf_gpmc_a5_putypesel,
-  conf_gpmc_a5_rxactive,
-  conf_gpmc_a5_slewctrl,
-  RESERVED = -1,
-  offset = 0x854,
-  reset = 0
-};
-enum class conf_conf_gpmc_a6_gpmc {
-  conf_gpmc_a6_mmode,
-  conf_gpmc_a6_puden,
-  conf_gpmc_a6_putypesel,
-  conf_gpmc_a6_rxactive,
-  conf_gpmc_a6_slewctrl,
-  RESERVED = -1,
-  offset = 0x858,
-  reset = 0
-};
-enum class conf_conf_gpmc_a7_gpmc {
-  conf_gpmc_a7_mmode,
-  conf_gpmc_a7_puden,
-  conf_gpmc_a7_putypesel,
-  conf_gpmc_a7_rxactive,
-  conf_gpmc_a7_slewctrl,
-  RESERVED = -1,
-  offset = 0x85C,
-  reset = 0
-};
-enum class conf_conf_gpmc_a8_gpmc {
-  conf_gpmc_a8_mmode,
-  conf_gpmc_a8_puden,
-  conf_gpmc_a8_putypesel,
-  conf_gpmc_a8_rxactive,
-  conf_gpmc_a8_slewctrl,
-  RESERVED = -1,
-  offset = 0x860,
-  reset = 0
-};
-enum class conf_conf_gpmc_a9_gpmc {
-  conf_gpmc_a9_mmode,
-  conf_gpmc_a9_puden,
-  conf_gpmc_a9_putypesel,
-  conf_gpmc_a9_rxactive,
-  conf_gpmc_a9_slewctrl,
-  RESERVED = -1,
-  offset = 0x864,
-  reset = 0
-};
-enum class conf_conf_gpmc_a10_gpmc {
-  conf_gpmc_a10_mmode,
-  conf_gpmc_a10_puden,
-  conf_gpmc_a10_putypesel,
-  conf_gpmc_a10_rxactive,
-  conf_gpmc_a10_slewctrl,
-  RESERVED = -1,
-  offset = 0x868,
-  reset = 0
-};
-enum class conf_conf_gpmc_a11_gpmc {
-  conf_gpmc_a11_mmode,
-  conf_gpmc_a11_puden,
-  conf_gpmc_a11_putypesel,
-  conf_gpmc_a11_rxactive,
-  conf_gpmc_a11_slewctrl,
-  RESERVED = -1,
-  offset = 0x86C,
-  reset = 0
-};
-enum class conf_conf_gpmc_wait0_gpmc {
-  conf_gpmc_wait0_mmode,
-  conf_gpmc_wait0_puden,
-  conf_gpmc_wait0_putypesel,
-  conf_gpmc_wait0_rxactive,
-  conf_gpmc_wait0_slewctrl,
-  RESERVED = -1,
-  offset = 0x870,
-  reset = 0
-};
-enum class conf_conf_gpmc_wpn_gpmc {
-  conf_gpmc_wpn_mmode,
-  conf_gpmc_wpn_puden,
-  conf_gpmc_wpn_putypesel,
-  conf_gpmc_wpn_rxactive,
-  conf_gpmc_wpn_slewctrl,
-  RESERVED = -1,
-  offset = 0x874,
-  reset = 0
-};
-enum class conf_conf_gpmc_ben1_gpmc {
-  conf_gpmc_ben1_mmode,
-  conf_gpmc_ben1_puden,
-  conf_gpmc_ben1_putypesel,
-  conf_gpmc_ben1_rxactive,
-  conf_gpmc_ben1_slewctrl,
-  RESERVED = -1,
-  offset = 0x878,
-  reset = 0
-};
-enum class conf_conf_gpmc_csn0_gpmc {
-  conf_gpmc_csn0_mmode,
-  conf_gpmc_csn0_puden,
-  conf_gpmc_csn0_putypesel,
-  conf_gpmc_csn0_rxactive,
-  conf_gpmc_csn0_slewctrl,
-  RESERVED = -1,
-  offset = 0x87C,
-  reset = 0
-};
-enum class conf_conf_gpmc_csn1_gpmc {
-  conf_gpmc_csn1_mmode,
-  conf_gpmc_csn1_puden,
-  conf_gpmc_csn1_putypesel,
-  conf_gpmc_csn1_rxactive,
-  conf_gpmc_csn1_slewctrl,
-  RESERVED = -1,
-  offset = 0x880,
-  reset = 0
-};
-enum class conf_conf_gpmc_csn2_gpmc {
-  conf_gpmc_csn2_mmode,
-  conf_gpmc_csn2_puden,
-  conf_gpmc_csn2_putypesel,
-  conf_gpmc_csn2_rxactive,
-  conf_gpmc_csn2_slewctrl,
-  RESERVED = -1,
-  offset = 0x884,
-  reset = 0
-};
-enum class conf_conf_gpmc_csn3_gpmc {
-  conf_gpmc_csn3_mmode,
-  conf_gpmc_csn3_puden,
-  conf_gpmc_csn3_putypesel,
-  conf_gpmc_csn3_rxactive,
-  conf_gpmc_csn3_slewctrl,
-  RESERVED = -1,
-  offset = 0x888,
-  reset = 0
-};
-enum class conf_conf_gpmc_clk_gpmc {
-  conf_gpmc_clk_mmode,
-  conf_gpmc_clk_puden,
-  conf_gpmc_clk_putypesel,
-  conf_gpmc_clk_rxactive,
-  conf_gpmc_clk_slewctrl,
-  RESERVED = -1,
-  offset = 0x88C,
-  reset = 0
-};
-enum class conf_conf_gpmc_advn_ale_gpmc {
-  conf_gpmc_advn_ale_mmode,
-  conf_gpmc_advn_ale_puden,
-  conf_gpmc_advn_ale_putypesel,
-  conf_gpmc_advn_ale_rxactive,
-  conf_gpmc_advn_ale_slewctrl,
-  RESERVED = -1,
-  offset = 0x890,
-  reset = 0
-};
-enum class conf_conf_gpmc_oen_ren_gpmc {
-  conf_gpmc_oen_ren_mmode,
-  conf_gpmc_oen_ren_puden,
-  conf_gpmc_oen_ren_putypesel,
-  conf_gpmc_oen_ren_rxactive,
-  conf_gpmc_oen_ren_slewctrl,
-  RESERVED = -1,
-  offset = 0x894,
-  reset = 0
-};
-enum class conf_conf_gpmc_wen_gpmc {
-  conf_gpmc_wen_mmode,
-  conf_gpmc_wen_puden,
-  conf_gpmc_wen_putypesel,
-  conf_gpmc_wen_rxactive,
-  conf_gpmc_wen_slewctrl,
-  RESERVED = -1,
-  offset = 0x898,
-  reset = 0
-};
-enum class conf_conf_gpmc_ben0_cle_gpmc {
-  conf_gpmc_ben0_cle_mmode,
-  conf_gpmc_ben0_cle_puden,
-  conf_gpmc_ben0_cle_putypesel,
-  conf_gpmc_ben0_cle_rxactive,
-  conf_gpmc_ben0_cle_slewctrl,
-  RESERVED = -1,
-  offset = 0x89C,
-  reset = 0
-};
-enum class conf_conf_lcd_data0_lcd {
-  conf_lcd_data0_mmode,
-  conf_lcd_data0_puden,
-  conf_lcd_data0_putypesel,
-  conf_lcd_data0_rxactive,
-  conf_lcd_data0_slewctrl,
-  RESERVED = -1,
-  offset = 0x8A0,
-  reset = 0
-};
-enum class conf_conf_lcd_data1_lcd {
-  conf_lcd_data1_mmode,
-  conf_lcd_data1_puden,
-  conf_lcd_data1_putypesel,
-  conf_lcd_data1_rxactive,
-  conf_lcd_data1_slewctrl,
-  RESERVED = -1,
-  offset = 0x8A4,
-  reset = 0
-};
-enum class conf_conf_lcd_data2_lcd {
-  conf_lcd_data2_mmode,
-  conf_lcd_data2_puden,
-  conf_lcd_data2_putypesel,
-  conf_lcd_data2_rxactive,
-  conf_lcd_data2_slewctrl,
-  RESERVED = -1,
-  offset = 0x8A8,
-  reset = 0
-};
-enum class conf_conf_lcd_data3_lcd {
-  conf_lcd_data3_mmode,
-  conf_lcd_data3_puden,
-  conf_lcd_data3_putypesel,
-  conf_lcd_data3_rxactive,
-  conf_lcd_data3_slewctrl,
-  RESERVED = -1,
-  offset = 0x8AC,
-  reset = 0
-};
-enum class conf_conf_lcd_data4_lcd {
-  conf_lcd_data4_mmode,
-  conf_lcd_data4_puden,
-  conf_lcd_data4_putypesel,
-  conf_lcd_data4_rxactive,
-  conf_lcd_data4_slewctrl,
-  RESERVED = -1,
-  offset = 0x8B0,
-  reset = 0
-};
-enum class conf_conf_lcd_data5_lcd {
-  conf_lcd_data5_mmode,
-  conf_lcd_data5_puden,
-  conf_lcd_data5_putypesel,
-  conf_lcd_data5_rxactive,
-  conf_lcd_data5_slewctrl,
-  RESERVED = -1,
-  offset = 0x8B4,
-  reset = 0
-};
-enum class conf_conf_lcd_data6_lcd {
-  conf_lcd_data6_mmode,
-  conf_lcd_data6_puden,
-  conf_lcd_data6_putypesel,
-  conf_lcd_data6_rxactive,
-  conf_lcd_data6_slewctrl,
-  RESERVED = -1,
-  offset = 0x8B8,
-  reset = 0
-};
-enum class conf_conf_lcd_data7_lcd {
-  conf_lcd_data7_mmode,
-  conf_lcd_data7_puden,
-  conf_lcd_data7_putypesel,
-  conf_lcd_data7_rxactive,
-  conf_lcd_data7_slewctrl,
-  RESERVED = -1,
-  offset = 0x8BC,
-  reset = 0
-};
-enum class conf_conf_lcd_data8_lcd {
-  conf_lcd_data8_mmode,
-  conf_lcd_data8_puden,
-  conf_lcd_data8_putypesel,
-  conf_lcd_data8_rxactive,
-  conf_lcd_data8_slewctrl,
-  RESERVED = -1,
-  offset = 0x8C0,
-  reset = 0
-};
-enum class conf_conf_lcd_data9_lcd {
-  conf_lcd_data9_mmode,
-  conf_lcd_data9_puden,
-  conf_lcd_data9_putypesel,
-  conf_lcd_data9_rxactive,
-  conf_lcd_data9_slewctrl,
-  RESERVED = -1,
-  offset = 0x8C4,
-  reset = 0
-};
-enum class conf_conf_lcd_data10_lcd {
-  conf_lcd_data10_mmode,
-  conf_lcd_data10_puden,
-  conf_lcd_data10_putypesel,
-  conf_lcd_data10_rxactive,
-  conf_lcd_data10_slewctrl,
-  RESERVED = -1,
-  offset = 0x8C8,
-  reset = 0
-};
-enum class conf_conf_lcd_data11_lcd {
-  conf_lcd_data11_mmode,
-  conf_lcd_data11_puden,
-  conf_lcd_data11_putypesel,
-  conf_lcd_data11_rxactive,
-  conf_lcd_data11_slewctrl,
-  RESERVED = -1,
-  offset = 0x8CC,
-  reset = 0
-};
-enum class conf_conf_lcd_data12_lcd {
-  conf_lcd_data12_mmode,
-  conf_lcd_data12_puden,
-  conf_lcd_data12_putypesel,
-  conf_lcd_data12_rxactive,
-  conf_lcd_data12_slewctrl,
-  RESERVED = -1,
-  offset = 0x8D0,
-  reset = 0
-};
-enum class conf_conf_lcd_data13_lcd {
-  conf_lcd_data13_mmode,
-  conf_lcd_data13_puden,
-  conf_lcd_data13_putypesel,
-  conf_lcd_data13_rxactive,
-  conf_lcd_data13_slewctrl,
-  RESERVED = -1,
-  offset = 0x8D4,
-  reset = 0
-};
-enum class conf_conf_lcd_data14_lcd {
-  conf_lcd_data14_mmode,
-  conf_lcd_data14_puden,
-  conf_lcd_data14_putypesel,
-  conf_lcd_data14_rxactive,
-  conf_lcd_data14_slewctrl,
-  RESERVED = -1,
-  offset = 0x8D8,
-  reset = 0
-};
-enum class conf_conf_lcd_data15_lcd {
-  conf_lcd_data15_mmode,
-  conf_lcd_data15_puden,
-  conf_lcd_data15_putypesel,
-  conf_lcd_data15_rxactive,
-  conf_lcd_data15_slewctrl,
-  RESERVED = -1,
-  offset = 0x8DC,
-  reset = 0
-};
-enum class conf_conf_lcd_vsync_lcd {
-  conf_lcd_vsync_mmode,
-  conf_lcd_vsync_puden,
-  conf_lcd_vsync_putypesel,
-  conf_lcd_vsync_rxactive,
-  conf_lcd_vsync_slewctrl,
-  RESERVED = -1,
-  offset = 0x8E0,
-  reset = 0
-};
-enum class conf_conf_lcd_hsync_lcd {
-  conf_lcd_hsync_mmode,
-  conf_lcd_hsync_puden,
-  conf_lcd_hsync_putypesel,
-  conf_lcd_hsync_rxactive,
-  conf_lcd_hsync_slewctrl,
-  RESERVED = -1,
-  offset = 0x8E4,
-  reset = 0
-};
-enum class conf_conf_lcd_pclk_lcd {
-  conf_lcd_pclk_mmode,
-  conf_lcd_pclk_puden,
-  conf_lcd_pclk_putypesel,
-  conf_lcd_pclk_rxactive,
-  conf_lcd_pclk_slewctrl,
-  RESERVED = -1,
-  offset = 0x8E8,
-  reset = 0
-};
-enum class conf_conf_lcd_ac_bias_en_lcd {
-  conf_lcd_ac_bias_en_mmode,
-  conf_lcd_ac_bias_en_puden,
-  conf_lcd_ac_bias_en_putypesel,
-  conf_lcd_ac_bias_en_rxactive,
-  conf_lcd_ac_bias_en_slewctrl,
-  RESERVED = -1,
-  offset = 0x8EC,
-  reset = 0
-};
-enum class conf_conf_mmc0_dat3_mmc0 {
-  conf_mmc0_dat3_mmode,
-  conf_mmc0_dat3_puden,
-  conf_mmc0_dat3_putypesel,
-  conf_mmc0_dat3_rxactive,
-  conf_mmc0_dat3_slewctrl,
-  RESERVED = -1,
-  offset = 0x8F0,
-  reset = 0
-};
-enum class conf_conf_mmc0_dat2_mmc0 {
-  conf_mmc0_dat2_mmode,
-  conf_mmc0_dat2_puden,
-  conf_mmc0_dat2_putypesel,
-  conf_mmc0_dat2_rxactive,
-  conf_mmc0_dat2_slewctrl,
-  RESERVED = -1,
-  offset = 0x8F4,
-  reset = 0
-};
-enum class conf_conf_mmc0_dat1_mmc0 {
-  conf_mmc0_dat1_mmode,
-  conf_mmc0_dat1_puden,
-  conf_mmc0_dat1_putypesel,
-  conf_mmc0_dat1_rxactive,
-  conf_mmc0_dat1_slewctrl,
-  RESERVED = -1,
-  offset = 0x8F8,
-  reset = 0
-};
-enum class conf_conf_mmc0_dat0_mmc0 {
-  conf_mmc0_dat0_mmode,
-  conf_mmc0_dat0_puden,
-  conf_mmc0_dat0_putypesel,
-  conf_mmc0_dat0_rxactive,
-  conf_mmc0_dat0_slewctrl,
-  RESERVED = -1,
-  offset = 0x8FC,
-  reset = 0
-};
-enum class conf_conf_mmc0_clk_mmc0 {
-  conf_mmc0_clk_mmode,
-  conf_mmc0_clk_puden,
-  conf_mmc0_clk_putypesel,
-  conf_mmc0_clk_rxactive,
-  conf_mmc0_clk_slewctrl,
-  RESERVED = -1,
-  offset = 0x900,
-  reset = 0
-};
-enum class conf_conf_mmc0_cmd_mmc0 {
-  conf_mmc0_cmd_mmode,
-  conf_mmc0_cmd_puden,
-  conf_mmc0_cmd_putypesel,
-  conf_mmc0_cmd_rxactive,
-  conf_mmc0_cmd_slewctrl,
-  RESERVED = -1,
-  offset = 0x904,
-  reset = 0
-};
-enum class conf_conf_mii1_col_mii1 {
-  conf_mii1_col_mmode,
-  conf_mii1_col_puden,
-  conf_mii1_col_putypesel,
-  conf_mii1_col_rxactive,
-  conf_mii1_col_slewctrl,
-  RESERVED = -1,
-  offset = 0x908,
-  reset = 0
-};
-enum class conf_conf_mii1_crs_mii1 {
-  conf_mii1_crs_mmode,
-  conf_mii1_crs_puden,
-  conf_mii1_crs_putypesel,
-  conf_mii1_crs_rxactive,
-  conf_mii1_crs_slewctrl,
-  RESERVED = -1,
-  offset = 0x90C,
-  reset = 0
-};
-enum class conf_conf_mii1_rx_er_mii1 {
-  conf_mii1_rx_er_mmode,
-  conf_mii1_rx_er_puden,
-  conf_mii1_rx_er_putypesel,
-  conf_mii1_rx_er_rxactive,
-  conf_mii1_rx_er_slewctrl,
-  RESERVED = -1,
-  offset = 0x910,
-  reset = 0
-};
-enum class conf_conf_mii1_tx_en_mii1 {
-  conf_mii1_tx_en_mmode,
-  conf_mii1_tx_en_puden,
-  conf_mii1_tx_en_putypesel,
-  conf_mii1_tx_en_rxactive,
-  conf_mii1_tx_en_slewctrl,
-  RESERVED = -1,
-  offset = 0x914,
-  reset = 0
-};
-enum class conf_conf_mii1_rx_dv_mii1 {
-  conf_mii1_rx_dv_mmode,
-  conf_mii1_rx_dv_puden,
-  conf_mii1_rx_dv_putypesel,
-  conf_mii1_rx_dv_rxactive,
-  conf_mii1_rx_dv_slewctrl,
-  RESERVED = -1,
-  offset = 0x918,
-  reset = 0
-};
-enum class conf_conf_mii1_txd3_mii1 {
-  conf_mii1_txd3_mmode,
-  conf_mii1_txd3_puden,
-  conf_mii1_txd3_putypesel,
-  conf_mii1_txd3_rxactive,
-  conf_mii1_txd3_slewctrl,
-  RESERVED = -1,
-  offset = 0x91C,
-  reset = 0
-};
-enum class conf_conf_mii1_txd2_mii1 {
-  conf_mii1_txd2_mmode,
-  conf_mii1_txd2_puden,
-  conf_mii1_txd2_putypesel,
-  conf_mii1_txd2_rxactive,
-  conf_mii1_txd2_slewctrl,
-  RESERVED = -1,
-  offset = 0x920,
-  reset = 0
-};
-enum class conf_conf_mii1_txd1_mii1 {
-  conf_mii1_txd1_mmode,
-  conf_mii1_txd1_puden,
-  conf_mii1_txd1_putypesel,
-  conf_mii1_txd1_rxactive,
-  conf_mii1_txd1_slewctrl,
-  RESERVED = -1,
-  offset = 0x924,
-  reset = 0
-};
-enum class conf_conf_mii1_txd0_mii1 {
-  conf_mii1_txd0_mmode,
-  conf_mii1_txd0_puden,
-  conf_mii1_txd0_putypesel,
-  conf_mii1_txd0_rxactive,
-  conf_mii1_txd0_slewctrl,
-  RESERVED = -1,
-  offset = 0x928,
-  reset = 0
-};
-enum class conf_conf_mii1_tx_clk_mii1 {
-  conf_mii1_tx_clk_mmode,
-  conf_mii1_tx_clk_puden,
-  conf_mii1_tx_clk_putypesel,
-  conf_mii1_tx_clk_rxactive,
-  conf_mii1_tx_clk_slewctrl,
-  RESERVED = -1,
-  offset = 0x92C,
-  reset = 0
-};
-enum class conf_conf_mii1_rx_clk_mii1 {
-  conf_mii1_rx_clk_mmode,
-  conf_mii1_rx_clk_puden,
-  conf_mii1_rx_clk_putypesel,
-  conf_mii1_rx_clk_rxactive,
-  conf_mii1_rx_clk_slewctrl,
-  RESERVED = -1,
-  offset = 0x930,
-  reset = 0
-};
-enum class conf_conf_mii1_rxd3_mii1 {
-  conf_mii1_rxd3_mmode,
-  conf_mii1_rxd3_puden,
-  conf_mii1_rxd3_putypesel,
-  conf_mii1_rxd3_rxactive,
-  conf_mii1_rxd3_slewctrl,
-  RESERVED = -1,
-  offset = 0x934,
-  reset = 0
-};
-enum class conf_conf_mii1_rxd2_mii1 {
-  conf_mii1_rxd2_mmode,
-  conf_mii1_rxd2_puden,
-  conf_mii1_rxd2_putypesel,
-  conf_mii1_rxd2_rxactive,
-  conf_mii1_rxd2_slewctrl,
-  RESERVED = -1,
-  offset = 0x938,
-  reset = 0
-};
-enum class conf_conf_mii1_rxd1_mii1 {
-  conf_mii1_rxd1_mmode,
-  conf_mii1_rxd1_puden,
-  conf_mii1_rxd1_putypesel,
-  conf_mii1_rxd1_rxactive,
-  conf_mii1_rxd1_slewctrl,
-  RESERVED = -1,
-  offset = 0x93C,
-  reset = 0
-};
-enum class conf_conf_mii1_rxd0_mii1 {
-  conf_mii1_rxd0_mmode,
-  conf_mii1_rxd0_puden,
-  conf_mii1_rxd0_putypesel,
-  conf_mii1_rxd0_rxactive,
-  conf_mii1_rxd0_slewctrl,
-  RESERVED = -1,
-  offset = 0x940,
-  reset = 0
-};
-enum class conf_conf_rmii1_ref_clk_rmii1 {
-  conf_rmii1_ref_clk_mmode,
-  conf_rmii1_ref_clk_puden,
-  conf_rmii1_ref_clk_putypesel,
-  conf_rmii1_ref_clk_rxactive,
-  conf_rmii1_ref_clk_slewctrl,
-  RESERVED = -1,
-  offset = 0x944,
-  reset = 0
-};
-enum class conf_mdio { RESERVED = -1, offset = 0x948, reset = 0 };
-enum class conf_mdc { RESERVED = -1, offset = 0x94C, reset = 0 };
-enum class conf_conf_spi0_sclk_spi0 {
-  conf_spi0_sclk_mmode,
-  conf_spi0_sclk_puden,
-  conf_spi0_sclk_putypesel,
-  conf_spi0_sclk_rxactive,
-  conf_spi0_sclk_slewctrl,
-  RESERVED = -1,
-  offset = 0x950,
-  reset = 0
-};
-enum class conf_conf_spi0_d0_spi0 {
-  conf_spi0_d0_mmode,
-  conf_spi0_d0_puden,
-  conf_spi0_d0_putypesel,
-  conf_spi0_d0_rxactive,
-  conf_spi0_d0_slewctrl,
-  RESERVED = -1,
-  offset = 0x954,
-  reset = 0
-};
-enum class conf_conf_spi0_d1_spi0 {
-  conf_spi0_d1_mmode,
-  conf_spi0_d1_puden,
-  conf_spi0_d1_putypesel,
-  conf_spi0_d1_rxactive,
-  conf_spi0_d1_slewctrl,
-  RESERVED = -1,
-  offset = 0x958,
-  reset = 0
-};
-enum class conf_conf_spi0_cs0_spi0 {
-  conf_spi0_cs0_mmode,
-  conf_spi0_cs0_puden,
-  conf_spi0_cs0_putypesel,
-  conf_spi0_cs0_rxactive,
-  conf_spi0_cs0_slewctrl,
-  RESERVED = -1,
-  offset = 0x95C,
-  reset = 0
-};
-enum class conf_conf_spi0_cs1_spi0 {
-  conf_spi0_cs1_mmode,
-  conf_spi0_cs1_puden,
-  conf_spi0_cs1_putypesel,
-  conf_spi0_cs1_rxactive,
-  conf_spi0_cs1_slewctrl,
-  RESERVED = -1,
-  offset = 0x960,
-  reset = 0
-};
-enum class conf_conf_ecap0_in_pwm0_out_ecap0 {
-  conf_ecap0_in_pwm0_out_mmode,
-  conf_ecap0_in_pwm0_out_puden,
-  conf_ecap0_in_pwm0_out_putypesel,
-  conf_ecap0_in_pwm0_out_rxactive,
-  conf_ecap0_in_pwm0_out_slewctrl,
-  RESERVED = -1,
-  offset = 0x964,
-  reset = 0
-};
-enum class conf_conf_uart0_ctsn_uart0 {
-  conf_uart0_ctsn_mmode,
-  conf_uart0_ctsn_puden,
-  conf_uart0_ctsn_putypesel,
-  conf_uart0_ctsn_rxactive,
-  conf_uart0_ctsn_slewctrl,
-  RESERVED = -1,
-  offset = 0x968,
-  reset = 0
-};
-enum class conf_conf_uart0_rtsn_uart0 {
-  conf_uart0_rtsn_mmode,
-  conf_uart0_rtsn_puden,
-  conf_uart0_rtsn_putypesel,
-  conf_uart0_rtsn_rxactive,
-  conf_uart0_rtsn_slewctrl,
-  RESERVED = -1,
-  offset = 0x96C,
-  reset = 0
-};
-enum class conf_conf_uart0_rxd_uart0 {
-  conf_uart0_rxd_mmode,
-  conf_uart0_rxd_puden,
-  conf_uart0_rxd_putypesel,
-  conf_uart0_rxd_rxactive,
-  conf_uart0_rxd_slewctrl,
-  RESERVED = -1,
-  offset = 0x970,
-  reset = 0
-};
-enum class conf_conf_uart0_txd_uart0 {
-  conf_uart0_txd_mmode,
-  conf_uart0_txd_puden,
-  conf_uart0_txd_putypesel,
-  conf_uart0_txd_rxactive,
-  conf_uart0_txd_slewctrl,
-  RESERVED = -1,
-  offset = 0x974,
-  reset = 0
-};
-enum class conf_conf_uart1_ctsn_uart1 {
-  conf_uart1_ctsn_mmode,
-  conf_uart1_ctsn_puden,
-  conf_uart1_ctsn_putypesel,
-  conf_uart1_ctsn_rxactive,
-  conf_uart1_ctsn_slewctrl,
-  RESERVED = -1,
-  offset = 0x978,
-  reset = 0
-};
-enum class conf_conf_uart1_rtsn_uart1 {
-  conf_uart1_rtsn_mmode,
-  conf_uart1_rtsn_puden,
-  conf_uart1_rtsn_putypesel,
-  conf_uart1_rtsn_rxactive,
-  conf_uart1_rtsn_slewctrl,
-  RESERVED = -1,
-  offset = 0x97C,
-  reset = 0
-};
-enum class conf_conf_uart1_rxd_uart1 {
-  conf_uart1_rxd_mmode,
-  conf_uart1_rxd_puden,
-  conf_uart1_rxd_putypesel,
-  conf_uart1_rxd_rxactive,
-  conf_uart1_rxd_slewctrl,
-  RESERVED = -1,
-  offset = 0x980,
-  reset = 0
-};
-enum class conf_conf_uart1_txd_uart1 {
-  conf_uart1_txd_mmode,
-  conf_uart1_txd_puden,
-  conf_uart1_txd_putypesel,
-  conf_uart1_txd_rxactive,
-  conf_uart1_txd_slewctrl,
-  RESERVED = -1,
-  offset = 0x984,
-  reset = 0
-};
-enum class conf_conf_i2c0_sda_i2c0 {
-  conf_i2c0_sda_mmode,
-  conf_i2c0_sda_puden,
-  conf_i2c0_sda_putypesel,
-  conf_i2c0_sda_rxactive,
-  conf_i2c0_sda_slewctrl,
-  RESERVED = -1,
-  offset = 0x988,
-  reset = 0
-};
-enum class conf_conf_i2c0_scl_i2c0 {
-  conf_i2c0_scl_mmode,
-  conf_i2c0_scl_puden,
-  conf_i2c0_scl_putypesel,
-  conf_i2c0_scl_rxactive,
-  conf_i2c0_scl_slewctrl,
-  RESERVED = -1,
-  offset = 0x98C,
-  reset = 0
-};
-enum class conf_conf_mcasp0_aclkx_mcasp0 {
-  conf_mcasp0_aclkx_mmode,
-  conf_mcasp0_aclkx_puden,
-  conf_mcasp0_aclkx_putypesel,
-  conf_mcasp0_aclkx_rxactive,
-  conf_mcasp0_aclkx_slewctrl,
-  RESERVED = -1,
-  offset = 0x990,
-  reset = 0
-};
-enum class conf_conf_mcasp0_fsx_mcasp0 {
-  conf_mcasp0_fsx_mmode,
-  conf_mcasp0_fsx_puden,
-  conf_mcasp0_fsx_putypesel,
-  conf_mcasp0_fsx_rxactive,
-  conf_mcasp0_fsx_slewctrl,
-  RESERVED = -1,
-  offset = 0x994,
-  reset = 0
-};
-enum class conf_conf_mcasp0_axr0_mcasp0 {
-  conf_mcasp0_axr0_mmode,
-  conf_mcasp0_axr0_puden,
-  conf_mcasp0_axr0_putypesel,
-  conf_mcasp0_axr0_rxactive,
-  conf_mcasp0_axr0_slewctrl,
-  RESERVED = -1,
-  offset = 0x998,
-  reset = 0
-};
-enum class conf_conf_mcasp0_ahclkr_mcasp0 {
-  conf_mcasp0_ahclkr_mmode,
-  conf_mcasp0_ahclkr_puden,
-  conf_mcasp0_ahclkr_putypesel,
-  conf_mcasp0_ahclkr_rxactive,
-  conf_mcasp0_ahclkr_slewctrl,
-  RESERVED = -1,
-  offset = 0x99C,
-  reset = 0
-};
-enum class conf_conf_mcasp0_aclkr_mcasp0 {
-  conf_mcasp0_aclkr_mmode,
-  conf_mcasp0_aclkr_puden,
-  conf_mcasp0_aclkr_putypesel,
-  conf_mcasp0_aclkr_rxactive,
-  conf_mcasp0_aclkr_slewctrl,
-  RESERVED = -1,
-  offset = 0x9A0,
-  reset = 0
-};
-enum class conf_conf_mcasp0_fsr_mcasp0 {
-  conf_mcasp0_fsr_mmode,
-  conf_mcasp0_fsr_puden,
-  conf_mcasp0_fsr_putypesel,
-  conf_mcasp0_fsr_rxactive,
-  conf_mcasp0_fsr_slewctrl,
-  RESERVED = -1,
-  offset = 0x9A4,
-  reset = 0
-};
-enum class conf_conf_mcasp0_axr1_mcasp0 {
-  conf_mcasp0_axr1_mmode,
-  conf_mcasp0_axr1_puden,
-  conf_mcasp0_axr1_putypesel,
-  conf_mcasp0_axr1_rxactive,
-  conf_mcasp0_axr1_slewctrl,
-  RESERVED = -1,
-  offset = 0x9A8,
-  reset = 0
-};
-enum class conf_conf_mcasp0_ahclkx_mcasp0 {
-  conf_mcasp0_ahclkx_mmode,
-  conf_mcasp0_ahclkx_puden,
-  conf_mcasp0_ahclkx_putypesel,
-  conf_mcasp0_ahclkx_rxactive,
-  conf_mcasp0_ahclkx_slewctrl,
-  RESERVED = -1,
-  offset = 0x9AC,
-  reset = 0
-};
-enum class conf_conf_xdma_event_intr0_xdma {
-  conf_xdma_event_intr0_mmode,
-  conf_xdma_event_intr0_puden,
-  conf_xdma_event_intr0_putypesel,
-  conf_xdma_event_intr0_rxactive,
-  conf_xdma_event_intr0_slewctrl,
-  RESERVED = -1,
-  offset = 0x9B0,
-  reset = 0
-};
-enum class conf_conf_xdma_event_intr1_xdma {
-  conf_xdma_event_intr1_mmode,
-  conf_xdma_event_intr1_puden,
-  conf_xdma_event_intr1_putypesel,
-  conf_xdma_event_intr1_rxactive,
-  conf_xdma_event_intr1_slewctrl,
-  RESERVED = -1,
-  offset = 0x9B4,
-  reset = 0
-};
-enum class conf_warmrstn { RESERVED = -1, offset = 0x9B8, reset = 0 };
-enum class conf_nnmi { RESERVED = -1, offset = 0x9C0, reset = 0 };
-enum class conf_tms { RESERVED = -1, offset = 0x9D0, reset = 0 };
-enum class conf_tdi { RESERVED = -1, offset = 0x9D4, reset = 0 };
-enum class conf_tdo { RESERVED = -1, offset = 0x9D8, reset = 0 };
-enum class conf_tck { RESERVED = -1, offset = 0x9DC, reset = 0 };
-enum class conf_trstn { RESERVED = -1, offset = 0x9E0, reset = 0 };
-enum class conf_emu0 { RESERVED = -1, offset = 0x9E4, reset = 0 };
-enum class conf_emu1 { RESERVED = -1, offset = 0x9E8, reset = 0 };
-enum class conf_conf_rtc_pwronrstn_rtc {
-  conf_rtc_pwronrstn_mmode,
-  conf_rtc_pwronrstn_puden,
-  conf_rtc_pwronrstn_putypesel,
-  conf_rtc_pwronrstn_rxactive,
-  conf_rtc_pwronrstn_slewctrl,
-  RESERVED = -1,
-  offset = 0x9F8,
-  reset = 0
-};
-enum class conf_conf_pmic_power_en_pmic {
-  conf_pmic_power_en_mmode,
-  conf_pmic_power_en_puden,
-  conf_pmic_power_en_putypesel,
-  conf_pmic_power_en_rxactive,
-  conf_pmic_power_en_slewctrl,
-  RESERVED = -1,
-  offset = 0x9FC,
-  reset = 0
-};
-enum class conf_conf_ext_wakeup_ext {
-  conf_ext_wakeup_mmode,
-  conf_ext_wakeup_puden,
-  conf_ext_wakeup_putypesel,
-  conf_ext_wakeup_rxactive,
-  conf_ext_wakeup_slewctrl,
-  RESERVED = -1,
-  offset = 0xA00,
-  reset = 0
-};
-enum class conf_conf_usb0_drvvbus_usb0 {
-  conf_usb0_drvvbus_mmode,
-  conf_usb0_drvvbus_puden,
-  conf_usb0_drvvbus_putypesel,
-  conf_usb0_drvvbus_rxactive,
-  conf_usb0_drvvbus_slewctrl,
-  RESERVED = -1,
-  offset = 0xA1C,
-  reset = 0
-};
-enum class conf_conf_usb1_drvvbus_usb1 {
-  conf_usb1_drvvbus_mmode,
-  conf_usb1_drvvbus_puden,
-  conf_usb1_drvvbus_putypesel,
-  conf_usb1_drvvbus_rxactive,
-  conf_usb1_drvvbus_slewctrl,
-  RESERVED = -1,
-  offset = 0xA34,
-  reset = 0
-};
-enum class cqdetect_status { RESERVED = -1, offset = 0xE00, reset = 0 };
-enum class ddr_io_ctrl { RESERVED = -1, offset = 0xE04, reset = 0 };
-enum class vtp_ctrl { RESERVED = -1, offset = 0xE0C, reset = 0 };
-enum class vref_ctrl { RESERVED = -1, offset = 0xE14, reset = 0 };
-enum class tpcc_evt_mux_0_3 {
-  evt_mux_0,
+enum class CONTROL_REVISION { RESERVED = -1, OFFSET = 0, RESET = 0 };
+enum class CONTROL_HWINFO { RESERVED = -1, OFFSET = 4, RESET = 0 };
+enum class CONTROL_SYSCONFIG { RESERVED = -1, OFFSET = 0X10, RESET = 0 };
+enum class CONTROL_STATUS { RESERVED = -1, OFFSET = 0X40, RESET = 0 };
+enum class CONTROL_EMIF_SDRAM_CONFIG {
+  RESERVED = -1,
+  OFFSET = 0X110,
+  RESET = 0
+};
+enum class CORE_SLDO_CTRL { RESERVED = -1, OFFSET = 0X428, RESET = 0 };
+enum class MPU_SLDO_CTRL { RESERVED = -1, OFFSET = 0X42C, RESET = 0 };
+enum class CLK32KDIVRATIO_CTRL { RESERVED = -1, OFFSET = 0X444, RESET = 0 };
+enum class BANDGAP_CTRL { RESERVED = -1, OFFSET = 0X448, RESET = 0 };
+enum class BANDGAP_TRIM { RESERVED = -1, OFFSET = 0X44C, RESET = 0 };
+enum class PLL_CLKINPULOW_CTRL { RESERVED = -1, OFFSET = 0X458, RESET = 0 };
+enum class MOSC_CTRL { RESERVED = -1, OFFSET = 0X468, RESET = 0 };
+enum class DEEPSLEEP_CTRL { RESERVED = -1, OFFSET = 0X470, RESET = 0 };
+enum class DPLL_PWR_SW_STATUS { RESERVED = -1, OFFSET = 0X50C, RESET = 0 };
+enum class DEVICE_ID { RESERVED = -1, OFFSET = 0X600, RESET = 0 };
+enum class DEV_FEATURE { RESERVED = -1, OFFSET = 0X604, RESET = 0 };
+enum class INIT_PRIORITY_0 { RESERVED = -1, OFFSET = 0X608, RESET = 0 };
+enum class INIT_PRIORITY_1 { RESERVED = -1, OFFSET = 0X60C, RESET = 0 };
+enum class TPTC_CFG { RESERVED = -1, OFFSET = 0X614, RESET = 0 };
+enum class USB_CTRL0 { RESERVED = -1, OFFSET = 0X620, RESET = 0 };
+enum class USB_STS0 { RESERVED = -1, OFFSET = 0X624, RESET = 0 };
+enum class USB_CTRL1 { RESERVED = -1, OFFSET = 0X628, RESET = 0 };
+enum class USB_STS1 { RESERVED = -1, OFFSET = 0X62C, RESET = 0 };
+enum class MAC_ID0_LO { RESERVED = -1, OFFSET = 0X630, RESET = 0 };
+enum class MAC_ID0_HI { RESERVED = -1, OFFSET = 0X634, RESET = 0 };
+enum class MAC_ID1_LO { RESERVED = -1, OFFSET = 0X638, RESET = 0 };
+enum class MAC_ID1_HI { RESERVED = -1, OFFSET = 0X63C, RESET = 0 };
+enum class DCAN_RAMINIT { RESERVED = -1, OFFSET = 0X644, RESET = 0 };
+enum class USB_WKUP_CTRL { RESERVED = -1, OFFSET = 0X648, RESET = 0 };
+enum class GMII_SEL { RESERVED = -1, OFFSET = 0X650, RESET = 0 };
+enum class PWMSS_CTRL { RESERVED = -1, OFFSET = 0X664, RESET = 0 };
+enum class MREQPRIO_0 { RESERVED = -1, OFFSET = 0X670, RESET = 0 };
+enum class MREQPRIO_1 { RESERVED = -1, OFFSET = 0X674, RESET = 0 };
+enum class HW_EVENT_SEL_GRP1 { RESERVED = -1, OFFSET = 0X690, RESET = 0 };
+enum class HW_EVENT_SEL_GRP2 { RESERVED = -1, OFFSET = 0X694, RESET = 0 };
+enum class HW_EVENT_SEL_GRP3 { RESERVED = -1, OFFSET = 0X698, RESET = 0 };
+enum class HW_EVENT_SEL_GRP4 { RESERVED = -1, OFFSET = 0X69C, RESET = 0 };
+enum class SMRT_CTRL { RESERVED = -1, OFFSET = 0X6A0, RESET = 0 };
+enum class MPUSS_HW_DEBUG_SEL { RESERVED = -1, OFFSET = 0X6A4, RESET = 0 };
+enum class MPUSS_HW_DBG_INFO { RESERVED = -1, OFFSET = 0X6A8, RESET = 0 };
+enum class VDD_MPU_OPP_050 { RESERVED = -1, OFFSET = 0X770, RESET = 0 };
+enum class VDD_MPU_OPP_100 { RESERVED = -1, OFFSET = 0X774, RESET = 0 };
+enum class VDD_MPU_OPP_120 { RESERVED = -1, OFFSET = 0X778, RESET = 0 };
+enum class VDD_MPU_OPP_TURBO { RESERVED = -1, OFFSET = 0X77C, RESET = 0 };
+enum class VDD_CORE_OPP_050 { RESERVED = -1, OFFSET = 0X7B8, RESET = 0 };
+enum class VDD_CORE_OPP_100 { RESERVED = -1, OFFSET = 0X7BC, RESET = 0 };
+enum class BB_SCALE { RESERVED = -1, OFFSET = 0X7D0, RESET = 0 };
+enum class USB_VID_PID { RESERVED = -1, OFFSET = 0X7F4, RESET = 0 };
+enum class EFUSE_SMA { RESERVED = -1, OFFSET = 0X7FC, RESET = 0 };
+enum class CONF_GPMC_AD0 {
+  CONF_GPMC_AD0_MMODE,
+  CONF_GPMC_AD0_PUDEN,
+  CONF_GPMC_AD0_PUTYPESEL,
+  CONF_GPMC_AD0_RXACTIVE,
+  CONF_GPMC_AD0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X800,
+  RESET = 0
+};
+enum class CONF_GPMC_AD1 {
+  CONF_GPMC_AD1_MMODE,
+  CONF_GPMC_AD1_PUDEN,
+  CONF_GPMC_AD1_PUTYPESEL,
+  CONF_GPMC_AD1_RXACTIVE,
+  CONF_GPMC_AD1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X804,
+  RESET = 0
+};
+enum class CONF_GPMC_AD2 {
+  CONF_GPMC_AD2_MMODE,
+  CONF_GPMC_AD2_PUDEN,
+  CONF_GPMC_AD2_PUTYPESEL,
+  CONF_GPMC_AD2_RXACTIVE,
+  CONF_GPMC_AD2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X808,
+  RESET = 0
+};
+enum class CONF_GPMC_AD3 {
+  CONF_GPMC_AD3_MMODE,
+  CONF_GPMC_AD3_PUDEN,
+  CONF_GPMC_AD3_PUTYPESEL,
+  CONF_GPMC_AD3_RXACTIVE,
+  CONF_GPMC_AD3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X80C,
+  RESET = 0
+};
+enum class CONF_GPMC_AD4 {
+  CONF_GPMC_AD4_MMODE,
+  CONF_GPMC_AD4_PUDEN,
+  CONF_GPMC_AD4_PUTYPESEL,
+  CONF_GPMC_AD4_RXACTIVE,
+  CONF_GPMC_AD4_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X810,
+  RESET = 0
+};
+enum class CONF_GPMC_AD5 {
+  CONF_GPMC_AD5_MMODE,
+  CONF_GPMC_AD5_PUDEN,
+  CONF_GPMC_AD5_PUTYPESEL,
+  CONF_GPMC_AD5_RXACTIVE,
+  CONF_GPMC_AD5_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X814,
+  RESET = 0
+};
+enum class CONF_GPMC_AD6 {
+  CONF_GPMC_AD6_MMODE,
+  CONF_GPMC_AD6_PUDEN,
+  CONF_GPMC_AD6_PUTYPESEL,
+  CONF_GPMC_AD6_RXACTIVE,
+  CONF_GPMC_AD6_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X818,
+  RESET = 0
+};
+enum class CONF_GPMC_AD7 {
+  CONF_GPMC_AD7_MMODE,
+  CONF_GPMC_AD7_PUDEN,
+  CONF_GPMC_AD7_PUTYPESEL,
+  CONF_GPMC_AD7_RXACTIVE,
+  CONF_GPMC_AD7_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X81C,
+  RESET = 0
+};
+enum class CONF_GPMC_AD8 {
+  CONF_GPMC_AD8_MMODE,
+  CONF_GPMC_AD8_PUDEN,
+  CONF_GPMC_AD8_PUTYPESEL,
+  CONF_GPMC_AD8_RXACTIVE,
+  CONF_GPMC_AD8_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X820,
+  RESET = 0
+};
+enum class CONF_GPMC_AD9 {
+  CONF_GPMC_AD9_MMODE,
+  CONF_GPMC_AD9_PUDEN,
+  CONF_GPMC_AD9_PUTYPESEL,
+  CONF_GPMC_AD9_RXACTIVE,
+  CONF_GPMC_AD9_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X824,
+  RESET = 0
+};
+enum class CONF_GPMC_AD10 {
+  CONF_GPMC_AD10_MMODE,
+  CONF_GPMC_AD10_PUDEN,
+  CONF_GPMC_AD10_PUTYPESEL,
+  CONF_GPMC_AD10_RXACTIVE,
+  CONF_GPMC_AD10_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X828,
+  RESET = 0
+};
+enum class CONF_GPMC_AD11 {
+  CONF_GPMC_AD11_MMODE,
+  CONF_GPMC_AD11_PUDEN,
+  CONF_GPMC_AD11_PUTYPESEL,
+  CONF_GPMC_AD11_RXACTIVE,
+  CONF_GPMC_AD11_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X82C,
+  RESET = 0
+};
+enum class CONF_GPMC_AD12 {
+  CONF_GPMC_AD12_MMODE,
+  CONF_GPMC_AD12_PUDEN,
+  CONF_GPMC_AD12_PUTYPESEL,
+  CONF_GPMC_AD12_RXACTIVE,
+  CONF_GPMC_AD12_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X830,
+  RESET = 0
+};
+enum class CONF_GPMC_AD13 {
+  CONF_GPMC_AD13_MMODE,
+  CONF_GPMC_AD13_PUDEN,
+  CONF_GPMC_AD13_PUTYPESEL,
+  CONF_GPMC_AD13_RXACTIVE,
+  CONF_GPMC_AD13_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X834,
+  RESET = 0
+};
+enum class CONF_GPMC_AD14 {
+  CONF_GPMC_AD14_MMODE,
+  CONF_GPMC_AD14_PUDEN,
+  CONF_GPMC_AD14_PUTYPESEL,
+  CONF_GPMC_AD14_RXACTIVE,
+  CONF_GPMC_AD14_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X838,
+  RESET = 0
+};
+enum class CONF_GPMC_AD15 {
+  CONF_GPMC_AD15_MMODE,
+  CONF_GPMC_AD15_PUDEN,
+  CONF_GPMC_AD15_PUTYPESEL,
+  CONF_GPMC_AD15_RXACTIVE,
+  CONF_GPMC_AD15_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X83C,
+  RESET = 0
+};
+enum class CONF_GPMC_A0 {
+  CONF_GPMC_A0_MMODE,
+  CONF_GPMC_A0_PUDEN,
+  CONF_GPMC_A0_PUTYPESEL,
+  CONF_GPMC_A0_RXACTIVE,
+  CONF_GPMC_A0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X840,
+  RESET = 0
+};
+enum class CONF_GPMC_A1 {
+  CONF_GPMC_A1_MMODE,
+  CONF_GPMC_A1_PUDEN,
+  CONF_GPMC_A1_PUTYPESEL,
+  CONF_GPMC_A1_RXACTIVE,
+  CONF_GPMC_A1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X844,
+  RESET = 0
+};
+enum class CONF_GPMC_A2 {
+  CONF_GPMC_A2_MMODE,
+  CONF_GPMC_A2_PUDEN,
+  CONF_GPMC_A2_PUTYPESEL,
+  CONF_GPMC_A2_RXACTIVE,
+  CONF_GPMC_A2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X848,
+  RESET = 0
+};
+enum class CONF_GPMC_A3 {
+  CONF_GPMC_A3_MMODE,
+  CONF_GPMC_A3_PUDEN,
+  CONF_GPMC_A3_PUTYPESEL,
+  CONF_GPMC_A3_RXACTIVE,
+  CONF_GPMC_A3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X84C,
+  RESET = 0
+};
+enum class CONF_GPMC_A4 {
+  CONF_GPMC_A4_MMODE,
+  CONF_GPMC_A4_PUDEN,
+  CONF_GPMC_A4_PUTYPESEL,
+  CONF_GPMC_A4_RXACTIVE,
+  CONF_GPMC_A4_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X850,
+  RESET = 0
+};
+enum class CONF_GPMC_A5 {
+  CONF_GPMC_A5_MMODE,
+  CONF_GPMC_A5_PUDEN,
+  CONF_GPMC_A5_PUTYPESEL,
+  CONF_GPMC_A5_RXACTIVE,
+  CONF_GPMC_A5_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X854,
+  RESET = 0
+};
+enum class CONF_GPMC_A6 {
+  CONF_GPMC_A6_MMODE,
+  CONF_GPMC_A6_PUDEN,
+  CONF_GPMC_A6_PUTYPESEL,
+  CONF_GPMC_A6_RXACTIVE,
+  CONF_GPMC_A6_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X858,
+  RESET = 0
+};
+enum class CONF_GPMC_A7 {
+  CONF_GPMC_A7_MMODE,
+  CONF_GPMC_A7_PUDEN,
+  CONF_GPMC_A7_PUTYPESEL,
+  CONF_GPMC_A7_RXACTIVE,
+  CONF_GPMC_A7_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X85C,
+  RESET = 0
+};
+enum class CONF_GPMC_A8 {
+  CONF_GPMC_A8_MMODE,
+  CONF_GPMC_A8_PUDEN,
+  CONF_GPMC_A8_PUTYPESEL,
+  CONF_GPMC_A8_RXACTIVE,
+  CONF_GPMC_A8_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X860,
+  RESET = 0
+};
+enum class CONF_GPMC_A9 {
+  CONF_GPMC_A9_MMODE,
+  CONF_GPMC_A9_PUDEN,
+  CONF_GPMC_A9_PUTYPESEL,
+  CONF_GPMC_A9_RXACTIVE,
+  CONF_GPMC_A9_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X864,
+  RESET = 0
+};
+enum class CONF_GPMC_A10 {
+  CONF_GPMC_A10_MMODE,
+  CONF_GPMC_A10_PUDEN,
+  CONF_GPMC_A10_PUTYPESEL,
+  CONF_GPMC_A10_RXACTIVE,
+  CONF_GPMC_A10_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X868,
+  RESET = 0
+};
+enum class CONF_GPMC_A11 {
+  CONF_GPMC_A11_MMODE,
+  CONF_GPMC_A11_PUDEN,
+  CONF_GPMC_A11_PUTYPESEL,
+  CONF_GPMC_A11_RXACTIVE,
+  CONF_GPMC_A11_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X86C,
+  RESET = 0
+};
+enum class CONF_GPMC_WAIT0 {
+  CONF_GPMC_WAIT0_MMODE,
+  CONF_GPMC_WAIT0_PUDEN,
+  CONF_GPMC_WAIT0_PUTYPESEL,
+  CONF_GPMC_WAIT0_RXACTIVE,
+  CONF_GPMC_WAIT0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X870,
+  RESET = 0
+};
+enum class CONF_GPMC_WPN {
+  CONF_GPMC_WPN_MMODE,
+  CONF_GPMC_WPN_PUDEN,
+  CONF_GPMC_WPN_PUTYPESEL,
+  CONF_GPMC_WPN_RXACTIVE,
+  CONF_GPMC_WPN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X874,
+  RESET = 0
+};
+enum class CONF_GPMC_BEN1 {
+  CONF_GPMC_BEN1_MMODE,
+  CONF_GPMC_BEN1_PUDEN,
+  CONF_GPMC_BEN1_PUTYPESEL,
+  CONF_GPMC_BEN1_RXACTIVE,
+  CONF_GPMC_BEN1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X878,
+  RESET = 0
+};
+enum class CONF_GPMC_CSN0 {
+  CONF_GPMC_CSN0_MMODE,
+  CONF_GPMC_CSN0_PUDEN,
+  CONF_GPMC_CSN0_PUTYPESEL,
+  CONF_GPMC_CSN0_RXACTIVE,
+  CONF_GPMC_CSN0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X87C,
+  RESET = 0
+};
+enum class CONF_GPMC_CSN1 {
+  CONF_GPMC_CSN1_MMODE,
+  CONF_GPMC_CSN1_PUDEN,
+  CONF_GPMC_CSN1_PUTYPESEL,
+  CONF_GPMC_CSN1_RXACTIVE,
+  CONF_GPMC_CSN1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X880,
+  RESET = 0
+};
+enum class CONF_GPMC_CSN2 {
+  CONF_GPMC_CSN2_MMODE,
+  CONF_GPMC_CSN2_PUDEN,
+  CONF_GPMC_CSN2_PUTYPESEL,
+  CONF_GPMC_CSN2_RXACTIVE,
+  CONF_GPMC_CSN2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X884,
+  RESET = 0
+};
+enum class CONF_GPMC_CSN3 {
+  CONF_GPMC_CSN3_MMODE,
+  CONF_GPMC_CSN3_PUDEN,
+  CONF_GPMC_CSN3_PUTYPESEL,
+  CONF_GPMC_CSN3_RXACTIVE,
+  CONF_GPMC_CSN3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X888,
+  RESET = 0
+};
+enum class CONF_GPMC_CLK {
+  CONF_GPMC_CLK_MMODE,
+  CONF_GPMC_CLK_PUDEN,
+  CONF_GPMC_CLK_PUTYPESEL,
+  CONF_GPMC_CLK_RXACTIVE,
+  CONF_GPMC_CLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X88C,
+  RESET = 0
+};
+enum class CONF_GPMC_ADVN_ALE {
+  CONF_GPMC_ADVN_ALE_MMODE,
+  CONF_GPMC_ADVN_ALE_PUDEN,
+  CONF_GPMC_ADVN_ALE_PUTYPESEL,
+  CONF_GPMC_ADVN_ALE_RXACTIVE,
+  CONF_GPMC_ADVN_ALE_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X890,
+  RESET = 0
+};
+enum class CONF_GPMC_OEN_REN {
+  CONF_GPMC_OEN_REN_MMODE,
+  CONF_GPMC_OEN_REN_PUDEN,
+  CONF_GPMC_OEN_REN_PUTYPESEL,
+  CONF_GPMC_OEN_REN_RXACTIVE,
+  CONF_GPMC_OEN_REN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X894,
+  RESET = 0
+};
+enum class CONF_GPMC_WEN {
+  CONF_GPMC_WEN_MMODE,
+  CONF_GPMC_WEN_PUDEN,
+  CONF_GPMC_WEN_PUTYPESEL,
+  CONF_GPMC_WEN_RXACTIVE,
+  CONF_GPMC_WEN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X898,
+  RESET = 0
+};
+enum class CONF_GPMC_BEN0_CLE {
+  CONF_GPMC_BEN0_CLE_MMODE,
+  CONF_GPMC_BEN0_CLE_PUDEN,
+  CONF_GPMC_BEN0_CLE_PUTYPESEL,
+  CONF_GPMC_BEN0_CLE_RXACTIVE,
+  CONF_GPMC_BEN0_CLE_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X89C,
+  RESET = 0
+};
+enum class CONF_LCD_DATA0 {
+  CONF_LCD_DATA0_MMODE,
+  CONF_LCD_DATA0_PUDEN,
+  CONF_LCD_DATA0_PUTYPESEL,
+  CONF_LCD_DATA0_RXACTIVE,
+  CONF_LCD_DATA0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8A0,
+  RESET = 0
+};
+enum class CONF_LCD_DATA1 {
+  CONF_LCD_DATA1_MMODE,
+  CONF_LCD_DATA1_PUDEN,
+  CONF_LCD_DATA1_PUTYPESEL,
+  CONF_LCD_DATA1_RXACTIVE,
+  CONF_LCD_DATA1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8A4,
+  RESET = 0
+};
+enum class CONF_LCD_DATA2 {
+  CONF_LCD_DATA2_MMODE,
+  CONF_LCD_DATA2_PUDEN,
+  CONF_LCD_DATA2_PUTYPESEL,
+  CONF_LCD_DATA2_RXACTIVE,
+  CONF_LCD_DATA2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8A8,
+  RESET = 0
+};
+enum class CONF_LCD_DATA3 {
+  CONF_LCD_DATA3_MMODE,
+  CONF_LCD_DATA3_PUDEN,
+  CONF_LCD_DATA3_PUTYPESEL,
+  CONF_LCD_DATA3_RXACTIVE,
+  CONF_LCD_DATA3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8AC,
+  RESET = 0
+};
+enum class CONF_LCD_DATA4 {
+  CONF_LCD_DATA4_MMODE,
+  CONF_LCD_DATA4_PUDEN,
+  CONF_LCD_DATA4_PUTYPESEL,
+  CONF_LCD_DATA4_RXACTIVE,
+  CONF_LCD_DATA4_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8B0,
+  RESET = 0
+};
+enum class CONF_LCD_DATA5 {
+  CONF_LCD_DATA5_MMODE,
+  CONF_LCD_DATA5_PUDEN,
+  CONF_LCD_DATA5_PUTYPESEL,
+  CONF_LCD_DATA5_RXACTIVE,
+  CONF_LCD_DATA5_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8B4,
+  RESET = 0
+};
+enum class CONF_LCD_DATA6 {
+  CONF_LCD_DATA6_MMODE,
+  CONF_LCD_DATA6_PUDEN,
+  CONF_LCD_DATA6_PUTYPESEL,
+  CONF_LCD_DATA6_RXACTIVE,
+  CONF_LCD_DATA6_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8B8,
+  RESET = 0
+};
+enum class CONF_LCD_DATA7 {
+  CONF_LCD_DATA7_MMODE,
+  CONF_LCD_DATA7_PUDEN,
+  CONF_LCD_DATA7_PUTYPESEL,
+  CONF_LCD_DATA7_RXACTIVE,
+  CONF_LCD_DATA7_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8BC,
+  RESET = 0
+};
+enum class CONF_LCD_DATA8 {
+  CONF_LCD_DATA8_MMODE,
+  CONF_LCD_DATA8_PUDEN,
+  CONF_LCD_DATA8_PUTYPESEL,
+  CONF_LCD_DATA8_RXACTIVE,
+  CONF_LCD_DATA8_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8C0,
+  RESET = 0
+};
+enum class CONF_LCD_DATA9 {
+  CONF_LCD_DATA9_MMODE,
+  CONF_LCD_DATA9_PUDEN,
+  CONF_LCD_DATA9_PUTYPESEL,
+  CONF_LCD_DATA9_RXACTIVE,
+  CONF_LCD_DATA9_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8C4,
+  RESET = 0
+};
+enum class CONF_LCD_DATA10 {
+  CONF_LCD_DATA10_MMODE,
+  CONF_LCD_DATA10_PUDEN,
+  CONF_LCD_DATA10_PUTYPESEL,
+  CONF_LCD_DATA10_RXACTIVE,
+  CONF_LCD_DATA10_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8C8,
+  RESET = 0
+};
+enum class CONF_LCD_DATA11 {
+  CONF_LCD_DATA11_MMODE,
+  CONF_LCD_DATA11_PUDEN,
+  CONF_LCD_DATA11_PUTYPESEL,
+  CONF_LCD_DATA11_RXACTIVE,
+  CONF_LCD_DATA11_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8CC,
+  RESET = 0
+};
+enum class CONF_LCD_DATA12 {
+  CONF_LCD_DATA12_MMODE,
+  CONF_LCD_DATA12_PUDEN,
+  CONF_LCD_DATA12_PUTYPESEL,
+  CONF_LCD_DATA12_RXACTIVE,
+  CONF_LCD_DATA12_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8D0,
+  RESET = 0
+};
+enum class CONF_LCD_DATA13 {
+  CONF_LCD_DATA13_MMODE,
+  CONF_LCD_DATA13_PUDEN,
+  CONF_LCD_DATA13_PUTYPESEL,
+  CONF_LCD_DATA13_RXACTIVE,
+  CONF_LCD_DATA13_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8D4,
+  RESET = 0
+};
+enum class CONF_LCD_DATA14 {
+  CONF_LCD_DATA14_MMODE,
+  CONF_LCD_DATA14_PUDEN,
+  CONF_LCD_DATA14_PUTYPESEL,
+  CONF_LCD_DATA14_RXACTIVE,
+  CONF_LCD_DATA14_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8D8,
+  RESET = 0
+};
+enum class CONF_LCD_DATA15 {
+  CONF_LCD_DATA15_MMODE,
+  CONF_LCD_DATA15_PUDEN,
+  CONF_LCD_DATA15_PUTYPESEL,
+  CONF_LCD_DATA15_RXACTIVE,
+  CONF_LCD_DATA15_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8DC,
+  RESET = 0
+};
+enum class CONF_LCD_VSYNC {
+  CONF_LCD_VSYNC_MMODE,
+  CONF_LCD_VSYNC_PUDEN,
+  CONF_LCD_VSYNC_PUTYPESEL,
+  CONF_LCD_VSYNC_RXACTIVE,
+  CONF_LCD_VSYNC_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8E0,
+  RESET = 0
+};
+enum class CONF_LCD_HSYNC {
+  CONF_LCD_HSYNC_MMODE,
+  CONF_LCD_HSYNC_PUDEN,
+  CONF_LCD_HSYNC_PUTYPESEL,
+  CONF_LCD_HSYNC_RXACTIVE,
+  CONF_LCD_HSYNC_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8E4,
+  RESET = 0
+};
+enum class CONF_LCD_PCLK {
+  CONF_LCD_PCLK_MMODE,
+  CONF_LCD_PCLK_PUDEN,
+  CONF_LCD_PCLK_PUTYPESEL,
+  CONF_LCD_PCLK_RXACTIVE,
+  CONF_LCD_PCLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8E8,
+  RESET = 0
+};
+enum class CONF_LCD_AC_BIAS_EN {
+  CONF_LCD_AC_BIAS_EN_MMODE,
+  CONF_LCD_AC_BIAS_EN_PUDEN,
+  CONF_LCD_AC_BIAS_EN_PUTYPESEL,
+  CONF_LCD_AC_BIAS_EN_RXACTIVE,
+  CONF_LCD_AC_BIAS_EN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8EC,
+  RESET = 0
+};
+enum class CONF_MMC0_DAT3 {
+  CONF_MMC0_DAT3_MMODE,
+  CONF_MMC0_DAT3_PUDEN,
+  CONF_MMC0_DAT3_PUTYPESEL,
+  CONF_MMC0_DAT3_RXACTIVE,
+  CONF_MMC0_DAT3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8F0,
+  RESET = 0
+};
+enum class CONF_MMC0_DAT2 {
+  CONF_MMC0_DAT2_MMODE,
+  CONF_MMC0_DAT2_PUDEN,
+  CONF_MMC0_DAT2_PUTYPESEL,
+  CONF_MMC0_DAT2_RXACTIVE,
+  CONF_MMC0_DAT2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8F4,
+  RESET = 0
+};
+enum class CONF_MMC0_DAT1 {
+  CONF_MMC0_DAT1_MMODE,
+  CONF_MMC0_DAT1_PUDEN,
+  CONF_MMC0_DAT1_PUTYPESEL,
+  CONF_MMC0_DAT1_RXACTIVE,
+  CONF_MMC0_DAT1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8F8,
+  RESET = 0
+};
+enum class CONF_MMC0_DAT0 {
+  CONF_MMC0_DAT0_MMODE,
+  CONF_MMC0_DAT0_PUDEN,
+  CONF_MMC0_DAT0_PUTYPESEL,
+  CONF_MMC0_DAT0_RXACTIVE,
+  CONF_MMC0_DAT0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X8FC,
+  RESET = 0
+};
+enum class CONF_MMC0_CLK {
+  CONF_MMC0_CLK_MMODE,
+  CONF_MMC0_CLK_PUDEN,
+  CONF_MMC0_CLK_PUTYPESEL,
+  CONF_MMC0_CLK_RXACTIVE,
+  CONF_MMC0_CLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X900,
+  RESET = 0
+};
+enum class CONF_MMC0_CMD {
+  CONF_MMC0_CMD_MMODE,
+  CONF_MMC0_CMD_PUDEN,
+  CONF_MMC0_CMD_PUTYPESEL,
+  CONF_MMC0_CMD_RXACTIVE,
+  CONF_MMC0_CMD_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X904,
+  RESET = 0
+};
+enum class CONF_MII1_COL {
+  CONF_MII1_COL_MMODE,
+  CONF_MII1_COL_PUDEN,
+  CONF_MII1_COL_PUTYPESEL,
+  CONF_MII1_COL_RXACTIVE,
+  CONF_MII1_COL_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X908,
+  RESET = 0
+};
+enum class CONF_MII1_CRS {
+  CONF_MII1_CRS_MMODE,
+  CONF_MII1_CRS_PUDEN,
+  CONF_MII1_CRS_PUTYPESEL,
+  CONF_MII1_CRS_RXACTIVE,
+  CONF_MII1_CRS_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X90C,
+  RESET = 0
+};
+enum class CONF_MII1_RX_ER {
+  CONF_MII1_RX_ER_MMODE,
+  CONF_MII1_RX_ER_PUDEN,
+  CONF_MII1_RX_ER_PUTYPESEL,
+  CONF_MII1_RX_ER_RXACTIVE,
+  CONF_MII1_RX_ER_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X910,
+  RESET = 0
+};
+enum class CONF_MII1_TX_EN {
+  CONF_MII1_TX_EN_MMODE,
+  CONF_MII1_TX_EN_PUDEN,
+  CONF_MII1_TX_EN_PUTYPESEL,
+  CONF_MII1_TX_EN_RXACTIVE,
+  CONF_MII1_TX_EN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X914,
+  RESET = 0
+};
+enum class CONF_MII1_RX_DV {
+  CONF_MII1_RX_DV_MMODE,
+  CONF_MII1_RX_DV_PUDEN,
+  CONF_MII1_RX_DV_PUTYPESEL,
+  CONF_MII1_RX_DV_RXACTIVE,
+  CONF_MII1_RX_DV_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X918,
+  RESET = 0
+};
+enum class CONF_MII1_TXD3 {
+  CONF_MII1_TXD3_MMODE,
+  CONF_MII1_TXD3_PUDEN,
+  CONF_MII1_TXD3_PUTYPESEL,
+  CONF_MII1_TXD3_RXACTIVE,
+  CONF_MII1_TXD3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X91C,
+  RESET = 0
+};
+enum class CONF_MII1_TXD2 {
+  CONF_MII1_TXD2_MMODE,
+  CONF_MII1_TXD2_PUDEN,
+  CONF_MII1_TXD2_PUTYPESEL,
+  CONF_MII1_TXD2_RXACTIVE,
+  CONF_MII1_TXD2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X920,
+  RESET = 0
+};
+enum class CONF_MII1_TXD1 {
+  CONF_MII1_TXD1_MMODE,
+  CONF_MII1_TXD1_PUDEN,
+  CONF_MII1_TXD1_PUTYPESEL,
+  CONF_MII1_TXD1_RXACTIVE,
+  CONF_MII1_TXD1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X924,
+  RESET = 0
+};
+enum class CONF_MII1_TXD0 {
+  CONF_MII1_TXD0_MMODE,
+  CONF_MII1_TXD0_PUDEN,
+  CONF_MII1_TXD0_PUTYPESEL,
+  CONF_MII1_TXD0_RXACTIVE,
+  CONF_MII1_TXD0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X928,
+  RESET = 0
+};
+enum class CONF_MII1_TX_CLK {
+  CONF_MII1_TX_CLK_MMODE,
+  CONF_MII1_TX_CLK_PUDEN,
+  CONF_MII1_TX_CLK_PUTYPESEL,
+  CONF_MII1_TX_CLK_RXACTIVE,
+  CONF_MII1_TX_CLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X92C,
+  RESET = 0
+};
+enum class CONF_MII1_RX_CLK {
+  CONF_MII1_RX_CLK_MMODE,
+  CONF_MII1_RX_CLK_PUDEN,
+  CONF_MII1_RX_CLK_PUTYPESEL,
+  CONF_MII1_RX_CLK_RXACTIVE,
+  CONF_MII1_RX_CLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X930,
+  RESET = 0
+};
+enum class CONF_MII1_RXD3 {
+  CONF_MII1_RXD3_MMODE,
+  CONF_MII1_RXD3_PUDEN,
+  CONF_MII1_RXD3_PUTYPESEL,
+  CONF_MII1_RXD3_RXACTIVE,
+  CONF_MII1_RXD3_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X934,
+  RESET = 0
+};
+enum class CONF_MII1_RXD2 {
+  CONF_MII1_RXD2_MMODE,
+  CONF_MII1_RXD2_PUDEN,
+  CONF_MII1_RXD2_PUTYPESEL,
+  CONF_MII1_RXD2_RXACTIVE,
+  CONF_MII1_RXD2_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X938,
+  RESET = 0
+};
+enum class CONF_MII1_RXD1 {
+  CONF_MII1_RXD1_MMODE,
+  CONF_MII1_RXD1_PUDEN,
+  CONF_MII1_RXD1_PUTYPESEL,
+  CONF_MII1_RXD1_RXACTIVE,
+  CONF_MII1_RXD1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X93C,
+  RESET = 0
+};
+enum class CONF_MII1_RXD0 {
+  CONF_MII1_RXD0_MMODE,
+  CONF_MII1_RXD0_PUDEN,
+  CONF_MII1_RXD0_PUTYPESEL,
+  CONF_MII1_RXD0_RXACTIVE,
+  CONF_MII1_RXD0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X940,
+  RESET = 0
+};
+enum class CONF_RMII1_REF_CLK {
+  CONF_RMII1_REF_CLK_MMODE,
+  CONF_RMII1_REF_CLK_PUDEN,
+  CONF_RMII1_REF_CLK_PUTYPESEL,
+  CONF_RMII1_REF_CLK_RXACTIVE,
+  CONF_RMII1_REF_CLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X944,
+  RESET = 0
+};
+enum class CONF_MDIO { RESERVED = -1, OFFSET = 0X948, RESET = 0 };
+enum class CONF_MDC { RESERVED = -1, OFFSET = 0X94C, RESET = 0 };
+enum class CONF_SPI0_SCLK {
+  CONF_SPI0_SCLK_MMODE,
+  CONF_SPI0_SCLK_PUDEN,
+  CONF_SPI0_SCLK_PUTYPESEL,
+  CONF_SPI0_SCLK_RXACTIVE,
+  CONF_SPI0_SCLK_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X950,
+  RESET = 0
+};
+enum class CONF_SPI0_D0 {
+  CONF_SPI0_D0_MMODE,
+  CONF_SPI0_D0_PUDEN,
+  CONF_SPI0_D0_PUTYPESEL,
+  CONF_SPI0_D0_RXACTIVE,
+  CONF_SPI0_D0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X954,
+  RESET = 0
+};
+enum class CONF_SPI0_D1 {
+  CONF_SPI0_D1_MMODE,
+  CONF_SPI0_D1_PUDEN,
+  CONF_SPI0_D1_PUTYPESEL,
+  CONF_SPI0_D1_RXACTIVE,
+  CONF_SPI0_D1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X958,
+  RESET = 0
+};
+enum class CONF_SPI0_CS0 {
+  CONF_SPI0_CS0_MMODE,
+  CONF_SPI0_CS0_PUDEN,
+  CONF_SPI0_CS0_PUTYPESEL,
+  CONF_SPI0_CS0_RXACTIVE,
+  CONF_SPI0_CS0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X95C,
+  RESET = 0
+};
+enum class CONF_SPI0_CS1 {
+  CONF_SPI0_CS1_MMODE,
+  CONF_SPI0_CS1_PUDEN,
+  CONF_SPI0_CS1_PUTYPESEL,
+  CONF_SPI0_CS1_RXACTIVE,
+  CONF_SPI0_CS1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X960,
+  RESET = 0
+};
+enum class CONF_ECAP0_IN_PWM0_OUT {
+  CONF_ECAP0_IN_PWM0_OUT_MMODE,
+  CONF_ECAP0_IN_PWM0_OUT_PUDEN,
+  CONF_ECAP0_IN_PWM0_OUT_PUTYPESEL,
+  CONF_ECAP0_IN_PWM0_OUT_RXACTIVE,
+  CONF_ECAP0_IN_PWM0_OUT_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X964,
+  RESET = 0
+};
+enum class CONF_UART0_CTSN {
+  CONF_UART0_CTSN_MMODE,
+  CONF_UART0_CTSN_PUDEN,
+  CONF_UART0_CTSN_PUTYPESEL,
+  CONF_UART0_CTSN_RXACTIVE,
+  CONF_UART0_CTSN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X968,
+  RESET = 0
+};
+enum class CONF_UART0_RTSN {
+  CONF_UART0_RTSN_MMODE,
+  CONF_UART0_RTSN_PUDEN,
+  CONF_UART0_RTSN_PUTYPESEL,
+  CONF_UART0_RTSN_RXACTIVE,
+  CONF_UART0_RTSN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X96C,
+  RESET = 0
+};
+enum class CONF_UART0_RXD {
+  CONF_UART0_RXD_MMODE,
+  CONF_UART0_RXD_PUDEN,
+  CONF_UART0_RXD_PUTYPESEL,
+  CONF_UART0_RXD_RXACTIVE,
+  CONF_UART0_RXD_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X970,
+  RESET = 0
+};
+enum class CONF_UART0_TXD {
+  CONF_UART0_TXD_MMODE,
+  CONF_UART0_TXD_PUDEN,
+  CONF_UART0_TXD_PUTYPESEL,
+  CONF_UART0_TXD_RXACTIVE,
+  CONF_UART0_TXD_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X974,
+  RESET = 0
+};
+enum class CONF_UART1_CTSN {
+  CONF_UART1_CTSN_MMODE,
+  CONF_UART1_CTSN_PUDEN,
+  CONF_UART1_CTSN_PUTYPESEL,
+  CONF_UART1_CTSN_RXACTIVE,
+  CONF_UART1_CTSN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X978,
+  RESET = 0
+};
+enum class CONF_UART1_RTSN {
+  CONF_UART1_RTSN_MMODE,
+  CONF_UART1_RTSN_PUDEN,
+  CONF_UART1_RTSN_PUTYPESEL,
+  CONF_UART1_RTSN_RXACTIVE,
+  CONF_UART1_RTSN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X97C,
+  RESET = 0
+};
+enum class CONF_UART1_RXD {
+  CONF_UART1_RXD_MMODE,
+  CONF_UART1_RXD_PUDEN,
+  CONF_UART1_RXD_PUTYPESEL,
+  CONF_UART1_RXD_RXACTIVE,
+  CONF_UART1_RXD_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X980,
+  RESET = 0
+};
+enum class CONF_UART1_TXD {
+  CONF_UART1_TXD_MMODE,
+  CONF_UART1_TXD_PUDEN,
+  CONF_UART1_TXD_PUTYPESEL,
+  CONF_UART1_TXD_RXACTIVE,
+  CONF_UART1_TXD_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X984,
+  RESET = 0
+};
+enum class CONF_I2C0_SDA {
+  CONF_I2C0_SDA_MMODE,
+  CONF_I2C0_SDA_PUDEN,
+  CONF_I2C0_SDA_PUTYPESEL,
+  CONF_I2C0_SDA_RXACTIVE,
+  CONF_I2C0_SDA_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X988,
+  RESET = 0
+};
+enum class CONF_I2C0_SCL {
+  CONF_I2C0_SCL_MMODE,
+  CONF_I2C0_SCL_PUDEN,
+  CONF_I2C0_SCL_PUTYPESEL,
+  CONF_I2C0_SCL_RXACTIVE,
+  CONF_I2C0_SCL_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X98C,
+  RESET = 0
+};
+enum class CONF_MCASP0_ACLKX {
+  CONF_MCASP0_ACLKX_MMODE,
+  CONF_MCASP0_ACLKX_PUDEN,
+  CONF_MCASP0_ACLKX_PUTYPESEL,
+  CONF_MCASP0_ACLKX_RXACTIVE,
+  CONF_MCASP0_ACLKX_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X990,
+  RESET = 0
+};
+enum class CONF_MCASP0_FSX {
+  CONF_MCASP0_FSX_MMODE,
+  CONF_MCASP0_FSX_PUDEN,
+  CONF_MCASP0_FSX_PUTYPESEL,
+  CONF_MCASP0_FSX_RXACTIVE,
+  CONF_MCASP0_FSX_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X994,
+  RESET = 0
+};
+enum class CONF_MCASP0_AXR0 {
+  CONF_MCASP0_AXR0_MMODE,
+  CONF_MCASP0_AXR0_PUDEN,
+  CONF_MCASP0_AXR0_PUTYPESEL,
+  CONF_MCASP0_AXR0_RXACTIVE,
+  CONF_MCASP0_AXR0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X998,
+  RESET = 0
+};
+enum class CONF_MCASP0_AHCLKR {
+  CONF_MCASP0_AHCLKR_MMODE,
+  CONF_MCASP0_AHCLKR_PUDEN,
+  CONF_MCASP0_AHCLKR_PUTYPESEL,
+  CONF_MCASP0_AHCLKR_RXACTIVE,
+  CONF_MCASP0_AHCLKR_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X99C,
+  RESET = 0
+};
+enum class CONF_MCASP0_ACLKR {
+  CONF_MCASP0_ACLKR_MMODE,
+  CONF_MCASP0_ACLKR_PUDEN,
+  CONF_MCASP0_ACLKR_PUTYPESEL,
+  CONF_MCASP0_ACLKR_RXACTIVE,
+  CONF_MCASP0_ACLKR_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9A0,
+  RESET = 0
+};
+enum class CONF_MCASP0_FSR {
+  CONF_MCASP0_FSR_MMODE,
+  CONF_MCASP0_FSR_PUDEN,
+  CONF_MCASP0_FSR_PUTYPESEL,
+  CONF_MCASP0_FSR_RXACTIVE,
+  CONF_MCASP0_FSR_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9A4,
+  RESET = 0
+};
+enum class CONF_MCASP0_AXR1 {
+  CONF_MCASP0_AXR1_MMODE,
+  CONF_MCASP0_AXR1_PUDEN,
+  CONF_MCASP0_AXR1_PUTYPESEL,
+  CONF_MCASP0_AXR1_RXACTIVE,
+  CONF_MCASP0_AXR1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9A8,
+  RESET = 0
+};
+enum class CONF_MCASP0_AHCLKX {
+  CONF_MCASP0_AHCLKX_MMODE,
+  CONF_MCASP0_AHCLKX_PUDEN,
+  CONF_MCASP0_AHCLKX_PUTYPESEL,
+  CONF_MCASP0_AHCLKX_RXACTIVE,
+  CONF_MCASP0_AHCLKX_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9AC,
+  RESET = 0
+};
+enum class CONF_XDMA_EVENT_INTR0 {
+  CONF_XDMA_EVENT_INTR0_MMODE,
+  CONF_XDMA_EVENT_INTR0_PUDEN,
+  CONF_XDMA_EVENT_INTR0_PUTYPESEL,
+  CONF_XDMA_EVENT_INTR0_RXACTIVE,
+  CONF_XDMA_EVENT_INTR0_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9B0,
+  RESET = 0
+};
+enum class CONF_XDMA_EVENT_INTR1 {
+  CONF_XDMA_EVENT_INTR1_MMODE,
+  CONF_XDMA_EVENT_INTR1_PUDEN,
+  CONF_XDMA_EVENT_INTR1_PUTYPESEL,
+  CONF_XDMA_EVENT_INTR1_RXACTIVE,
+  CONF_XDMA_EVENT_INTR1_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9B4,
+  RESET = 0
+};
+enum class CONF_WARMRSTN { RESERVED = -1, OFFSET = 0X9B8, RESET = 0 };
+enum class CONF_NNMI { RESERVED = -1, OFFSET = 0X9C0, RESET = 0 };
+enum class CONF_TMS { RESERVED = -1, OFFSET = 0X9D0, RESET = 0 };
+enum class CONF_TDI { RESERVED = -1, OFFSET = 0X9D4, RESET = 0 };
+enum class CONF_TDO { RESERVED = -1, OFFSET = 0X9D8, RESET = 0 };
+enum class CONF_TCK { RESERVED = -1, OFFSET = 0X9DC, RESET = 0 };
+enum class CONF_TRSTN { RESERVED = -1, OFFSET = 0X9E0, RESET = 0 };
+enum class CONF_EMU0 { RESERVED = -1, OFFSET = 0X9E4, RESET = 0 };
+enum class CONF_EMU1 { RESERVED = -1, OFFSET = 0X9E8, RESET = 0 };
+enum class CONF_RTC_PWRONRSTN {
+  CONF_RTC_PWRONRSTN_MMODE,
+  CONF_RTC_PWRONRSTN_PUDEN,
+  CONF_RTC_PWRONRSTN_PUTYPESEL,
+  CONF_RTC_PWRONRSTN_RXACTIVE,
+  CONF_RTC_PWRONRSTN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9F8,
+  RESET = 0
+};
+enum class CONF_PMIC_POWER_EN {
+  CONF_PMIC_POWER_EN_MMODE,
+  CONF_PMIC_POWER_EN_PUDEN,
+  CONF_PMIC_POWER_EN_PUTYPESEL,
+  CONF_PMIC_POWER_EN_RXACTIVE,
+  CONF_PMIC_POWER_EN_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0X9FC,
+  RESET = 0
+};
+enum class CONF_EXT_WAKEUP {
+  CONF_EXT_WAKEUP_MMODE,
+  CONF_EXT_WAKEUP_PUDEN,
+  CONF_EXT_WAKEUP_PUTYPESEL,
+  CONF_EXT_WAKEUP_RXACTIVE,
+  CONF_EXT_WAKEUP_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0XA00,
+  RESET = 0
+};
+enum class CONF_USB0_DRVVBUS {
+  CONF_USB0_DRVVBUS_MMODE,
+  CONF_USB0_DRVVBUS_PUDEN,
+  CONF_USB0_DRVVBUS_PUTYPESEL,
+  CONF_USB0_DRVVBUS_RXACTIVE,
+  CONF_USB0_DRVVBUS_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0XA1C,
+  RESET = 0
+};
+enum class CONF_USB1_DRVVBUS {
+  CONF_USB1_DRVVBUS_MMODE,
+  CONF_USB1_DRVVBUS_PUDEN,
+  CONF_USB1_DRVVBUS_PUTYPESEL,
+  CONF_USB1_DRVVBUS_RXACTIVE,
+  CONF_USB1_DRVVBUS_SLEWCTRL,
+  RESERVED = -1,
+  OFFSET = 0XA34,
+  RESET = 0
+};
+enum class CQDETECT_STATUS { RESERVED = -1, OFFSET = 0XE00, RESET = 0 };
+enum class DDR_IO_CTRL { RESERVED = -1, OFFSET = 0XE04, RESET = 0 };
+enum class VTP_CTRL { RESERVED = -1, OFFSET = 0XE0C, RESET = 0 };
+enum class VREF_CTRL { RESERVED = -1, OFFSET = 0XE14, RESET = 0 };
+enum class TPCC_EVT_MUX_0_3 {
+  EVT_MUX_0,
   RESERVED0,
-  evt_mux_1,
+  EVT_MUX_1,
   RESERVED1,
-  evt_mux_2,
+  EVT_MUX_2,
   RESERVED2,
-  evt_mux_3,
+  EVT_MUX_3,
   RESERVED = -1,
-  offset = 0xF90,
-  reset = 0
+  OFFSET = 0XF90,
+  RESET = 0
 };
-enum class tpcc_evt_mux_4_7 {
-  evt_mux_4,
+enum class TPCC_EVT_MUX_4_7 {
+  EVT_MUX_4,
   RESERVED0,
-  evt_mux_5,
+  EVT_MUX_5,
   RESERVED1,
-  evt_mux_6,
+  EVT_MUX_6,
   RESERVED2,
-  evt_mux_7,
+  EVT_MUX_7,
   RESERVED = -1,
-  offset = 0xF94,
-  reset = 0
+  OFFSET = 0XF94,
+  RESET = 0
 };
-enum class tpcc_evt_mux_8_11 {
-  evt_mux_8,
+enum class TPCC_EVT_MUX_8_11 {
+  EVT_MUX_8,
   RESERVED0,
-  evt_mux_9,
+  EVT_MUX_9,
   RESERVED1,
-  evt_mux_10,
+  EVT_MUX_10,
   RESERVED2,
-  evt_mux_11,
+  EVT_MUX_11,
   RESERVED = -1,
-  offset = 0xF98,
-  reset = 0
+  OFFSET = 0XF98,
+  RESET = 0
 };
-enum class tpcc_evt_mux_12_15 {
-  evt_mux_12,
+enum class TPCC_EVT_MUX_12_15 {
+  EVT_MUX_12,
   RESERVED0,
-  evt_mux_13,
+  EVT_MUX_13,
   RESERVED1,
-  evt_mux_14,
+  EVT_MUX_14,
   RESERVED2,
-  evt_mux_15,
+  EVT_MUX_15,
   RESERVED = -1,
-  offset = 0xF9C,
-  reset = 0
+  OFFSET = 0XF9C,
+  RESET = 0
 };
-enum class tpcc_evt_mux_16_19 {
-  evt_mux_16,
+enum class TPCC_EVT_MUX_16_19 {
+  EVT_MUX_16,
   RESERVED0,
-  evt_mux_17,
+  EVT_MUX_17,
   RESERVED1,
-  evt_mux_18,
+  EVT_MUX_18,
   RESERVED2,
-  evt_mux_19,
+  EVT_MUX_19,
   RESERVED = -1,
-  offset = 0xFA0,
-  reset = 0
+  OFFSET = 0XFA0,
+  RESET = 0
 };
-enum class tpcc_evt_mux_20_23 {
-  evt_mux_20,
+enum class TPCC_EVT_MUX_20_23 {
+  EVT_MUX_20,
   RESERVED0,
-  evt_mux_21,
+  EVT_MUX_21,
   RESERVED1,
-  evt_mux_22,
+  EVT_MUX_22,
   RESERVED2,
-  evt_mux_23,
+  EVT_MUX_23,
   RESERVED = -1,
-  offset = 0xFA4,
-  reset = 0
+  OFFSET = 0XFA4,
+  RESET = 0
 };
-enum class tpcc_evt_mux_24_27 {
-  evt_mux_24,
+enum class TPCC_EVT_MUX_24_27 {
+  EVT_MUX_24,
   RESERVED0,
-  evt_mux_25,
+  EVT_MUX_25,
   RESERVED1,
-  evt_mux_26,
+  EVT_MUX_26,
   RESERVED2,
-  evt_mux_27,
+  EVT_MUX_27,
   RESERVED = -1,
-  offset = 0xFA8,
-  reset = 0
+  OFFSET = 0XFA8,
+  RESET = 0
 };
-enum class tpcc_evt_mux_28_31 {
-  evt_mux_28,
+enum class TPCC_EVT_MUX_28_31 {
+  EVT_MUX_28,
   RESERVED0,
-  evt_mux_29,
+  EVT_MUX_29,
   RESERVED1,
-  evt_mux_30,
+  EVT_MUX_30,
   RESERVED2,
-  evt_mux_31,
+  EVT_MUX_31,
   RESERVED = -1,
-  offset = 0xFAC,
-  reset = 0
+  OFFSET = 0XFAC,
+  RESET = 0
 };
-enum class tpcc_evt_mux_32_35 {
-  evt_mux_32,
+enum class TPCC_EVT_MUX_32_35 {
+  EVT_MUX_32,
   RESERVED0,
-  evt_mux_33,
+  EVT_MUX_33,
   RESERVED1,
-  evt_mux_34,
+  EVT_MUX_34,
   RESERVED2,
-  evt_mux_35,
+  EVT_MUX_35,
   RESERVED = -1,
-  offset = 0xFB0,
-  reset = 0
+  OFFSET = 0XFB0,
+  RESET = 0
 };
-enum class tpcc_evt_mux_36_39 {
-  evt_mux_36,
+enum class TPCC_EVT_MUX_36_39 {
+  EVT_MUX_36,
   RESERVED0,
-  evt_mux_37,
+  EVT_MUX_37,
   RESERVED1,
-  evt_mux_38,
+  EVT_MUX_38,
   RESERVED2,
-  evt_mux_39,
+  EVT_MUX_39,
   RESERVED = -1,
-  offset = 0xFB4,
-  reset = 0
+  OFFSET = 0XFB4,
+  RESET = 0
 };
-enum class tpcc_evt_mux_40_43 {
-  evt_mux_40,
+enum class TPCC_EVT_MUX_40_43 {
+  EVT_MUX_40,
   RESERVED0,
-  evt_mux_41,
+  EVT_MUX_41,
   RESERVED1,
-  evt_mux_42,
+  EVT_MUX_42,
   RESERVED2,
-  evt_mux_43,
+  EVT_MUX_43,
   RESERVED = -1,
-  offset = 0xFB8,
-  reset = 0
+  OFFSET = 0XFB8,
+  RESET = 0
 };
-enum class tpcc_evt_mux_44_47 {
-  evt_mux_44,
+enum class TPCC_EVT_MUX_44_47 {
+  EVT_MUX_44,
   RESERVED0,
-  evt_mux_45,
+  EVT_MUX_45,
   RESERVED1,
-  evt_mux_46,
+  EVT_MUX_46,
   RESERVED2,
-  evt_mux_47,
+  EVT_MUX_47,
   RESERVED = -1,
-  offset = 0xFBC,
-  reset = 0
+  OFFSET = 0XFBC,
+  RESET = 0
 };
-enum class tpcc_evt_mux_48_51 {
-  evt_mux_48,
+enum class TPCC_EVT_MUX_48_51 {
+  EVT_MUX_48,
   RESERVED0,
-  evt_mux_49,
+  EVT_MUX_49,
   RESERVED1,
-  evt_mux_50,
+  EVT_MUX_50,
   RESERVED2,
-  evt_mux_51,
+  EVT_MUX_51,
   RESERVED = -1,
-  offset = 0xFC0,
-  reset = 0
+  OFFSET = 0XFC0,
+  RESET = 0
 };
-enum class tpcc_evt_mux_52_55 {
-  evt_mux_52,
+enum class TPCC_EVT_MUX_52_55 {
+  EVT_MUX_52,
   RESERVED0,
-  evt_mux_53,
+  EVT_MUX_53,
   RESERVED1,
-  evt_mux_54,
+  EVT_MUX_54,
   RESERVED2,
-  evt_mux_55,
+  EVT_MUX_55,
   RESERVED = -1,
-  offset = 0xFC4,
-  reset = 0
+  OFFSET = 0XFC4,
+  RESET = 0
 };
-enum class tpcc_evt_mux_56_59 {
-  evt_mux_56,
+enum class TPCC_EVT_MUX_56_59 {
+  EVT_MUX_56,
   RESERVED0,
-  evt_mux_57,
+  EVT_MUX_57,
   RESERVED1,
-  evt_mux_58,
+  EVT_MUX_58,
   RESERVED2,
-  evt_mux_59,
+  EVT_MUX_59,
   RESERVED = -1,
-  offset = 0xFC8,
-  reset = 0
+  OFFSET = 0XFC8,
+  RESET = 0
 };
-enum class tpcc_evt_mux_60_63 {
-  evt_mux_60,
+enum class TPCC_EVT_MUX_60_63 {
+  EVT_MUX_60,
   RESERVED0,
-  evt_mux_61,
+  EVT_MUX_61,
   RESERVED1,
-  evt_mux_62,
+  EVT_MUX_62,
   RESERVED2,
-  evt_mux_63,
+  EVT_MUX_63,
   RESERVED = -1,
-  offset = 0xFCC,
-  reset = 0
+  OFFSET = 0XFCC,
+  RESET = 0
 };
-enum class timer_evt_capt { RESERVED = -1, offset = 0xFD0, reset = 0 };
-enum class ecap_evt_capt { RESERVED = -1, offset = 0xFD4, reset = 0 };
-enum class adc_evt_capt { RESERVED = -1, offset = 0xFD8, reset = 0 };
-enum class reset_iso { RESERVED = -1, offset = 0x1000, reset = 0 };
-enum class dpll_pwr_sw_ctrl { RESERVED = -1, offset = 0x1318, reset = 0 };
-enum class ddr_cke_ctrl { RESERVED = -1, offset = 0x131C, reset = 0 };
-enum class sma2 { RESERVED = -1, offset = 0x1320, reset = 0 };
-enum class m3_txev_eoi { RESERVED = -1, offset = 0x1324, reset = 0 };
-enum class ipc_msg_reg0 {
-  ipc_msg_reg0,
+enum class TIMER_EVT_CAPT { RESERVED = -1, OFFSET = 0XFD0, RESET = 0 };
+enum class ECAP_EVT_CAPT { RESERVED = -1, OFFSET = 0XFD4, RESET = 0 };
+enum class ADC_EVT_CAPT { RESERVED = -1, OFFSET = 0XFD8, RESET = 0 };
+enum class RESET_ISO { RESERVED = -1, OFFSET = 0X1000, RESET = 0 };
+enum class DPLL_PWR_SW_CTRL { RESERVED = -1, OFFSET = 0X1318, RESET = 0 };
+enum class DDR_CKE_CTRL { RESERVED = -1, OFFSET = 0X131C, RESET = 0 };
+enum class SMA2 { RESERVED = -1, OFFSET = 0X1320, RESET = 0 };
+enum class M3_TXEV_EOI { RESERVED = -1, OFFSET = 0X1324, RESET = 0 };
+enum class IPC_MSG_REG0 {
+  IPC_MSG_REG0,
   RESERVED = -1,
-  offset = 0x1328,
-  reset = 0
+  OFFSET = 0X1328,
+  RESET = 0
 };
-enum class ipc_msg_reg1 {
-  ipc_msg_reg1,
+enum class IPC_MSG_REG1 {
+  IPC_MSG_REG1,
   RESERVED = -1,
-  offset = 0x132C,
-  reset = 0
+  OFFSET = 0X132C,
+  RESET = 0
 };
-enum class ipc_msg_reg2 {
-  ipc_msg_reg2,
+enum class IPC_MSG_REG2 {
+  IPC_MSG_REG2,
   RESERVED = -1,
-  offset = 0x1330,
-  reset = 0
+  OFFSET = 0X1330,
+  RESET = 0
 };
-enum class ipc_msg_reg3 {
-  ipc_msg_reg3,
+enum class IPC_MSG_REG3 {
+  IPC_MSG_REG3,
   RESERVED = -1,
-  offset = 0x1334,
-  reset = 0
+  OFFSET = 0X1334,
+  RESET = 0
 };
-enum class ipc_msg_reg4 {
-  ipc_msg_reg4,
+enum class IPC_MSG_REG4 {
+  IPC_MSG_REG4,
   RESERVED = -1,
-  offset = 0x1338,
-  reset = 0
+  OFFSET = 0X1338,
+  RESET = 0
 };
-enum class ipc_msg_reg5 {
-  ipc_msg_reg5,
+enum class IPC_MSG_REG5 {
+  IPC_MSG_REG5,
   RESERVED = -1,
-  offset = 0x133C,
-  reset = 0
+  OFFSET = 0X133C,
+  RESET = 0
 };
-enum class ipc_msg_reg6 {
-  ipc_msg_reg6,
+enum class IPC_MSG_REG6 {
+  IPC_MSG_REG6,
   RESERVED = -1,
-  offset = 0x1340,
-  reset = 0
+  OFFSET = 0X1340,
+  RESET = 0
 };
-enum class ipc_msg_reg7 {
-  ipc_msg_reg7,
+enum class IPC_MSG_REG7 {
+  IPC_MSG_REG7,
   RESERVED = -1,
-  offset = 0x1344,
-  reset = 0
+  OFFSET = 0X1344,
+  RESET = 0
 };
-enum class ddr_cmd0_ioctrl { RESERVED = -1, offset = 0x1404, reset = 0 };
-enum class ddr_cmd1_ioctrl { RESERVED = -1, offset = 0x1408, reset = 0 };
-enum class ddr_cmd2_ioctrl { RESERVED = -1, offset = 0x140C, reset = 0 };
-enum class ddr_data0_ioctrl { RESERVED = -1, offset = 0x1440, reset = 0 };
-enum class ddr_data1_ioctrl { RESERVED = -1, offset = 0x1444, reset = 0 };
+enum class DDR_CMD0_IOCTRL { RESERVED = -1, OFFSET = 0X1404, RESET = 0 };
+enum class DDR_CMD1_IOCTRL { RESERVED = -1, OFFSET = 0X1408, RESET = 0 };
+enum class DDR_CMD2_IOCTRL { RESERVED = -1, OFFSET = 0X140C, RESET = 0 };
+enum class DDR_DATA0_IOCTRL { RESERVED = -1, OFFSET = 0X1440, RESET = 0 };
+enum class DDR_DATA1_IOCTRL { RESERVED = -1, OFFSET = 0X1444, RESET = 0 };
 
-using control_revision_REG = offset_register<control_revision, 1>;
-using control_hwinfo_REG = offset_register<control_hwinfo, 1>;
-using control_sysconfig_REG = offset_register<control_sysconfig, 1>;
-using control_status_REG = offset_register<control_status, 1>;
-using control_emif_sdram_config_REG =
-    offset_register<control_emif_sdram_config, 1>;
-using core_sldo_ctrl_REG = offset_register<core_sldo_ctrl, 1>;
-using mpu_sldo_ctrl_REG = offset_register<mpu_sldo_ctrl, 1>;
-using clk32kdivratio_ctrl_REG = offset_register<clk32kdivratio_ctrl, 1>;
-using bandgap_ctrl_REG = offset_register<bandgap_ctrl, 1>;
-using bandgap_trim_REG = offset_register<bandgap_trim, 1>;
-using pll_clkinpulow_ctrl_REG = offset_register<pll_clkinpulow_ctrl, 1>;
-using mosc_ctrl_REG = offset_register<mosc_ctrl, 1>;
-using deepsleep_ctrl_REG = offset_register<deepsleep_ctrl, 1>;
-using dpll_pwr_sw_status_REG = offset_register<dpll_pwr_sw_status, 1>;
-using device_id_REG = offset_register<device_id, 1>;
-using dev_feature_REG = offset_register<dev_feature, 1>;
-using init_priority_0_REG = offset_register<init_priority_0, 1>;
-using init_priority_1_REG = offset_register<init_priority_1, 1>;
-using tptc_cfg_REG = offset_register<tptc_cfg, 1>;
-using usb_ctrl0_REG = offset_register<usb_ctrl0, 1>;
-using usb_sts0_REG = offset_register<usb_sts0, 1>;
-using usb_ctrl1_REG = offset_register<usb_ctrl1, 1>;
-using usb_sts1_REG = offset_register<usb_sts1, 1>;
-using mac_id0_lo_REG = offset_register<mac_id0_lo, 1>;
-using mac_id0_hi_REG = offset_register<mac_id0_hi, 1>;
-using mac_id1_lo_REG = offset_register<mac_id1_lo, 1>;
-using mac_id1_hi_REG = offset_register<mac_id1_hi, 1>;
-using dcan_raminit_REG = offset_register<dcan_raminit, 1>;
-using usb_wkup_ctrl_REG = offset_register<usb_wkup_ctrl, 1>;
-using gmii_sel_REG = offset_register<gmii_sel, 1>;
-using pwmss_ctrl_REG = offset_register<pwmss_ctrl, 1>;
-using mreqprio_0_REG = offset_register<mreqprio_0, 1>;
-using mreqprio_1_REG = offset_register<mreqprio_1, 1>;
-using hw_event_sel_grp1_REG = offset_register<hw_event_sel_grp1, 1>;
-using hw_event_sel_grp2_REG = offset_register<hw_event_sel_grp2, 1>;
-using hw_event_sel_grp3_REG = offset_register<hw_event_sel_grp3, 1>;
-using hw_event_sel_grp4_REG = offset_register<hw_event_sel_grp4, 1>;
-using smrt_ctrl_REG = offset_register<smrt_ctrl, 1>;
-using mpuss_hw_debug_sel_REG = offset_register<mpuss_hw_debug_sel, 1>;
-using mpuss_hw_dbg_info_REG = offset_register<mpuss_hw_dbg_info, 1>;
-using vdd_mpu_opp_050_REG = offset_register<vdd_mpu_opp_050, 1>;
-using vdd_mpu_opp_100_REG = offset_register<vdd_mpu_opp_100, 1>;
-using vdd_mpu_opp_120_REG = offset_register<vdd_mpu_opp_120, 1>;
-using vdd_mpu_opp_turbo_REG = offset_register<vdd_mpu_opp_turbo, 1>;
-using vdd_core_opp_050_REG = offset_register<vdd_core_opp_050, 1>;
-using vdd_core_opp_100_REG = offset_register<vdd_core_opp_100, 1>;
-using bb_scale_REG = offset_register<bb_scale, 1>;
-using usb_vid_pid_REG = offset_register<usb_vid_pid, 1>;
-using efuse_sma_REG = offset_register<efuse_sma, 1>;
-using conf_gpmc_ad0_REG = offset_register<conf_gpmc_ad0, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad1_REG = offset_register<conf_gpmc_ad1, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad2_REG = offset_register<conf_gpmc_ad2, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad3_REG = offset_register<conf_gpmc_ad3, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad4_REG = offset_register<conf_gpmc_ad4, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad5_REG = offset_register<conf_gpmc_ad5, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad6_REG = offset_register<conf_gpmc_ad6, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad7_REG = offset_register<conf_gpmc_ad7, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad8_REG = offset_register<conf_gpmc_ad8, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad9_REG = offset_register<conf_gpmc_ad9, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad10_REG = offset_register<conf_gpmc_ad10, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad11_REG = offset_register<conf_gpmc_ad11, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad12_REG = offset_register<conf_gpmc_ad12, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad13_REG = offset_register<conf_gpmc_ad13, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad14_REG = offset_register<conf_gpmc_ad14, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ad15_REG = offset_register<conf_gpmc_ad15, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a0_REG = offset_register<conf_gpmc_a0, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a1_REG = offset_register<conf_gpmc_a1, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a2_REG = offset_register<conf_gpmc_a2, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a3_REG = offset_register<conf_gpmc_a3, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a4_REG = offset_register<conf_gpmc_a4, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a5_REG = offset_register<conf_gpmc_a5, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a6_REG = offset_register<conf_gpmc_a6, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a7_REG = offset_register<conf_gpmc_a7, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a8_REG = offset_register<conf_gpmc_a8, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a9_REG = offset_register<conf_gpmc_a9, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a10_REG = offset_register<conf_gpmc_a10, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_a11_REG = offset_register<conf_gpmc_a11, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_wait0_REG = offset_register<conf_gpmc_wait0, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_wpn_REG = offset_register<conf_gpmc_wpn, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ben1_REG = offset_register<conf_gpmc_ben1, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_csn0_REG = offset_register<conf_gpmc_csn0, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_csn1_REG = offset_register<conf_gpmc_csn1, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_csn2_REG = offset_register<conf_gpmc_csn2, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_csn3_REG = offset_register<conf_gpmc_csn3, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_clk_REG = offset_register<conf_gpmc_clk, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_advn_ale_REG =
-    offset_register<conf_gpmc_advn_ale, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_oen_ren_REG =
-    offset_register<conf_gpmc_oen_ren, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_wen_REG = offset_register<conf_gpmc_wen, 3, 1, 1, 1, 1, 25>;
-using conf_gpmc_ben0_cle_REG =
-    offset_register<conf_gpmc_ben0_cle, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data0_REG = offset_register<conf_lcd_data0, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data1_REG = offset_register<conf_lcd_data1, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data2_REG = offset_register<conf_lcd_data2, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data3_REG = offset_register<conf_lcd_data3, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data4_REG = offset_register<conf_lcd_data4, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data5_REG = offset_register<conf_lcd_data5, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data6_REG = offset_register<conf_lcd_data6, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data7_REG = offset_register<conf_lcd_data7, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data8_REG = offset_register<conf_lcd_data8, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data9_REG = offset_register<conf_lcd_data9, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data10_REG = offset_register<conf_lcd_data10, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data11_REG = offset_register<conf_lcd_data11, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data12_REG = offset_register<conf_lcd_data12, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data13_REG = offset_register<conf_lcd_data13, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data14_REG = offset_register<conf_lcd_data14, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_data15_REG = offset_register<conf_lcd_data15, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_vsync_REG = offset_register<conf_lcd_vsync, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_hsync_REG = offset_register<conf_lcd_hsync, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_pclk_REG = offset_register<conf_lcd_pclk, 3, 1, 1, 1, 1, 25>;
-using conf_lcd_ac_bias_en_REG =
-    offset_register<conf_lcd_ac_bias_en, 3, 1, 1, 1, 1, 25>;
-using conf_mmc0_dat3_REG = offset_register<conf_mmc0_dat3, 3, 1, 1, 1, 1, 25>;
-using conf_mmc0_dat2_REG = offset_register<conf_mmc0_dat2, 3, 1, 1, 1, 1, 25>;
-using conf_mmc0_dat1_REG = offset_register<conf_mmc0_dat1, 3, 1, 1, 1, 1, 25>;
-using conf_mmc0_dat0_REG = offset_register<conf_mmc0_dat0, 3, 1, 1, 1, 1, 25>;
-using conf_mmc0_clk_REG = offset_register<conf_mmc0_clk, 3, 1, 1, 1, 1, 25>;
-using conf_mmc0_cmd_REG = offset_register<conf_mmc0_cmd, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_col_REG = offset_register<conf_mii1_col, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_crs_REG = offset_register<conf_mii1_crs, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rx_er_REG = offset_register<conf_mii1_rx_er, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_tx_en_REG = offset_register<conf_mii1_tx_en, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rx_dv_REG = offset_register<conf_mii1_rx_dv, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_txd3_REG = offset_register<conf_mii1_txd3, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_txd2_REG = offset_register<conf_mii1_txd2, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_txd1_REG = offset_register<conf_mii1_txd1, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_txd0_REG = offset_register<conf_mii1_txd0, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_tx_clk_REG =
-    offset_register<conf_mii1_tx_clk, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rx_clk_REG =
-    offset_register<conf_mii1_rx_clk, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rxd3_REG = offset_register<conf_mii1_rxd3, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rxd2_REG = offset_register<conf_mii1_rxd2, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rxd1_REG = offset_register<conf_mii1_rxd1, 3, 1, 1, 1, 1, 25>;
-using conf_mii1_rxd0_REG = offset_register<conf_mii1_rxd0, 3, 1, 1, 1, 1, 25>;
-using conf_rmii1_ref_clk_REG =
-    offset_register<conf_rmii1_ref_clk, 3, 1, 1, 1, 1, 25>;
-using conf_mdio_REG = offset_register<conf_mdio, 3, 1, 1, 1, 1, 25>;
-using conf_mdc_REG = offset_register<conf_mdc, 3, 1, 1, 1, 1, 25>;
-using conf_spi0_sclk_REG = offset_register<conf_spi0_sclk, 3, 1, 1, 1, 1, 25>;
-using conf_spi0_d0_REG = offset_register<conf_spi0_d0, 3, 1, 1, 1, 1, 25>;
-using conf_spi0_d1_REG = offset_register<conf_spi0_d1, 3, 1, 1, 1, 1, 25>;
-using conf_spi0_cs0_REG = offset_register<conf_spi0_cs0, 3, 1, 1, 1, 1, 25>;
-using conf_spi0_cs1_REG = offset_register<conf_spi0_cs1, 3, 1, 1, 1, 1, 25>;
-using conf_ecap0_in_pwm0_out_REG =
-    offset_register<conf_ecap0_in_pwm0_out, 3, 1, 1, 1, 1, 25>;
-using conf_uart0_ctsn_REG = offset_register<conf_uart0_ctsn, 3, 1, 1, 1, 1, 25>;
-using conf_uart0_rtsn_REG = offset_register<conf_uart0_rtsn, 3, 1, 1, 1, 1, 25>;
-using conf_uart0_rxd_REG = offset_register<conf_uart0_rxd, 3, 1, 1, 1, 1, 25>;
-using conf_uart0_txd_REG = offset_register<conf_uart0_txd, 3, 1, 1, 1, 1, 25>;
-using conf_uart1_ctsn_REG = offset_register<conf_uart1_ctsn, 3, 1, 1, 1, 1, 25>;
-using conf_uart1_rtsn_REG = offset_register<conf_uart1_rtsn, 3, 1, 1, 1, 1, 25>;
-using conf_uart1_rxd_REG = offset_register<conf_uart1_rxd, 3, 1, 1, 1, 1, 25>;
-using conf_uart1_txd_REG = offset_register<conf_uart1_txd, 3, 1, 1, 1, 1, 25>;
-using conf_i2c0_sda_REG = offset_register<conf_i2c0_sda, 3, 1, 1, 1, 1, 25>;
-using conf_i2c0_scl_REG = offset_register<conf_i2c0_scl, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_aclkx_REG =
-    offset_register<conf_mcasp0_aclkx, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_fsx_REG = offset_register<conf_mcasp0_fsx, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_axr0_REG =
-    offset_register<conf_mcasp0_axr0, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_ahclkr_REG =
-    offset_register<conf_mcasp0_ahclkr, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_aclkr_REG =
-    offset_register<conf_mcasp0_aclkr, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_fsr_REG = offset_register<conf_mcasp0_fsr, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_axr1_REG =
-    offset_register<conf_mcasp0_axr1, 3, 1, 1, 1, 1, 25>;
-using conf_mcasp0_ahclkx_REG =
-    offset_register<conf_mcasp0_ahclkx, 3, 1, 1, 1, 1, 25>;
-using conf_xdma_event_intr0_REG =
-    offset_register<conf_xdma_event_intr0, 3, 1, 1, 1, 1, 25>;
-using conf_xdma_event_intr1_REG =
-    offset_register<conf_xdma_event_intr1, 3, 1, 1, 1, 1, 25>;
-using conf_warmrstn_REG = offset_register<conf_warmrstn, 3, 1, 1, 1, 1, 25>;
-using conf_nnmi_REG = offset_register<conf_nnmi, 3, 1, 1, 1, 1, 25>;
-using conf_tms_REG = offset_register<conf_tms, 3, 1, 1, 1, 1, 25>;
-using conf_tdi_REG = offset_register<conf_tdi, 3, 1, 1, 1, 1, 25>;
-using conf_tdo_REG = offset_register<conf_tdo, 3, 1, 1, 1, 1, 25>;
-using conf_tck_REG = offset_register<conf_tck, 3, 1, 1, 1, 1, 25>;
-using conf_trstn_REG = offset_register<conf_trstn, 3, 1, 1, 1, 1, 25>;
-using conf_emu0_REG = offset_register<conf_emu0, 3, 1, 1, 1, 1, 25>;
-using conf_emu1_REG = offset_register<conf_emu1, 3, 1, 1, 1, 1, 25>;
-using conf_rtc_pwronrstn_REG =
-    offset_register<conf_rtc_pwronrstn, 3, 1, 1, 1, 1, 25>;
-using conf_pmic_power_en_REG =
-    offset_register<conf_pmic_power_en, 3, 1, 1, 1, 1, 25>;
-using conf_ext_wakeup_REG = offset_register<conf_ext_wakeup, 3, 1, 1, 1, 1, 25>;
-using conf_usb0_drvvbus_REG =
-    offset_register<conf_usb0_drvvbus, 3, 1, 1, 1, 1, 25>;
-using conf_usb1_drvvbus_REG =
-    offset_register<conf_usb1_drvvbus, 3, 1, 1, 1, 1, 25>;
-using cqdetect_status_REG = offset_register<cqdetect_status, 1>;
-using ddr_io_ctrl_REG = offset_register<ddr_io_ctrl, 1>;
-using vtp_ctrl_REG = offset_register<vtp_ctrl, 1>;
-using vref_ctrl_REG = offset_register<vref_ctrl, 1>;
-using tpcc_evt_mux_0_3_REG =
-    offset_register<tpcc_evt_mux_0_3, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_4_7_REG =
-    offset_register<tpcc_evt_mux_4_7, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_8_11_REG =
-    offset_register<tpcc_evt_mux_8_11, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_12_15_REG =
-    offset_register<tpcc_evt_mux_12_15, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_16_19_REG =
-    offset_register<tpcc_evt_mux_16_19, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_20_23_REG =
-    offset_register<tpcc_evt_mux_20_23, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_24_27_REG =
-    offset_register<tpcc_evt_mux_24_27, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_28_31_REG =
-    offset_register<tpcc_evt_mux_28_31, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_32_35_REG =
-    offset_register<tpcc_evt_mux_32_35, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_36_39_REG =
-    offset_register<tpcc_evt_mux_36_39, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_40_43_REG =
-    offset_register<tpcc_evt_mux_40_43, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_44_47_REG =
-    offset_register<tpcc_evt_mux_44_47, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_48_51_REG =
-    offset_register<tpcc_evt_mux_48_51, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_52_55_REG =
-    offset_register<tpcc_evt_mux_52_55, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_56_59_REG =
-    offset_register<tpcc_evt_mux_56_59, 6, 2, 6, 2, 6, 2, 6, 2>;
-using tpcc_evt_mux_60_63_REG =
-    offset_register<tpcc_evt_mux_60_63, 6, 2, 6, 2, 6, 2, 6, 2>;
-using timer_evt_capt_REG = offset_register<timer_evt_capt, 1>;
-using ecap_evt_capt_REG = offset_register<ecap_evt_capt, 1>;
-using adc_evt_capt_REG = offset_register<adc_evt_capt, 1>;
-using reset_iso_REG = offset_register<reset_iso, 1>;
-using dpll_pwr_sw_ctrl_REG = offset_register<dpll_pwr_sw_ctrl, 1>;
-using ddr_cke_ctrl_REG = offset_register<ddr_cke_ctrl, 1>;
-using sma2_REG = offset_register<sma2, 1>;
-using m3_txev_eoi_REG = offset_register<m3_txev_eoi, 1>;
-using ipc_msg_reg0_REG = offset_register<ipc_msg_reg0, 32>;
-using ipc_msg_reg1_REG = offset_register<ipc_msg_reg1, 32>;
-using ipc_msg_reg2_REG = offset_register<ipc_msg_reg2, 32>;
-using ipc_msg_reg3_REG = offset_register<ipc_msg_reg3, 32>;
-using ipc_msg_reg4_REG = offset_register<ipc_msg_reg4, 32>;
-using ipc_msg_reg5_REG = offset_register<ipc_msg_reg5, 32>;
-using ipc_msg_reg6_REG = offset_register<ipc_msg_reg6, 32>;
-using ipc_msg_reg7_REG = offset_register<ipc_msg_reg7, 32>;
-using ddr_cmd0_ioctrl_REG = offset_register<ddr_cmd0_ioctrl, 1>;
-using ddr_cmd1_ioctrl_REG = offset_register<ddr_cmd1_ioctrl, 1>;
-using ddr_cmd2_ioctrl_REG = offset_register<ddr_cmd2_ioctrl, 1>;
-using ddr_data0_ioctrl_REG = offset_register<ddr_data0_ioctrl, 1>;
-using ddr_data1_ioctrl_REG = offset_register<ddr_data1_ioctrl, 1>;
+using CONTROL_REVISION_REG = offset_register<CONTROL_REVISION, 1>;
+using CONTROL_HWINFO_REG = offset_register<CONTROL_HWINFO, 1>;
+using CONTROL_SYSCONFIG_REG = offset_register<CONTROL_SYSCONFIG, 1>;
+using CONTROL_STATUS_REG = offset_register<CONTROL_STATUS, 1>;
+using CONTROL_EMIF_SDRAM_CONFIG_REG =
+    offset_register<CONTROL_EMIF_SDRAM_CONFIG, 1>;
+using CORE_SLDO_CTRL_REG = offset_register<CORE_SLDO_CTRL, 1>;
+using MPU_SLDO_CTRL_REG = offset_register<MPU_SLDO_CTRL, 1>;
+using CLK32KDIVRATIO_CTRL_REG = offset_register<CLK32KDIVRATIO_CTRL, 1>;
+using BANDGAP_CTRL_REG = offset_register<BANDGAP_CTRL, 1>;
+using BANDGAP_TRIM_REG = offset_register<BANDGAP_TRIM, 1>;
+using PLL_CLKINPULOW_CTRL_REG = offset_register<PLL_CLKINPULOW_CTRL, 1>;
+using MOSC_CTRL_REG = offset_register<MOSC_CTRL, 1>;
+using DEEPSLEEP_CTRL_REG = offset_register<DEEPSLEEP_CTRL, 1>;
+using DPLL_PWR_SW_STATUS_REG = offset_register<DPLL_PWR_SW_STATUS, 1>;
+using DEVICE_ID_REG = offset_register<DEVICE_ID, 1>;
+using DEV_FEATURE_REG = offset_register<DEV_FEATURE, 1>;
+using INIT_PRIORITY_0_REG = offset_register<INIT_PRIORITY_0, 1>;
+using INIT_PRIORITY_1_REG = offset_register<INIT_PRIORITY_1, 1>;
+using TPTC_CFG_REG = offset_register<TPTC_CFG, 1>;
+using USB_CTRL0_REG = offset_register<USB_CTRL0, 1>;
+using USB_STS0_REG = offset_register<USB_STS0, 1>;
+using USB_CTRL1_REG = offset_register<USB_CTRL1, 1>;
+using USB_STS1_REG = offset_register<USB_STS1, 1>;
+using MAC_ID0_LO_REG = offset_register<MAC_ID0_LO, 1>;
+using MAC_ID0_HI_REG = offset_register<MAC_ID0_HI, 1>;
+using MAC_ID1_LO_REG = offset_register<MAC_ID1_LO, 1>;
+using MAC_ID1_HI_REG = offset_register<MAC_ID1_HI, 1>;
+using DCAN_RAMINIT_REG = offset_register<DCAN_RAMINIT, 1>;
+using USB_WKUP_CTRL_REG = offset_register<USB_WKUP_CTRL, 1>;
+using GMII_SEL_REG = offset_register<GMII_SEL, 1>;
+using PWMSS_CTRL_REG = offset_register<PWMSS_CTRL, 1>;
+using MREQPRIO_0_REG = offset_register<MREQPRIO_0, 1>;
+using MREQPRIO_1_REG = offset_register<MREQPRIO_1, 1>;
+using HW_EVENT_SEL_GRP1_REG = offset_register<HW_EVENT_SEL_GRP1, 1>;
+using HW_EVENT_SEL_GRP2_REG = offset_register<HW_EVENT_SEL_GRP2, 1>;
+using HW_EVENT_SEL_GRP3_REG = offset_register<HW_EVENT_SEL_GRP3, 1>;
+using HW_EVENT_SEL_GRP4_REG = offset_register<HW_EVENT_SEL_GRP4, 1>;
+using SMRT_CTRL_REG = offset_register<SMRT_CTRL, 1>;
+using MPUSS_HW_DEBUG_SEL_REG = offset_register<MPUSS_HW_DEBUG_SEL, 1>;
+using MPUSS_HW_DBG_INFO_REG = offset_register<MPUSS_HW_DBG_INFO, 1>;
+using VDD_MPU_OPP_050_REG = offset_register<VDD_MPU_OPP_050, 1>;
+using VDD_MPU_OPP_100_REG = offset_register<VDD_MPU_OPP_100, 1>;
+using VDD_MPU_OPP_120_REG = offset_register<VDD_MPU_OPP_120, 1>;
+using VDD_MPU_OPP_TURBO_REG = offset_register<VDD_MPU_OPP_TURBO, 1>;
+using VDD_CORE_OPP_050_REG = offset_register<VDD_CORE_OPP_050, 1>;
+using VDD_CORE_OPP_100_REG = offset_register<VDD_CORE_OPP_100, 1>;
+using BB_SCALE_REG = offset_register<BB_SCALE, 1>;
+using USB_VID_PID_REG = offset_register<USB_VID_PID, 1>;
+using EFUSE_SMA_REG = offset_register<EFUSE_SMA, 1>;
+using CONF_GPMC_AD0_REG = offset_register<CONF_GPMC_AD0, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD1_REG = offset_register<CONF_GPMC_AD1, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD2_REG = offset_register<CONF_GPMC_AD2, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD3_REG = offset_register<CONF_GPMC_AD3, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD4_REG = offset_register<CONF_GPMC_AD4, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD5_REG = offset_register<CONF_GPMC_AD5, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD6_REG = offset_register<CONF_GPMC_AD6, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD7_REG = offset_register<CONF_GPMC_AD7, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD8_REG = offset_register<CONF_GPMC_AD8, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD9_REG = offset_register<CONF_GPMC_AD9, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD10_REG = offset_register<CONF_GPMC_AD10, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD11_REG = offset_register<CONF_GPMC_AD11, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD12_REG = offset_register<CONF_GPMC_AD12, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD13_REG = offset_register<CONF_GPMC_AD13, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD14_REG = offset_register<CONF_GPMC_AD14, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_AD15_REG = offset_register<CONF_GPMC_AD15, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A0_REG = offset_register<CONF_GPMC_A0, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A1_REG = offset_register<CONF_GPMC_A1, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A2_REG = offset_register<CONF_GPMC_A2, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A3_REG = offset_register<CONF_GPMC_A3, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A4_REG = offset_register<CONF_GPMC_A4, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A5_REG = offset_register<CONF_GPMC_A5, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A6_REG = offset_register<CONF_GPMC_A6, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A7_REG = offset_register<CONF_GPMC_A7, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A8_REG = offset_register<CONF_GPMC_A8, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A9_REG = offset_register<CONF_GPMC_A9, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A10_REG = offset_register<CONF_GPMC_A10, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_A11_REG = offset_register<CONF_GPMC_A11, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_WAIT0_REG = offset_register<CONF_GPMC_WAIT0, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_WPN_REG = offset_register<CONF_GPMC_WPN, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_BEN1_REG = offset_register<CONF_GPMC_BEN1, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_CSN0_REG = offset_register<CONF_GPMC_CSN0, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_CSN1_REG = offset_register<CONF_GPMC_CSN1, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_CSN2_REG = offset_register<CONF_GPMC_CSN2, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_CSN3_REG = offset_register<CONF_GPMC_CSN3, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_CLK_REG = offset_register<CONF_GPMC_CLK, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_ADVN_ALE_REG =
+    offset_register<CONF_GPMC_ADVN_ALE, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_OEN_REN_REG =
+    offset_register<CONF_GPMC_OEN_REN, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_WEN_REG = offset_register<CONF_GPMC_WEN, 3, 1, 1, 1, 1, 25>;
+using CONF_GPMC_BEN0_CLE_REG =
+    offset_register<CONF_GPMC_BEN0_CLE, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA0_REG = offset_register<CONF_LCD_DATA0, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA1_REG = offset_register<CONF_LCD_DATA1, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA2_REG = offset_register<CONF_LCD_DATA2, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA3_REG = offset_register<CONF_LCD_DATA3, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA4_REG = offset_register<CONF_LCD_DATA4, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA5_REG = offset_register<CONF_LCD_DATA5, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA6_REG = offset_register<CONF_LCD_DATA6, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA7_REG = offset_register<CONF_LCD_DATA7, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA8_REG = offset_register<CONF_LCD_DATA8, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA9_REG = offset_register<CONF_LCD_DATA9, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA10_REG = offset_register<CONF_LCD_DATA10, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA11_REG = offset_register<CONF_LCD_DATA11, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA12_REG = offset_register<CONF_LCD_DATA12, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA13_REG = offset_register<CONF_LCD_DATA13, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA14_REG = offset_register<CONF_LCD_DATA14, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_DATA15_REG = offset_register<CONF_LCD_DATA15, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_VSYNC_REG = offset_register<CONF_LCD_VSYNC, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_HSYNC_REG = offset_register<CONF_LCD_HSYNC, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_PCLK_REG = offset_register<CONF_LCD_PCLK, 3, 1, 1, 1, 1, 25>;
+using CONF_LCD_AC_BIAS_EN_REG =
+    offset_register<CONF_LCD_AC_BIAS_EN, 3, 1, 1, 1, 1, 25>;
+using CONF_MMC0_DAT3_REG = offset_register<CONF_MMC0_DAT3, 3, 1, 1, 1, 1, 25>;
+using CONF_MMC0_DAT2_REG = offset_register<CONF_MMC0_DAT2, 3, 1, 1, 1, 1, 25>;
+using CONF_MMC0_DAT1_REG = offset_register<CONF_MMC0_DAT1, 3, 1, 1, 1, 1, 25>;
+using CONF_MMC0_DAT0_REG = offset_register<CONF_MMC0_DAT0, 3, 1, 1, 1, 1, 25>;
+using CONF_MMC0_CLK_REG = offset_register<CONF_MMC0_CLK, 3, 1, 1, 1, 1, 25>;
+using CONF_MMC0_CMD_REG = offset_register<CONF_MMC0_CMD, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_COL_REG = offset_register<CONF_MII1_COL, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_CRS_REG = offset_register<CONF_MII1_CRS, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RX_ER_REG = offset_register<CONF_MII1_RX_ER, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_TX_EN_REG = offset_register<CONF_MII1_TX_EN, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RX_DV_REG = offset_register<CONF_MII1_RX_DV, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_TXD3_REG = offset_register<CONF_MII1_TXD3, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_TXD2_REG = offset_register<CONF_MII1_TXD2, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_TXD1_REG = offset_register<CONF_MII1_TXD1, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_TXD0_REG = offset_register<CONF_MII1_TXD0, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_TX_CLK_REG =
+    offset_register<CONF_MII1_TX_CLK, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RX_CLK_REG =
+    offset_register<CONF_MII1_RX_CLK, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RXD3_REG = offset_register<CONF_MII1_RXD3, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RXD2_REG = offset_register<CONF_MII1_RXD2, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RXD1_REG = offset_register<CONF_MII1_RXD1, 3, 1, 1, 1, 1, 25>;
+using CONF_MII1_RXD0_REG = offset_register<CONF_MII1_RXD0, 3, 1, 1, 1, 1, 25>;
+using CONF_RMII1_REF_CLK_REG =
+    offset_register<CONF_RMII1_REF_CLK, 3, 1, 1, 1, 1, 25>;
+using CONF_MDIO_REG = offset_register<CONF_MDIO, 3, 1, 1, 1, 1, 25>;
+using CONF_MDC_REG = offset_register<CONF_MDC, 3, 1, 1, 1, 1, 25>;
+using CONF_SPI0_SCLK_REG = offset_register<CONF_SPI0_SCLK, 3, 1, 1, 1, 1, 25>;
+using CONF_SPI0_D0_REG = offset_register<CONF_SPI0_D0, 3, 1, 1, 1, 1, 25>;
+using CONF_SPI0_D1_REG = offset_register<CONF_SPI0_D1, 3, 1, 1, 1, 1, 25>;
+using CONF_SPI0_CS0_REG = offset_register<CONF_SPI0_CS0, 3, 1, 1, 1, 1, 25>;
+using CONF_SPI0_CS1_REG = offset_register<CONF_SPI0_CS1, 3, 1, 1, 1, 1, 25>;
+using CONF_ECAP0_IN_PWM0_OUT_REG =
+    offset_register<CONF_ECAP0_IN_PWM0_OUT, 3, 1, 1, 1, 1, 25>;
+using CONF_UART0_CTSN_REG = offset_register<CONF_UART0_CTSN, 3, 1, 1, 1, 1, 25>;
+using CONF_UART0_RTSN_REG = offset_register<CONF_UART0_RTSN, 3, 1, 1, 1, 1, 25>;
+using CONF_UART0_RXD_REG = offset_register<CONF_UART0_RXD, 3, 1, 1, 1, 1, 25>;
+using CONF_UART0_TXD_REG = offset_register<CONF_UART0_TXD, 3, 1, 1, 1, 1, 25>;
+using CONF_UART1_CTSN_REG = offset_register<CONF_UART1_CTSN, 3, 1, 1, 1, 1, 25>;
+using CONF_UART1_RTSN_REG = offset_register<CONF_UART1_RTSN, 3, 1, 1, 1, 1, 25>;
+using CONF_UART1_RXD_REG = offset_register<CONF_UART1_RXD, 3, 1, 1, 1, 1, 25>;
+using CONF_UART1_TXD_REG = offset_register<CONF_UART1_TXD, 3, 1, 1, 1, 1, 25>;
+using CONF_I2C0_SDA_REG = offset_register<CONF_I2C0_SDA, 3, 1, 1, 1, 1, 25>;
+using CONF_I2C0_SCL_REG = offset_register<CONF_I2C0_SCL, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_ACLKX_REG =
+    offset_register<CONF_MCASP0_ACLKX, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_FSX_REG = offset_register<CONF_MCASP0_FSX, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_AXR0_REG =
+    offset_register<CONF_MCASP0_AXR0, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_AHCLKR_REG =
+    offset_register<CONF_MCASP0_AHCLKR, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_ACLKR_REG =
+    offset_register<CONF_MCASP0_ACLKR, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_FSR_REG = offset_register<CONF_MCASP0_FSR, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_AXR1_REG =
+    offset_register<CONF_MCASP0_AXR1, 3, 1, 1, 1, 1, 25>;
+using CONF_MCASP0_AHCLKX_REG =
+    offset_register<CONF_MCASP0_AHCLKX, 3, 1, 1, 1, 1, 25>;
+using CONF_XDMA_EVENT_INTR0_REG =
+    offset_register<CONF_XDMA_EVENT_INTR0, 3, 1, 1, 1, 1, 25>;
+using CONF_XDMA_EVENT_INTR1_REG =
+    offset_register<CONF_XDMA_EVENT_INTR1, 3, 1, 1, 1, 1, 25>;
+using CONF_WARMRSTN_REG = offset_register<CONF_WARMRSTN, 3, 1, 1, 1, 1, 25>;
+using CONF_NNMI_REG = offset_register<CONF_NNMI, 3, 1, 1, 1, 1, 25>;
+using CONF_TMS_REG = offset_register<CONF_TMS, 3, 1, 1, 1, 1, 25>;
+using CONF_TDI_REG = offset_register<CONF_TDI, 3, 1, 1, 1, 1, 25>;
+using CONF_TDO_REG = offset_register<CONF_TDO, 3, 1, 1, 1, 1, 25>;
+using CONF_TCK_REG = offset_register<CONF_TCK, 3, 1, 1, 1, 1, 25>;
+using CONF_TRSTN_REG = offset_register<CONF_TRSTN, 3, 1, 1, 1, 1, 25>;
+using CONF_EMU0_REG = offset_register<CONF_EMU0, 3, 1, 1, 1, 1, 25>;
+using CONF_EMU1_REG = offset_register<CONF_EMU1, 3, 1, 1, 1, 1, 25>;
+using CONF_RTC_PWRONRSTN_REG =
+    offset_register<CONF_RTC_PWRONRSTN, 3, 1, 1, 1, 1, 25>;
+using CONF_PMIC_POWER_EN_REG =
+    offset_register<CONF_PMIC_POWER_EN, 3, 1, 1, 1, 1, 25>;
+using CONF_EXT_WAKEUP_REG = offset_register<CONF_EXT_WAKEUP, 3, 1, 1, 1, 1, 25>;
+using CONF_USB0_DRVVBUS_REG =
+    offset_register<CONF_USB0_DRVVBUS, 3, 1, 1, 1, 1, 25>;
+using CONF_USB1_DRVVBUS_REG =
+    offset_register<CONF_USB1_DRVVBUS, 3, 1, 1, 1, 1, 25>;
+using CQDETECT_STATUS_REG = offset_register<CQDETECT_STATUS, 1>;
+using DDR_IO_CTRL_REG = offset_register<DDR_IO_CTRL, 1>;
+using VTP_CTRL_REG = offset_register<VTP_CTRL, 1>;
+using VREF_CTRL_REG = offset_register<VREF_CTRL, 1>;
+using TPCC_EVT_MUX_0_3_REG =
+    offset_register<TPCC_EVT_MUX_0_3, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_4_7_REG =
+    offset_register<TPCC_EVT_MUX_4_7, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_8_11_REG =
+    offset_register<TPCC_EVT_MUX_8_11, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_12_15_REG =
+    offset_register<TPCC_EVT_MUX_12_15, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_16_19_REG =
+    offset_register<TPCC_EVT_MUX_16_19, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_20_23_REG =
+    offset_register<TPCC_EVT_MUX_20_23, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_24_27_REG =
+    offset_register<TPCC_EVT_MUX_24_27, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_28_31_REG =
+    offset_register<TPCC_EVT_MUX_28_31, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_32_35_REG =
+    offset_register<TPCC_EVT_MUX_32_35, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_36_39_REG =
+    offset_register<TPCC_EVT_MUX_36_39, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_40_43_REG =
+    offset_register<TPCC_EVT_MUX_40_43, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_44_47_REG =
+    offset_register<TPCC_EVT_MUX_44_47, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_48_51_REG =
+    offset_register<TPCC_EVT_MUX_48_51, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_52_55_REG =
+    offset_register<TPCC_EVT_MUX_52_55, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_56_59_REG =
+    offset_register<TPCC_EVT_MUX_56_59, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TPCC_EVT_MUX_60_63_REG =
+    offset_register<TPCC_EVT_MUX_60_63, 6, 2, 6, 2, 6, 2, 6, 2>;
+using TIMER_EVT_CAPT_REG = offset_register<TIMER_EVT_CAPT, 1>;
+using ECAP_EVT_CAPT_REG = offset_register<ECAP_EVT_CAPT, 1>;
+using ADC_EVT_CAPT_REG = offset_register<ADC_EVT_CAPT, 1>;
+using RESET_ISO_REG = offset_register<RESET_ISO, 1>;
+using DPLL_PWR_SW_CTRL_REG = offset_register<DPLL_PWR_SW_CTRL, 1>;
+using DDR_CKE_CTRL_REG = offset_register<DDR_CKE_CTRL, 1>;
+using SMA2_REG = offset_register<SMA2, 1>;
+using M3_TXEV_EOI_REG = offset_register<M3_TXEV_EOI, 1>;
+using IPC_MSG_REG0_REG = offset_register<IPC_MSG_REG0, 32>;
+using IPC_MSG_REG1_REG = offset_register<IPC_MSG_REG1, 32>;
+using IPC_MSG_REG2_REG = offset_register<IPC_MSG_REG2, 32>;
+using IPC_MSG_REG3_REG = offset_register<IPC_MSG_REG3, 32>;
+using IPC_MSG_REG4_REG = offset_register<IPC_MSG_REG4, 32>;
+using IPC_MSG_REG5_REG = offset_register<IPC_MSG_REG5, 32>;
+using IPC_MSG_REG6_REG = offset_register<IPC_MSG_REG6, 32>;
+using IPC_MSG_REG7_REG = offset_register<IPC_MSG_REG7, 32>;
+using DDR_CMD0_IOCTRL_REG = offset_register<DDR_CMD0_IOCTRL, 1>;
+using DDR_CMD1_IOCTRL_REG = offset_register<DDR_CMD1_IOCTRL, 1>;
+using DDR_CMD2_IOCTRL_REG = offset_register<DDR_CMD2_IOCTRL, 1>;
+using DDR_DATA0_IOCTRL_REG = offset_register<DDR_DATA0_IOCTRL, 1>;
+using DDR_DATA1_IOCTRL_REG = offset_register<DDR_DATA1_IOCTRL, 1>;
 }
 #endif
