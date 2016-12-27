@@ -4,59 +4,450 @@
 #include "offset_register.hpp"
 
 namespace control_module {
-enum class CONTROL_REVISION { RESERVED = -1, OFFSET = 0, RESET = 0 };
-enum class CONTROL_HWINFO { RESERVED = -1, OFFSET = 4, RESET = 0 };
-enum class CONTROL_SYSCONFIG { RESERVED = -1, OFFSET = 0X10, RESET = 0 };
-enum class CONTROL_STATUS { RESERVED = -1, OFFSET = 0X40, RESET = 0 };
-enum class CONTROL_EMIF_SDRAM_CONFIG {
+enum class CONTROL_REVISION {
+  IP_REV_MINOR,
+  IP_REV_CUSTOM,
+  IP_REV_MAJOR,
+  IP_REV_RTL,
+  IP_REV_FUNC,
+  RESERVED0,
+  IP_REV_SCHEME,
   RESERVED = -1,
-  OFFSET = 0X110,
-  RESET = 0
+  offset = 0,
+  reset = 0
 };
-enum class CORE_SLDO_CTRL { RESERVED = -1, OFFSET = 0X428, RESET = 0 };
-enum class MPU_SLDO_CTRL { RESERVED = -1, OFFSET = 0X42C, RESET = 0 };
-enum class CLK32KDIVRATIO_CTRL { RESERVED = -1, OFFSET = 0X444, RESET = 0 };
-enum class BANDGAP_CTRL { RESERVED = -1, OFFSET = 0X448, RESET = 0 };
-enum class BANDGAP_TRIM { RESERVED = -1, OFFSET = 0X44C, RESET = 0 };
-enum class PLL_CLKINPULOW_CTRL { RESERVED = -1, OFFSET = 0X458, RESET = 0 };
-enum class MOSC_CTRL { RESERVED = -1, OFFSET = 0X468, RESET = 0 };
-enum class DEEPSLEEP_CTRL { RESERVED = -1, OFFSET = 0X470, RESET = 0 };
-enum class DPLL_PWR_SW_STATUS { RESERVED = -1, OFFSET = 0X50C, RESET = 0 };
-enum class DEVICE_ID { RESERVED = -1, OFFSET = 0X600, RESET = 0 };
-enum class DEV_FEATURE { RESERVED = -1, OFFSET = 0X604, RESET = 0 };
-enum class INIT_PRIORITY_0 { RESERVED = -1, OFFSET = 0X608, RESET = 0 };
-enum class INIT_PRIORITY_1 { RESERVED = -1, OFFSET = 0X60C, RESET = 0 };
-enum class TPTC_CFG { RESERVED = -1, OFFSET = 0X614, RESET = 0 };
-enum class USB_CTRL0 { RESERVED = -1, OFFSET = 0X620, RESET = 0 };
-enum class USB_STS0 { RESERVED = -1, OFFSET = 0X624, RESET = 0 };
-enum class USB_CTRL1 { RESERVED = -1, OFFSET = 0X628, RESET = 0 };
-enum class USB_STS1 { RESERVED = -1, OFFSET = 0X62C, RESET = 0 };
-enum class MAC_ID0_LO { RESERVED = -1, OFFSET = 0X630, RESET = 0 };
-enum class MAC_ID0_HI { RESERVED = -1, OFFSET = 0X634, RESET = 0 };
-enum class MAC_ID1_LO { RESERVED = -1, OFFSET = 0X638, RESET = 0 };
-enum class MAC_ID1_HI { RESERVED = -1, OFFSET = 0X63C, RESET = 0 };
-enum class DCAN_RAMINIT { RESERVED = -1, OFFSET = 0X644, RESET = 0 };
-enum class USB_WKUP_CTRL { RESERVED = -1, OFFSET = 0X648, RESET = 0 };
-enum class GMII_SEL { RESERVED = -1, OFFSET = 0X650, RESET = 0 };
-enum class PWMSS_CTRL { RESERVED = -1, OFFSET = 0X664, RESET = 0 };
-enum class MREQPRIO_0 { RESERVED = -1, OFFSET = 0X670, RESET = 0 };
-enum class MREQPRIO_1 { RESERVED = -1, OFFSET = 0X674, RESET = 0 };
-enum class HW_EVENT_SEL_GRP1 { RESERVED = -1, OFFSET = 0X690, RESET = 0 };
-enum class HW_EVENT_SEL_GRP2 { RESERVED = -1, OFFSET = 0X694, RESET = 0 };
-enum class HW_EVENT_SEL_GRP3 { RESERVED = -1, OFFSET = 0X698, RESET = 0 };
-enum class HW_EVENT_SEL_GRP4 { RESERVED = -1, OFFSET = 0X69C, RESET = 0 };
-enum class SMRT_CTRL { RESERVED = -1, OFFSET = 0X6A0, RESET = 0 };
-enum class MPUSS_HW_DEBUG_SEL { RESERVED = -1, OFFSET = 0X6A4, RESET = 0 };
-enum class MPUSS_HW_DBG_INFO { RESERVED = -1, OFFSET = 0X6A8, RESET = 0 };
-enum class VDD_MPU_OPP_050 { RESERVED = -1, OFFSET = 0X770, RESET = 0 };
-enum class VDD_MPU_OPP_100 { RESERVED = -1, OFFSET = 0X774, RESET = 0 };
-enum class VDD_MPU_OPP_120 { RESERVED = -1, OFFSET = 0X778, RESET = 0 };
-enum class VDD_MPU_OPP_TURBO { RESERVED = -1, OFFSET = 0X77C, RESET = 0 };
-enum class VDD_CORE_OPP_050 { RESERVED = -1, OFFSET = 0X7B8, RESET = 0 };
-enum class VDD_CORE_OPP_100 { RESERVED = -1, OFFSET = 0X7BC, RESET = 0 };
-enum class BB_SCALE { RESERVED = -1, OFFSET = 0X7D0, RESET = 0 };
-enum class USB_VID_PID { RESERVED = -1, OFFSET = 0X7F4, RESET = 0 };
-enum class EFUSE_SMA { RESERVED = -1, OFFSET = 0X7FC, RESET = 0 };
+enum class CONTROL_HWINFO { IP_HWINFO, RESERVED = -1, offset = 4, reset = 0 };
+enum class CONTROL_SYSCONFIG {
+  RESERVED0,
+  FREEEMU,
+  IDLEMODE,
+  STANDBY,
+  RESERVED = -1,
+  offset = 0X10,
+  reset = 0
+};
+enum class CONTROL_STATUS {
+  SYSBOOT0,
+  DEVTYPE,
+  RESERVED0,
+  BW,
+  WAITEN,
+  ADMUX,
+  TESTMD,
+  SYSBOOT1,
+  RESERVED = -1,
+  offset = 0X40,
+  reset = 0
+};
+enum class CONTROL_EMIF_SDRAM_CONFIG {
+  PAGESIZE,
+  EBANK,
+  IBANK,
+  ROWSIZE,
+  CL,
+  NARROW_MODE,
+  CWL,
+  SDRAM_DRIVE,
+  RESERVED0,
+  DYN_ODT,
+  DDR2_DDQS,
+  DDR_TERM,
+  IBANK_POS,
+  SDRAM_TYPE,
+  RESERVED = -1,
+  offset = 0X110,
+  reset = 0
+};
+enum class CORE_SLDO_CTRL {
+  RESERVED0,
+  VSET,
+  RESERVED = -1,
+  offset = 0X428,
+  reset = 0
+};
+enum class MPU_SLDO_CTRL {
+  RESERVED0,
+  VSET,
+  RESERVED = -1,
+  offset = 0X42C,
+  reset = 0
+};
+enum class CLK32KDIVRATIO_CTRL {
+  CLKDIVOPP50_EN,
+  RESERVED = -1,
+  offset = 0X444,
+  reset = 0
+};
+enum class BANDGAP_CTRL {
+  TSHUT,
+  ECOZ,
+  CONTCONV,
+  CLRZ,
+  SOC,
+  TMPSOFF,
+  BGROFF,
+  CBIASSEL,
+  DTEMP,
+  RESERVED = -1,
+  offset = 0X448,
+  reset = 0
+};
+enum class BANDGAP_TRIM {
+  DTRTEMPSC,
+  DTRTEMPS,
+  DTRBGAPV,
+  DTRBGAPC,
+  RESERVED = -1,
+  offset = 0X44C,
+  reset = 0
+};
+enum class PLL_CLKINPULOW_CTRL {
+  MPU_DPLL_CLKINPULOW_SEL,
+  DISP_PLL_CLKINPULOW_SEL,
+  DDR_PLL_CLKINPULOW_SEL,
+  RESERVED = -1,
+  offset = 0X458,
+  reset = 0
+};
+enum class MOSC_CTRL { RESSELECT, RESERVED = -1, offset = 0X468, reset = 0 };
+enum class DEEPSLEEP_CTRL {
+  DSCOUNT,
+  RESERVED0,
+  DSENABLE,
+  RESERVED = -1,
+  offset = 0X470,
+  reset = 0
+};
+enum class DPLL_PWR_SW_STATUS {
+  RESERVED0,
+  PONOUT_PER,
+  PGODOUT_PER,
+  RESERVED1,
+  PONOUT_DISP,
+  PGOODOUT_DISP,
+  RESERVED2,
+  PONOUT_DDR,
+  PGOODOUT_DDR,
+  RESERVED = -1,
+  offset = 0X50C,
+  reset = 0
+};
+enum class DEVICE_ID {
+  RESERVED0,
+  MFGR,
+  PARTNUM,
+  DEVREV,
+  offset = 0X600,
+  reset = 0
+};
+enum class DEV_FEATURE { DEV_FEATURE_BITS, offset = 0X604, reset = 0 };
+enum class INIT_PRIORITY_0 {
+  HOST_ARM,
+  RESERVED0,
+  PRU_ICSS,
+  MMU,
+  RESERVED1,
+  P1500,
+  TCRD0,
+  TCWR0,
+  TCRD1,
+  TCWR1,
+  TCRD2,
+  TCWR2,
+  RESERVED = -1,
+  offset = 0X608,
+  reset = 0
+};
+enum class INIT_PRIORITY_1 {
+  CPSW,
+  RESERVED0,
+  USB_DMA,
+  USB_QMGR,
+  RESERVED1,
+  SGX,
+  LCD,
+  DEBUG,
+  RESERVED = -1,
+  offset = 0X60C,
+  reset = 0
+};
+enum class TPTC_CFG {
+  TC0DDBS,
+  TC1DBS,
+  TC2DBS,
+  RESERVED = -1,
+  offset = 0X614,
+  reset = 0
+};
+enum class USB_CTRL0 {
+  CM_PWRDN,
+  OTG_PWRDN,
+  CHGDET_DIS,
+  CHGDET_RSTRT,
+  SRCONDM,
+  SINKONDP,
+  CHGISINK_EN,
+  CHGVSRVC_EN,
+  DMPULLDN,
+  DPPULLUP,
+  CDET_EXTCTL,
+  RESERVED0,
+  GPIOMODE,
+  SIG_INV,
+  GPIO_SIG_CROSS,
+  RESERVED1,
+  DPGPIO_PD,
+  DMGPIO_PD,
+  OTGVDET_EN,
+  OTGSESSENDEN,
+  RESERVED2,
+  DATAPOLARITY_INV,
+  RESERVED = -1,
+  offset = 0X620,
+  reset = 0
+};
+enum class USB_STS0 {
+  CHGDETDONE,
+  CHGDETECT,
+  CDET_DATADET,
+  CDET_DPDET,
+  CDET_DMDET,
+  CHGDETSTS,
+  RESERVED = -1,
+  offset = 0X624,
+  reset = 0
+};
+enum class USB_CTRL1 {
+  CM_PWRDN,
+  OTG_PWRDN,
+  CHGDET_DIS,
+  CHGDET_RSTRT,
+  SRCONDM,
+  SINKONDP,
+  CHGISINK_EN,
+  CHGVSRVC_EN,
+  DMPULLDN,
+  DPPULLUP,
+  CDET_EXTCTL,
+  RESERVED0,
+  GPIOMODE,
+  SIG_INV,
+  GPIO_SIG_CROSS,
+  RESERVED1,
+  DPGPIO_PD,
+  DMGPIO_PD,
+  OTGVDET_EN,
+  OTGSESSENDEN,
+  RESERVED2,
+  DATAPOLARITY_INV,
+  RESERVED = -1,
+  offset = 0X628,
+  reset = 0
+};
+enum class USB_STS1 {
+  CHGDETDONE,
+  CHGDETECT,
+  CDET_DATADET,
+  CDET_DPDET,
+  CDET_DMDET,
+  CHGDETSTS,
+  RESERVED = -1,
+  offset = 0X62C,
+  reset = 0
+};
+enum class MAC_ID0_LO {
+  MACADDR_39_32,
+  MACADDR_47_40,
+  RESERVED = -1,
+  offset = 0X630,
+  reset = 0
+};
+enum class MAC_ID0_HI {
+  MACADDR_7_0,
+  MACADDR_15_8,
+  MACADDR_23_16,
+  MACADDR_31_24,
+  RESERVED = -1,
+  offset = 0X634,
+  reset = 0
+};
+enum class MAC_ID1_LO {
+  MACADDR_39_32,
+  MACADDR_47_40,
+  RESERVED = -1,
+  offset = 0X638,
+  reset = 0
+};
+enum class MAC_ID1_HI {
+  MACADDR_7_0,
+  MACADDR_15_8,
+  MACADDR_23_16,
+  MACADDR_31_24,
+  RESERVED = -1,
+  offset = 0X63C,
+  reset = 0
+};
+enum class DCAN_RAMINIT {
+  DCAN0_RAMINIT_START,
+  DCAN1_RAMINIT_START,
+  RESERVED0,
+  DCAN0_RAMINIT_DONE,
+  DCAN1_RAMINIT_DONE,
+  RESERVED = -1,
+  offset = 0X644,
+  reset = 0
+};
+enum class USB_WKUP_CTRL {
+  PHY0_WUEN,
+  RESERVED0,
+  PHY1_WUEN,
+  RESERVED = -1,
+  offset = 0X648,
+  reset = 0
+};
+enum class GMII_SEL {
+  GMII1_SEL,
+  GMII2_SEL,
+  RGMII1_IDMODE,
+  RGMII2_IDMODE,
+  RGMII1_IO_CLK_EN,
+  RMII2_IO_CLK_EN,
+  RESERVED = -1,
+  offset = 0X650,
+  reset = 0
+};
+enum class PWMSS_CTRL {
+  PWMSS0_TBCLKEN,
+  PWMSS1_TBCLKEN,
+  PWMSS2_TBCLKEN,
+  RESERVED = -1,
+  offset = 0X664,
+  reset = 0
+};
+enum class MREQPRIO_0 {
+  SAB_INIT0,
+  RESERVED0,
+  SAB_INIT1,
+  RESERVED1,
+  PRU_ICSS_PRU0,
+  RESERVED2,
+  CPSW,
+  RESERVED3,
+  USB0,
+  RESERVED4,
+  USB1,
+  RESERVED5,
+  SGX,
+  RESERVED = -1,
+  offset = 0X670,
+  reset = 0
+};
+enum class MREQPRIO_1 { RESERVED, offset = 0X674, reset = 0 };
+enum class HW_EVENT_SEL_GRP1 {
+  EVENT1,
+  EVENT2,
+  EVENT3,
+  EVENT4,
+  RESERVED = -1,
+  offset = 0X690,
+  reset = 0
+};
+enum class HW_EVENT_SEL_GRP2 {
+  EVENT5,
+  EVENT6,
+  EVENT7,
+  EVENT8,
+  RESERVED = -1,
+  offset = 0X694,
+  reset = 0
+};
+enum class HW_EVENT_SEL_GRP3 {
+  EVENT9,
+  EVENT10,
+  EVENT11,
+  EVENT12,
+  RESERVED = -1,
+  offset = 0X698,
+  reset = 0
+};
+enum class HW_EVENT_SEL_GRP4 {
+  EVENT13,
+  EVENT14,
+  EVENT15,
+  EVENT16,
+  RESERVED = -1,
+  offset = 0X69C,
+  reset = 0
+};
+enum class SMRT_CTRL {
+  SR0_SLEEP,
+  SR1_SLEEP,
+  RESERVED = -1,
+  offset = 0X6A0,
+  reset = 0
+};
+enum class MPUSS_HW_DEBUG_SEL {
+  HW_DBG_SEL,
+  RESERVED0,
+  HW_DBG_GATE_EN,
+  RESERVED = -1,
+  offset = 0X6A4,
+  reset = 0
+};
+enum class MPUSS_HW_DBG_INFO { HW_DBG_INFO, offset = 0X6A8, reset = 0 };
+enum class VDD_MPU_OPP_050 {
+  NTARGET,
+  RESERVED = -1,
+  offset = 0X770,
+  reset = 0
+};
+enum class VDD_MPU_OPP_100 {
+  NTARGET,
+  RESERVED = -1,
+  offset = 0X774,
+  reset = 0
+};
+enum class VDD_MPU_OPP_120 {
+  NTARGET,
+  RESERVED = -1,
+  offset = 0X778,
+  reset = 0
+};
+enum class VDD_MPU_OPP_TURBO {
+  NTARGET,
+  RESERVED = -1,
+  offset = 0X77C,
+  reset = 0
+};
+enum class VDD_CORE_OPP_050 {
+  NTARGET,
+  RESERVED = -1,
+  offset = 0X7B8,
+  reset = 0
+};
+enum class VDD_CORE_OPP_100 {
+  NTARGET,
+  RESERVED = -1,
+  offset = 0X7BC,
+  reset = 0
+};
+enum class BB_SCALE {
+  BBIAS,
+  RESERVED0,
+  SCALE,
+  RESERVED = -1,
+  offset = 0X7D0,
+  reset = 0
+};
+enum class USB_VID_PID { USB_PID, USB_VID, offset = 0X7F4, reset = 0 };
+enum class EFUSE_SMA {
+  ARM_MPU_MAX_FREQ,
+  RESERVED0,
+  PACKAGE_TYPE,
+  RESERVED = -1,
+  offset = 0X7FC,
+  reset = 0
+};
 enum class CONF_GPMC_AD0 {
   CONF_GPMC_AD0_MMODE,
   CONF_GPMC_AD0_PUDEN,
@@ -64,8 +455,8 @@ enum class CONF_GPMC_AD0 {
   CONF_GPMC_AD0_RXACTIVE,
   CONF_GPMC_AD0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X800,
-  RESET = 0
+  offset = 0X800,
+  reset = 0
 };
 enum class CONF_GPMC_AD1 {
   CONF_GPMC_AD1_MMODE,
@@ -74,8 +465,8 @@ enum class CONF_GPMC_AD1 {
   CONF_GPMC_AD1_RXACTIVE,
   CONF_GPMC_AD1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X804,
-  RESET = 0
+  offset = 0X804,
+  reset = 0
 };
 enum class CONF_GPMC_AD2 {
   CONF_GPMC_AD2_MMODE,
@@ -84,8 +475,8 @@ enum class CONF_GPMC_AD2 {
   CONF_GPMC_AD2_RXACTIVE,
   CONF_GPMC_AD2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X808,
-  RESET = 0
+  offset = 0X808,
+  reset = 0
 };
 enum class CONF_GPMC_AD3 {
   CONF_GPMC_AD3_MMODE,
@@ -94,8 +485,8 @@ enum class CONF_GPMC_AD3 {
   CONF_GPMC_AD3_RXACTIVE,
   CONF_GPMC_AD3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X80C,
-  RESET = 0
+  offset = 0X80C,
+  reset = 0
 };
 enum class CONF_GPMC_AD4 {
   CONF_GPMC_AD4_MMODE,
@@ -104,8 +495,8 @@ enum class CONF_GPMC_AD4 {
   CONF_GPMC_AD4_RXACTIVE,
   CONF_GPMC_AD4_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X810,
-  RESET = 0
+  offset = 0X810,
+  reset = 0
 };
 enum class CONF_GPMC_AD5 {
   CONF_GPMC_AD5_MMODE,
@@ -114,8 +505,8 @@ enum class CONF_GPMC_AD5 {
   CONF_GPMC_AD5_RXACTIVE,
   CONF_GPMC_AD5_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X814,
-  RESET = 0
+  offset = 0X814,
+  reset = 0
 };
 enum class CONF_GPMC_AD6 {
   CONF_GPMC_AD6_MMODE,
@@ -124,8 +515,8 @@ enum class CONF_GPMC_AD6 {
   CONF_GPMC_AD6_RXACTIVE,
   CONF_GPMC_AD6_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X818,
-  RESET = 0
+  offset = 0X818,
+  reset = 0
 };
 enum class CONF_GPMC_AD7 {
   CONF_GPMC_AD7_MMODE,
@@ -134,8 +525,8 @@ enum class CONF_GPMC_AD7 {
   CONF_GPMC_AD7_RXACTIVE,
   CONF_GPMC_AD7_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X81C,
-  RESET = 0
+  offset = 0X81C,
+  reset = 0
 };
 enum class CONF_GPMC_AD8 {
   CONF_GPMC_AD8_MMODE,
@@ -144,8 +535,8 @@ enum class CONF_GPMC_AD8 {
   CONF_GPMC_AD8_RXACTIVE,
   CONF_GPMC_AD8_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X820,
-  RESET = 0
+  offset = 0X820,
+  reset = 0
 };
 enum class CONF_GPMC_AD9 {
   CONF_GPMC_AD9_MMODE,
@@ -154,8 +545,8 @@ enum class CONF_GPMC_AD9 {
   CONF_GPMC_AD9_RXACTIVE,
   CONF_GPMC_AD9_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X824,
-  RESET = 0
+  offset = 0X824,
+  reset = 0
 };
 enum class CONF_GPMC_AD10 {
   CONF_GPMC_AD10_MMODE,
@@ -164,8 +555,8 @@ enum class CONF_GPMC_AD10 {
   CONF_GPMC_AD10_RXACTIVE,
   CONF_GPMC_AD10_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X828,
-  RESET = 0
+  offset = 0X828,
+  reset = 0
 };
 enum class CONF_GPMC_AD11 {
   CONF_GPMC_AD11_MMODE,
@@ -174,8 +565,8 @@ enum class CONF_GPMC_AD11 {
   CONF_GPMC_AD11_RXACTIVE,
   CONF_GPMC_AD11_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X82C,
-  RESET = 0
+  offset = 0X82C,
+  reset = 0
 };
 enum class CONF_GPMC_AD12 {
   CONF_GPMC_AD12_MMODE,
@@ -184,8 +575,8 @@ enum class CONF_GPMC_AD12 {
   CONF_GPMC_AD12_RXACTIVE,
   CONF_GPMC_AD12_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X830,
-  RESET = 0
+  offset = 0X830,
+  reset = 0
 };
 enum class CONF_GPMC_AD13 {
   CONF_GPMC_AD13_MMODE,
@@ -194,8 +585,8 @@ enum class CONF_GPMC_AD13 {
   CONF_GPMC_AD13_RXACTIVE,
   CONF_GPMC_AD13_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X834,
-  RESET = 0
+  offset = 0X834,
+  reset = 0
 };
 enum class CONF_GPMC_AD14 {
   CONF_GPMC_AD14_MMODE,
@@ -204,8 +595,8 @@ enum class CONF_GPMC_AD14 {
   CONF_GPMC_AD14_RXACTIVE,
   CONF_GPMC_AD14_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X838,
-  RESET = 0
+  offset = 0X838,
+  reset = 0
 };
 enum class CONF_GPMC_AD15 {
   CONF_GPMC_AD15_MMODE,
@@ -214,8 +605,8 @@ enum class CONF_GPMC_AD15 {
   CONF_GPMC_AD15_RXACTIVE,
   CONF_GPMC_AD15_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X83C,
-  RESET = 0
+  offset = 0X83C,
+  reset = 0
 };
 enum class CONF_GPMC_A0 {
   CONF_GPMC_A0_MMODE,
@@ -224,8 +615,8 @@ enum class CONF_GPMC_A0 {
   CONF_GPMC_A0_RXACTIVE,
   CONF_GPMC_A0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X840,
-  RESET = 0
+  offset = 0X840,
+  reset = 0
 };
 enum class CONF_GPMC_A1 {
   CONF_GPMC_A1_MMODE,
@@ -234,8 +625,8 @@ enum class CONF_GPMC_A1 {
   CONF_GPMC_A1_RXACTIVE,
   CONF_GPMC_A1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X844,
-  RESET = 0
+  offset = 0X844,
+  reset = 0
 };
 enum class CONF_GPMC_A2 {
   CONF_GPMC_A2_MMODE,
@@ -244,8 +635,8 @@ enum class CONF_GPMC_A2 {
   CONF_GPMC_A2_RXACTIVE,
   CONF_GPMC_A2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X848,
-  RESET = 0
+  offset = 0X848,
+  reset = 0
 };
 enum class CONF_GPMC_A3 {
   CONF_GPMC_A3_MMODE,
@@ -254,8 +645,8 @@ enum class CONF_GPMC_A3 {
   CONF_GPMC_A3_RXACTIVE,
   CONF_GPMC_A3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X84C,
-  RESET = 0
+  offset = 0X84C,
+  reset = 0
 };
 enum class CONF_GPMC_A4 {
   CONF_GPMC_A4_MMODE,
@@ -264,8 +655,8 @@ enum class CONF_GPMC_A4 {
   CONF_GPMC_A4_RXACTIVE,
   CONF_GPMC_A4_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X850,
-  RESET = 0
+  offset = 0X850,
+  reset = 0
 };
 enum class CONF_GPMC_A5 {
   CONF_GPMC_A5_MMODE,
@@ -274,8 +665,8 @@ enum class CONF_GPMC_A5 {
   CONF_GPMC_A5_RXACTIVE,
   CONF_GPMC_A5_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X854,
-  RESET = 0
+  offset = 0X854,
+  reset = 0
 };
 enum class CONF_GPMC_A6 {
   CONF_GPMC_A6_MMODE,
@@ -284,8 +675,8 @@ enum class CONF_GPMC_A6 {
   CONF_GPMC_A6_RXACTIVE,
   CONF_GPMC_A6_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X858,
-  RESET = 0
+  offset = 0X858,
+  reset = 0
 };
 enum class CONF_GPMC_A7 {
   CONF_GPMC_A7_MMODE,
@@ -294,8 +685,8 @@ enum class CONF_GPMC_A7 {
   CONF_GPMC_A7_RXACTIVE,
   CONF_GPMC_A7_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X85C,
-  RESET = 0
+  offset = 0X85C,
+  reset = 0
 };
 enum class CONF_GPMC_A8 {
   CONF_GPMC_A8_MMODE,
@@ -304,8 +695,8 @@ enum class CONF_GPMC_A8 {
   CONF_GPMC_A8_RXACTIVE,
   CONF_GPMC_A8_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X860,
-  RESET = 0
+  offset = 0X860,
+  reset = 0
 };
 enum class CONF_GPMC_A9 {
   CONF_GPMC_A9_MMODE,
@@ -314,8 +705,8 @@ enum class CONF_GPMC_A9 {
   CONF_GPMC_A9_RXACTIVE,
   CONF_GPMC_A9_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X864,
-  RESET = 0
+  offset = 0X864,
+  reset = 0
 };
 enum class CONF_GPMC_A10 {
   CONF_GPMC_A10_MMODE,
@@ -324,8 +715,8 @@ enum class CONF_GPMC_A10 {
   CONF_GPMC_A10_RXACTIVE,
   CONF_GPMC_A10_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X868,
-  RESET = 0
+  offset = 0X868,
+  reset = 0
 };
 enum class CONF_GPMC_A11 {
   CONF_GPMC_A11_MMODE,
@@ -334,8 +725,8 @@ enum class CONF_GPMC_A11 {
   CONF_GPMC_A11_RXACTIVE,
   CONF_GPMC_A11_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X86C,
-  RESET = 0
+  offset = 0X86C,
+  reset = 0
 };
 enum class CONF_GPMC_WAIT0 {
   CONF_GPMC_WAIT0_MMODE,
@@ -344,8 +735,8 @@ enum class CONF_GPMC_WAIT0 {
   CONF_GPMC_WAIT0_RXACTIVE,
   CONF_GPMC_WAIT0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X870,
-  RESET = 0
+  offset = 0X870,
+  reset = 0
 };
 enum class CONF_GPMC_WPN {
   CONF_GPMC_WPN_MMODE,
@@ -354,8 +745,8 @@ enum class CONF_GPMC_WPN {
   CONF_GPMC_WPN_RXACTIVE,
   CONF_GPMC_WPN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X874,
-  RESET = 0
+  offset = 0X874,
+  reset = 0
 };
 enum class CONF_GPMC_BEN1 {
   CONF_GPMC_BEN1_MMODE,
@@ -364,8 +755,8 @@ enum class CONF_GPMC_BEN1 {
   CONF_GPMC_BEN1_RXACTIVE,
   CONF_GPMC_BEN1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X878,
-  RESET = 0
+  offset = 0X878,
+  reset = 0
 };
 enum class CONF_GPMC_CSN0 {
   CONF_GPMC_CSN0_MMODE,
@@ -374,8 +765,8 @@ enum class CONF_GPMC_CSN0 {
   CONF_GPMC_CSN0_RXACTIVE,
   CONF_GPMC_CSN0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X87C,
-  RESET = 0
+  offset = 0X87C,
+  reset = 0
 };
 enum class CONF_GPMC_CSN1 {
   CONF_GPMC_CSN1_MMODE,
@@ -384,8 +775,8 @@ enum class CONF_GPMC_CSN1 {
   CONF_GPMC_CSN1_RXACTIVE,
   CONF_GPMC_CSN1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X880,
-  RESET = 0
+  offset = 0X880,
+  reset = 0
 };
 enum class CONF_GPMC_CSN2 {
   CONF_GPMC_CSN2_MMODE,
@@ -394,8 +785,8 @@ enum class CONF_GPMC_CSN2 {
   CONF_GPMC_CSN2_RXACTIVE,
   CONF_GPMC_CSN2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X884,
-  RESET = 0
+  offset = 0X884,
+  reset = 0
 };
 enum class CONF_GPMC_CSN3 {
   CONF_GPMC_CSN3_MMODE,
@@ -404,8 +795,8 @@ enum class CONF_GPMC_CSN3 {
   CONF_GPMC_CSN3_RXACTIVE,
   CONF_GPMC_CSN3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X888,
-  RESET = 0
+  offset = 0X888,
+  reset = 0
 };
 enum class CONF_GPMC_CLK {
   CONF_GPMC_CLK_MMODE,
@@ -414,8 +805,8 @@ enum class CONF_GPMC_CLK {
   CONF_GPMC_CLK_RXACTIVE,
   CONF_GPMC_CLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X88C,
-  RESET = 0
+  offset = 0X88C,
+  reset = 0
 };
 enum class CONF_GPMC_ADVN_ALE {
   CONF_GPMC_ADVN_ALE_MMODE,
@@ -424,8 +815,8 @@ enum class CONF_GPMC_ADVN_ALE {
   CONF_GPMC_ADVN_ALE_RXACTIVE,
   CONF_GPMC_ADVN_ALE_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X890,
-  RESET = 0
+  offset = 0X890,
+  reset = 0
 };
 enum class CONF_GPMC_OEN_REN {
   CONF_GPMC_OEN_REN_MMODE,
@@ -434,8 +825,8 @@ enum class CONF_GPMC_OEN_REN {
   CONF_GPMC_OEN_REN_RXACTIVE,
   CONF_GPMC_OEN_REN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X894,
-  RESET = 0
+  offset = 0X894,
+  reset = 0
 };
 enum class CONF_GPMC_WEN {
   CONF_GPMC_WEN_MMODE,
@@ -444,8 +835,8 @@ enum class CONF_GPMC_WEN {
   CONF_GPMC_WEN_RXACTIVE,
   CONF_GPMC_WEN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X898,
-  RESET = 0
+  offset = 0X898,
+  reset = 0
 };
 enum class CONF_GPMC_BEN0_CLE {
   CONF_GPMC_BEN0_CLE_MMODE,
@@ -454,8 +845,8 @@ enum class CONF_GPMC_BEN0_CLE {
   CONF_GPMC_BEN0_CLE_RXACTIVE,
   CONF_GPMC_BEN0_CLE_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X89C,
-  RESET = 0
+  offset = 0X89C,
+  reset = 0
 };
 enum class CONF_LCD_DATA0 {
   CONF_LCD_DATA0_MMODE,
@@ -464,8 +855,8 @@ enum class CONF_LCD_DATA0 {
   CONF_LCD_DATA0_RXACTIVE,
   CONF_LCD_DATA0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8A0,
-  RESET = 0
+  offset = 0X8A0,
+  reset = 0
 };
 enum class CONF_LCD_DATA1 {
   CONF_LCD_DATA1_MMODE,
@@ -474,8 +865,8 @@ enum class CONF_LCD_DATA1 {
   CONF_LCD_DATA1_RXACTIVE,
   CONF_LCD_DATA1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8A4,
-  RESET = 0
+  offset = 0X8A4,
+  reset = 0
 };
 enum class CONF_LCD_DATA2 {
   CONF_LCD_DATA2_MMODE,
@@ -484,8 +875,8 @@ enum class CONF_LCD_DATA2 {
   CONF_LCD_DATA2_RXACTIVE,
   CONF_LCD_DATA2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8A8,
-  RESET = 0
+  offset = 0X8A8,
+  reset = 0
 };
 enum class CONF_LCD_DATA3 {
   CONF_LCD_DATA3_MMODE,
@@ -494,8 +885,8 @@ enum class CONF_LCD_DATA3 {
   CONF_LCD_DATA3_RXACTIVE,
   CONF_LCD_DATA3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8AC,
-  RESET = 0
+  offset = 0X8AC,
+  reset = 0
 };
 enum class CONF_LCD_DATA4 {
   CONF_LCD_DATA4_MMODE,
@@ -504,8 +895,8 @@ enum class CONF_LCD_DATA4 {
   CONF_LCD_DATA4_RXACTIVE,
   CONF_LCD_DATA4_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8B0,
-  RESET = 0
+  offset = 0X8B0,
+  reset = 0
 };
 enum class CONF_LCD_DATA5 {
   CONF_LCD_DATA5_MMODE,
@@ -514,8 +905,8 @@ enum class CONF_LCD_DATA5 {
   CONF_LCD_DATA5_RXACTIVE,
   CONF_LCD_DATA5_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8B4,
-  RESET = 0
+  offset = 0X8B4,
+  reset = 0
 };
 enum class CONF_LCD_DATA6 {
   CONF_LCD_DATA6_MMODE,
@@ -524,8 +915,8 @@ enum class CONF_LCD_DATA6 {
   CONF_LCD_DATA6_RXACTIVE,
   CONF_LCD_DATA6_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8B8,
-  RESET = 0
+  offset = 0X8B8,
+  reset = 0
 };
 enum class CONF_LCD_DATA7 {
   CONF_LCD_DATA7_MMODE,
@@ -534,8 +925,8 @@ enum class CONF_LCD_DATA7 {
   CONF_LCD_DATA7_RXACTIVE,
   CONF_LCD_DATA7_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8BC,
-  RESET = 0
+  offset = 0X8BC,
+  reset = 0
 };
 enum class CONF_LCD_DATA8 {
   CONF_LCD_DATA8_MMODE,
@@ -544,8 +935,8 @@ enum class CONF_LCD_DATA8 {
   CONF_LCD_DATA8_RXACTIVE,
   CONF_LCD_DATA8_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8C0,
-  RESET = 0
+  offset = 0X8C0,
+  reset = 0
 };
 enum class CONF_LCD_DATA9 {
   CONF_LCD_DATA9_MMODE,
@@ -554,8 +945,8 @@ enum class CONF_LCD_DATA9 {
   CONF_LCD_DATA9_RXACTIVE,
   CONF_LCD_DATA9_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8C4,
-  RESET = 0
+  offset = 0X8C4,
+  reset = 0
 };
 enum class CONF_LCD_DATA10 {
   CONF_LCD_DATA10_MMODE,
@@ -564,8 +955,8 @@ enum class CONF_LCD_DATA10 {
   CONF_LCD_DATA10_RXACTIVE,
   CONF_LCD_DATA10_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8C8,
-  RESET = 0
+  offset = 0X8C8,
+  reset = 0
 };
 enum class CONF_LCD_DATA11 {
   CONF_LCD_DATA11_MMODE,
@@ -574,8 +965,8 @@ enum class CONF_LCD_DATA11 {
   CONF_LCD_DATA11_RXACTIVE,
   CONF_LCD_DATA11_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8CC,
-  RESET = 0
+  offset = 0X8CC,
+  reset = 0
 };
 enum class CONF_LCD_DATA12 {
   CONF_LCD_DATA12_MMODE,
@@ -584,8 +975,8 @@ enum class CONF_LCD_DATA12 {
   CONF_LCD_DATA12_RXACTIVE,
   CONF_LCD_DATA12_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8D0,
-  RESET = 0
+  offset = 0X8D0,
+  reset = 0
 };
 enum class CONF_LCD_DATA13 {
   CONF_LCD_DATA13_MMODE,
@@ -594,8 +985,8 @@ enum class CONF_LCD_DATA13 {
   CONF_LCD_DATA13_RXACTIVE,
   CONF_LCD_DATA13_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8D4,
-  RESET = 0
+  offset = 0X8D4,
+  reset = 0
 };
 enum class CONF_LCD_DATA14 {
   CONF_LCD_DATA14_MMODE,
@@ -604,8 +995,8 @@ enum class CONF_LCD_DATA14 {
   CONF_LCD_DATA14_RXACTIVE,
   CONF_LCD_DATA14_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8D8,
-  RESET = 0
+  offset = 0X8D8,
+  reset = 0
 };
 enum class CONF_LCD_DATA15 {
   CONF_LCD_DATA15_MMODE,
@@ -614,8 +1005,8 @@ enum class CONF_LCD_DATA15 {
   CONF_LCD_DATA15_RXACTIVE,
   CONF_LCD_DATA15_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8DC,
-  RESET = 0
+  offset = 0X8DC,
+  reset = 0
 };
 enum class CONF_LCD_VSYNC {
   CONF_LCD_VSYNC_MMODE,
@@ -624,8 +1015,8 @@ enum class CONF_LCD_VSYNC {
   CONF_LCD_VSYNC_RXACTIVE,
   CONF_LCD_VSYNC_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8E0,
-  RESET = 0
+  offset = 0X8E0,
+  reset = 0
 };
 enum class CONF_LCD_HSYNC {
   CONF_LCD_HSYNC_MMODE,
@@ -634,8 +1025,8 @@ enum class CONF_LCD_HSYNC {
   CONF_LCD_HSYNC_RXACTIVE,
   CONF_LCD_HSYNC_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8E4,
-  RESET = 0
+  offset = 0X8E4,
+  reset = 0
 };
 enum class CONF_LCD_PCLK {
   CONF_LCD_PCLK_MMODE,
@@ -644,8 +1035,8 @@ enum class CONF_LCD_PCLK {
   CONF_LCD_PCLK_RXACTIVE,
   CONF_LCD_PCLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8E8,
-  RESET = 0
+  offset = 0X8E8,
+  reset = 0
 };
 enum class CONF_LCD_AC_BIAS_EN {
   CONF_LCD_AC_BIAS_EN_MMODE,
@@ -654,8 +1045,8 @@ enum class CONF_LCD_AC_BIAS_EN {
   CONF_LCD_AC_BIAS_EN_RXACTIVE,
   CONF_LCD_AC_BIAS_EN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8EC,
-  RESET = 0
+  offset = 0X8EC,
+  reset = 0
 };
 enum class CONF_MMC0_DAT3 {
   CONF_MMC0_DAT3_MMODE,
@@ -664,8 +1055,8 @@ enum class CONF_MMC0_DAT3 {
   CONF_MMC0_DAT3_RXACTIVE,
   CONF_MMC0_DAT3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8F0,
-  RESET = 0
+  offset = 0X8F0,
+  reset = 0
 };
 enum class CONF_MMC0_DAT2 {
   CONF_MMC0_DAT2_MMODE,
@@ -674,8 +1065,8 @@ enum class CONF_MMC0_DAT2 {
   CONF_MMC0_DAT2_RXACTIVE,
   CONF_MMC0_DAT2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8F4,
-  RESET = 0
+  offset = 0X8F4,
+  reset = 0
 };
 enum class CONF_MMC0_DAT1 {
   CONF_MMC0_DAT1_MMODE,
@@ -684,8 +1075,8 @@ enum class CONF_MMC0_DAT1 {
   CONF_MMC0_DAT1_RXACTIVE,
   CONF_MMC0_DAT1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8F8,
-  RESET = 0
+  offset = 0X8F8,
+  reset = 0
 };
 enum class CONF_MMC0_DAT0 {
   CONF_MMC0_DAT0_MMODE,
@@ -694,8 +1085,8 @@ enum class CONF_MMC0_DAT0 {
   CONF_MMC0_DAT0_RXACTIVE,
   CONF_MMC0_DAT0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X8FC,
-  RESET = 0
+  offset = 0X8FC,
+  reset = 0
 };
 enum class CONF_MMC0_CLK {
   CONF_MMC0_CLK_MMODE,
@@ -704,8 +1095,8 @@ enum class CONF_MMC0_CLK {
   CONF_MMC0_CLK_RXACTIVE,
   CONF_MMC0_CLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X900,
-  RESET = 0
+  offset = 0X900,
+  reset = 0
 };
 enum class CONF_MMC0_CMD {
   CONF_MMC0_CMD_MMODE,
@@ -714,8 +1105,8 @@ enum class CONF_MMC0_CMD {
   CONF_MMC0_CMD_RXACTIVE,
   CONF_MMC0_CMD_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X904,
-  RESET = 0
+  offset = 0X904,
+  reset = 0
 };
 enum class CONF_MII1_COL {
   CONF_MII1_COL_MMODE,
@@ -724,8 +1115,8 @@ enum class CONF_MII1_COL {
   CONF_MII1_COL_RXACTIVE,
   CONF_MII1_COL_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X908,
-  RESET = 0
+  offset = 0X908,
+  reset = 0
 };
 enum class CONF_MII1_CRS {
   CONF_MII1_CRS_MMODE,
@@ -734,8 +1125,8 @@ enum class CONF_MII1_CRS {
   CONF_MII1_CRS_RXACTIVE,
   CONF_MII1_CRS_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X90C,
-  RESET = 0
+  offset = 0X90C,
+  reset = 0
 };
 enum class CONF_MII1_RX_ER {
   CONF_MII1_RX_ER_MMODE,
@@ -744,8 +1135,8 @@ enum class CONF_MII1_RX_ER {
   CONF_MII1_RX_ER_RXACTIVE,
   CONF_MII1_RX_ER_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X910,
-  RESET = 0
+  offset = 0X910,
+  reset = 0
 };
 enum class CONF_MII1_TX_EN {
   CONF_MII1_TX_EN_MMODE,
@@ -754,8 +1145,8 @@ enum class CONF_MII1_TX_EN {
   CONF_MII1_TX_EN_RXACTIVE,
   CONF_MII1_TX_EN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X914,
-  RESET = 0
+  offset = 0X914,
+  reset = 0
 };
 enum class CONF_MII1_RX_DV {
   CONF_MII1_RX_DV_MMODE,
@@ -764,8 +1155,8 @@ enum class CONF_MII1_RX_DV {
   CONF_MII1_RX_DV_RXACTIVE,
   CONF_MII1_RX_DV_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X918,
-  RESET = 0
+  offset = 0X918,
+  reset = 0
 };
 enum class CONF_MII1_TXD3 {
   CONF_MII1_TXD3_MMODE,
@@ -774,8 +1165,8 @@ enum class CONF_MII1_TXD3 {
   CONF_MII1_TXD3_RXACTIVE,
   CONF_MII1_TXD3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X91C,
-  RESET = 0
+  offset = 0X91C,
+  reset = 0
 };
 enum class CONF_MII1_TXD2 {
   CONF_MII1_TXD2_MMODE,
@@ -784,8 +1175,8 @@ enum class CONF_MII1_TXD2 {
   CONF_MII1_TXD2_RXACTIVE,
   CONF_MII1_TXD2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X920,
-  RESET = 0
+  offset = 0X920,
+  reset = 0
 };
 enum class CONF_MII1_TXD1 {
   CONF_MII1_TXD1_MMODE,
@@ -794,8 +1185,8 @@ enum class CONF_MII1_TXD1 {
   CONF_MII1_TXD1_RXACTIVE,
   CONF_MII1_TXD1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X924,
-  RESET = 0
+  offset = 0X924,
+  reset = 0
 };
 enum class CONF_MII1_TXD0 {
   CONF_MII1_TXD0_MMODE,
@@ -804,8 +1195,8 @@ enum class CONF_MII1_TXD0 {
   CONF_MII1_TXD0_RXACTIVE,
   CONF_MII1_TXD0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X928,
-  RESET = 0
+  offset = 0X928,
+  reset = 0
 };
 enum class CONF_MII1_TX_CLK {
   CONF_MII1_TX_CLK_MMODE,
@@ -814,8 +1205,8 @@ enum class CONF_MII1_TX_CLK {
   CONF_MII1_TX_CLK_RXACTIVE,
   CONF_MII1_TX_CLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X92C,
-  RESET = 0
+  offset = 0X92C,
+  reset = 0
 };
 enum class CONF_MII1_RX_CLK {
   CONF_MII1_RX_CLK_MMODE,
@@ -824,8 +1215,8 @@ enum class CONF_MII1_RX_CLK {
   CONF_MII1_RX_CLK_RXACTIVE,
   CONF_MII1_RX_CLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X930,
-  RESET = 0
+  offset = 0X930,
+  reset = 0
 };
 enum class CONF_MII1_RXD3 {
   CONF_MII1_RXD3_MMODE,
@@ -834,8 +1225,8 @@ enum class CONF_MII1_RXD3 {
   CONF_MII1_RXD3_RXACTIVE,
   CONF_MII1_RXD3_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X934,
-  RESET = 0
+  offset = 0X934,
+  reset = 0
 };
 enum class CONF_MII1_RXD2 {
   CONF_MII1_RXD2_MMODE,
@@ -844,8 +1235,8 @@ enum class CONF_MII1_RXD2 {
   CONF_MII1_RXD2_RXACTIVE,
   CONF_MII1_RXD2_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X938,
-  RESET = 0
+  offset = 0X938,
+  reset = 0
 };
 enum class CONF_MII1_RXD1 {
   CONF_MII1_RXD1_MMODE,
@@ -854,8 +1245,8 @@ enum class CONF_MII1_RXD1 {
   CONF_MII1_RXD1_RXACTIVE,
   CONF_MII1_RXD1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X93C,
-  RESET = 0
+  offset = 0X93C,
+  reset = 0
 };
 enum class CONF_MII1_RXD0 {
   CONF_MII1_RXD0_MMODE,
@@ -864,8 +1255,8 @@ enum class CONF_MII1_RXD0 {
   CONF_MII1_RXD0_RXACTIVE,
   CONF_MII1_RXD0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X940,
-  RESET = 0
+  offset = 0X940,
+  reset = 0
 };
 enum class CONF_RMII1_REF_CLK {
   CONF_RMII1_REF_CLK_MMODE,
@@ -874,11 +1265,11 @@ enum class CONF_RMII1_REF_CLK {
   CONF_RMII1_REF_CLK_RXACTIVE,
   CONF_RMII1_REF_CLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X944,
-  RESET = 0
+  offset = 0X944,
+  reset = 0
 };
-enum class CONF_MDIO { RESERVED = -1, OFFSET = 0X948, RESET = 0 };
-enum class CONF_MDC { RESERVED = -1, OFFSET = 0X94C, RESET = 0 };
+enum class CONF_MDIO { RESERVED = -1, offset = 0X948, reset = 0 };
+enum class CONF_MDC { RESERVED = -1, offset = 0X94C, reset = 0 };
 enum class CONF_SPI0_SCLK {
   CONF_SPI0_SCLK_MMODE,
   CONF_SPI0_SCLK_PUDEN,
@@ -886,8 +1277,8 @@ enum class CONF_SPI0_SCLK {
   CONF_SPI0_SCLK_RXACTIVE,
   CONF_SPI0_SCLK_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X950,
-  RESET = 0
+  offset = 0X950,
+  reset = 0
 };
 enum class CONF_SPI0_D0 {
   CONF_SPI0_D0_MMODE,
@@ -896,8 +1287,8 @@ enum class CONF_SPI0_D0 {
   CONF_SPI0_D0_RXACTIVE,
   CONF_SPI0_D0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X954,
-  RESET = 0
+  offset = 0X954,
+  reset = 0
 };
 enum class CONF_SPI0_D1 {
   CONF_SPI0_D1_MMODE,
@@ -906,8 +1297,8 @@ enum class CONF_SPI0_D1 {
   CONF_SPI0_D1_RXACTIVE,
   CONF_SPI0_D1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X958,
-  RESET = 0
+  offset = 0X958,
+  reset = 0
 };
 enum class CONF_SPI0_CS0 {
   CONF_SPI0_CS0_MMODE,
@@ -916,8 +1307,8 @@ enum class CONF_SPI0_CS0 {
   CONF_SPI0_CS0_RXACTIVE,
   CONF_SPI0_CS0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X95C,
-  RESET = 0
+  offset = 0X95C,
+  reset = 0
 };
 enum class CONF_SPI0_CS1 {
   CONF_SPI0_CS1_MMODE,
@@ -926,8 +1317,8 @@ enum class CONF_SPI0_CS1 {
   CONF_SPI0_CS1_RXACTIVE,
   CONF_SPI0_CS1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X960,
-  RESET = 0
+  offset = 0X960,
+  reset = 0
 };
 enum class CONF_ECAP0_IN_PWM0_OUT {
   CONF_ECAP0_IN_PWM0_OUT_MMODE,
@@ -936,8 +1327,8 @@ enum class CONF_ECAP0_IN_PWM0_OUT {
   CONF_ECAP0_IN_PWM0_OUT_RXACTIVE,
   CONF_ECAP0_IN_PWM0_OUT_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X964,
-  RESET = 0
+  offset = 0X964,
+  reset = 0
 };
 enum class CONF_UART0_CTSN {
   CONF_UART0_CTSN_MMODE,
@@ -946,8 +1337,8 @@ enum class CONF_UART0_CTSN {
   CONF_UART0_CTSN_RXACTIVE,
   CONF_UART0_CTSN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X968,
-  RESET = 0
+  offset = 0X968,
+  reset = 0
 };
 enum class CONF_UART0_RTSN {
   CONF_UART0_RTSN_MMODE,
@@ -956,8 +1347,8 @@ enum class CONF_UART0_RTSN {
   CONF_UART0_RTSN_RXACTIVE,
   CONF_UART0_RTSN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X96C,
-  RESET = 0
+  offset = 0X96C,
+  reset = 0
 };
 enum class CONF_UART0_RXD {
   CONF_UART0_RXD_MMODE,
@@ -966,8 +1357,8 @@ enum class CONF_UART0_RXD {
   CONF_UART0_RXD_RXACTIVE,
   CONF_UART0_RXD_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X970,
-  RESET = 0
+  offset = 0X970,
+  reset = 0
 };
 enum class CONF_UART0_TXD {
   CONF_UART0_TXD_MMODE,
@@ -976,8 +1367,8 @@ enum class CONF_UART0_TXD {
   CONF_UART0_TXD_RXACTIVE,
   CONF_UART0_TXD_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X974,
-  RESET = 0
+  offset = 0X974,
+  reset = 0
 };
 enum class CONF_UART1_CTSN {
   CONF_UART1_CTSN_MMODE,
@@ -986,8 +1377,8 @@ enum class CONF_UART1_CTSN {
   CONF_UART1_CTSN_RXACTIVE,
   CONF_UART1_CTSN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X978,
-  RESET = 0
+  offset = 0X978,
+  reset = 0
 };
 enum class CONF_UART1_RTSN {
   CONF_UART1_RTSN_MMODE,
@@ -996,8 +1387,8 @@ enum class CONF_UART1_RTSN {
   CONF_UART1_RTSN_RXACTIVE,
   CONF_UART1_RTSN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X97C,
-  RESET = 0
+  offset = 0X97C,
+  reset = 0
 };
 enum class CONF_UART1_RXD {
   CONF_UART1_RXD_MMODE,
@@ -1006,8 +1397,8 @@ enum class CONF_UART1_RXD {
   CONF_UART1_RXD_RXACTIVE,
   CONF_UART1_RXD_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X980,
-  RESET = 0
+  offset = 0X980,
+  reset = 0
 };
 enum class CONF_UART1_TXD {
   CONF_UART1_TXD_MMODE,
@@ -1016,8 +1407,8 @@ enum class CONF_UART1_TXD {
   CONF_UART1_TXD_RXACTIVE,
   CONF_UART1_TXD_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X984,
-  RESET = 0
+  offset = 0X984,
+  reset = 0
 };
 enum class CONF_I2C0_SDA {
   CONF_I2C0_SDA_MMODE,
@@ -1026,8 +1417,8 @@ enum class CONF_I2C0_SDA {
   CONF_I2C0_SDA_RXACTIVE,
   CONF_I2C0_SDA_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X988,
-  RESET = 0
+  offset = 0X988,
+  reset = 0
 };
 enum class CONF_I2C0_SCL {
   CONF_I2C0_SCL_MMODE,
@@ -1036,8 +1427,8 @@ enum class CONF_I2C0_SCL {
   CONF_I2C0_SCL_RXACTIVE,
   CONF_I2C0_SCL_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X98C,
-  RESET = 0
+  offset = 0X98C,
+  reset = 0
 };
 enum class CONF_MCASP0_ACLKX {
   CONF_MCASP0_ACLKX_MMODE,
@@ -1046,8 +1437,8 @@ enum class CONF_MCASP0_ACLKX {
   CONF_MCASP0_ACLKX_RXACTIVE,
   CONF_MCASP0_ACLKX_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X990,
-  RESET = 0
+  offset = 0X990,
+  reset = 0
 };
 enum class CONF_MCASP0_FSX {
   CONF_MCASP0_FSX_MMODE,
@@ -1056,8 +1447,8 @@ enum class CONF_MCASP0_FSX {
   CONF_MCASP0_FSX_RXACTIVE,
   CONF_MCASP0_FSX_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X994,
-  RESET = 0
+  offset = 0X994,
+  reset = 0
 };
 enum class CONF_MCASP0_AXR0 {
   CONF_MCASP0_AXR0_MMODE,
@@ -1066,8 +1457,8 @@ enum class CONF_MCASP0_AXR0 {
   CONF_MCASP0_AXR0_RXACTIVE,
   CONF_MCASP0_AXR0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X998,
-  RESET = 0
+  offset = 0X998,
+  reset = 0
 };
 enum class CONF_MCASP0_AHCLKR {
   CONF_MCASP0_AHCLKR_MMODE,
@@ -1076,8 +1467,8 @@ enum class CONF_MCASP0_AHCLKR {
   CONF_MCASP0_AHCLKR_RXACTIVE,
   CONF_MCASP0_AHCLKR_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X99C,
-  RESET = 0
+  offset = 0X99C,
+  reset = 0
 };
 enum class CONF_MCASP0_ACLKR {
   CONF_MCASP0_ACLKR_MMODE,
@@ -1086,8 +1477,8 @@ enum class CONF_MCASP0_ACLKR {
   CONF_MCASP0_ACLKR_RXACTIVE,
   CONF_MCASP0_ACLKR_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9A0,
-  RESET = 0
+  offset = 0X9A0,
+  reset = 0
 };
 enum class CONF_MCASP0_FSR {
   CONF_MCASP0_FSR_MMODE,
@@ -1096,8 +1487,8 @@ enum class CONF_MCASP0_FSR {
   CONF_MCASP0_FSR_RXACTIVE,
   CONF_MCASP0_FSR_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9A4,
-  RESET = 0
+  offset = 0X9A4,
+  reset = 0
 };
 enum class CONF_MCASP0_AXR1 {
   CONF_MCASP0_AXR1_MMODE,
@@ -1106,8 +1497,8 @@ enum class CONF_MCASP0_AXR1 {
   CONF_MCASP0_AXR1_RXACTIVE,
   CONF_MCASP0_AXR1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9A8,
-  RESET = 0
+  offset = 0X9A8,
+  reset = 0
 };
 enum class CONF_MCASP0_AHCLKX {
   CONF_MCASP0_AHCLKX_MMODE,
@@ -1116,8 +1507,8 @@ enum class CONF_MCASP0_AHCLKX {
   CONF_MCASP0_AHCLKX_RXACTIVE,
   CONF_MCASP0_AHCLKX_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9AC,
-  RESET = 0
+  offset = 0X9AC,
+  reset = 0
 };
 enum class CONF_XDMA_EVENT_INTR0 {
   CONF_XDMA_EVENT_INTR0_MMODE,
@@ -1126,8 +1517,8 @@ enum class CONF_XDMA_EVENT_INTR0 {
   CONF_XDMA_EVENT_INTR0_RXACTIVE,
   CONF_XDMA_EVENT_INTR0_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9B0,
-  RESET = 0
+  offset = 0X9B0,
+  reset = 0
 };
 enum class CONF_XDMA_EVENT_INTR1 {
   CONF_XDMA_EVENT_INTR1_MMODE,
@@ -1136,18 +1527,99 @@ enum class CONF_XDMA_EVENT_INTR1 {
   CONF_XDMA_EVENT_INTR1_RXACTIVE,
   CONF_XDMA_EVENT_INTR1_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9B4,
-  RESET = 0
+  offset = 0X9B4,
+  reset = 0
 };
-enum class CONF_WARMRSTN { RESERVED = -1, OFFSET = 0X9B8, RESET = 0 };
-enum class CONF_NNMI { RESERVED = -1, OFFSET = 0X9C0, RESET = 0 };
-enum class CONF_TMS { RESERVED = -1, OFFSET = 0X9D0, RESET = 0 };
-enum class CONF_TDI { RESERVED = -1, OFFSET = 0X9D4, RESET = 0 };
-enum class CONF_TDO { RESERVED = -1, OFFSET = 0X9D8, RESET = 0 };
-enum class CONF_TCK { RESERVED = -1, OFFSET = 0X9DC, RESET = 0 };
-enum class CONF_TRSTN { RESERVED = -1, OFFSET = 0X9E0, RESET = 0 };
-enum class CONF_EMU0 { RESERVED = -1, OFFSET = 0X9E4, RESET = 0 };
-enum class CONF_EMU1 { RESERVED = -1, OFFSET = 0X9E8, RESET = 0 };
+enum class CONF_WARMRSTN {
+  CONF_WARMRSTN_MODE,
+  CONF_WARMRSTN_PUDEN,
+  CONF_WARMRSTN_PUTYPESEL,
+  CONF_WARMRSTN_RXACTIVE,
+  CONF_WARMRSTN_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9B8,
+  reset = 0
+};
+enum class CONF_NNMI {
+  CONF_NNMI_MODE,
+  CONF_NNMI_PUDEN,
+  CONF_NNMI_PUTYPESEL,
+  CONF_NNMI_RXACTIVE,
+  CONF_NNMI_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9C0,
+  reset = 0
+};
+enum class CONF_TMS {
+  CONF_TMS_MODE,
+  CONF_TMS_PUDEN,
+  CONF_TMS_PUTYPESEL,
+  CONF_TMS_RXACTIVE,
+  CONF_TMS_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9D0,
+  reset = 0
+};
+enum class CONF_TDI {
+  CONF_TDI_MODE,
+  CONF_TDI_PUDEN,
+  CONF_TDI_PUTYPESEL,
+  CONF_TDI_RXACTIVE,
+  CONF_TDI_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9D4,
+  reset = 0
+};
+enum class CONF_TDO {
+  CONF_TDO_MODE,
+  CONF_TDO_PUDEN,
+  CONF_TDO_PUTYPESEL,
+  CONF_TDO_RXACTIVE,
+  CONF_TDO_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9D8,
+  reset = 0
+};
+enum class CONF_TCK {
+  CONF_TCK_MODE,
+  CONF_TCK_PUDEN,
+  CONF_TCK_PUTYPESEL,
+  CONF_TCK_RXACTIVE,
+  CONF_TCK_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9DC,
+  reset = 0
+};
+enum class CONF_TRSTN {
+  CONF_TRSTN_MODE,
+  CONF_TRSTN_PUDEN,
+  CONF_TRSTN_PUTYPESEL,
+  CONF_TRSTN_RXACTIVE,
+  CONF_TRSTN_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9E0,
+  reset = 0
+};
+enum class CONF_EMU0 {
+  CONF_EMU0_MODE,
+  CONF_EMU0_PUDEN,
+  CONF_EMU0_PUTYPESEL,
+  CONF_EMU0_RXACTIVE,
+  CONF_EMU0_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9E4,
+  reset = 0
+};
+enum class CONF_EMU1 {
+  CONF_EMU1_MODE,
+  CONF_EMU1_PUDEN,
+  CONF_EMU1_PUTYPESEL,
+  CONF_EMU1_RXACTIVE,
+  CONF_EMU1_SLEWCTRL,
+  RESERVED = -1,
+  offset = 0X9E8,
+  reset = 0
+};
 enum class CONF_RTC_PWRONRSTN {
   CONF_RTC_PWRONRSTN_MMODE,
   CONF_RTC_PWRONRSTN_PUDEN,
@@ -1155,8 +1627,8 @@ enum class CONF_RTC_PWRONRSTN {
   CONF_RTC_PWRONRSTN_RXACTIVE,
   CONF_RTC_PWRONRSTN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9F8,
-  RESET = 0
+  offset = 0X9F8,
+  reset = 0
 };
 enum class CONF_PMIC_POWER_EN {
   CONF_PMIC_POWER_EN_MMODE,
@@ -1165,8 +1637,8 @@ enum class CONF_PMIC_POWER_EN {
   CONF_PMIC_POWER_EN_RXACTIVE,
   CONF_PMIC_POWER_EN_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0X9FC,
-  RESET = 0
+  offset = 0X9FC,
+  reset = 0
 };
 enum class CONF_EXT_WAKEUP {
   CONF_EXT_WAKEUP_MMODE,
@@ -1175,8 +1647,8 @@ enum class CONF_EXT_WAKEUP {
   CONF_EXT_WAKEUP_RXACTIVE,
   CONF_EXT_WAKEUP_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0XA00,
-  RESET = 0
+  offset = 0XA00,
+  reset = 0
 };
 enum class CONF_USB0_DRVVBUS {
   CONF_USB0_DRVVBUS_MMODE,
@@ -1185,8 +1657,8 @@ enum class CONF_USB0_DRVVBUS {
   CONF_USB0_DRVVBUS_RXACTIVE,
   CONF_USB0_DRVVBUS_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0XA1C,
-  RESET = 0
+  offset = 0XA1C,
+  reset = 0
 };
 enum class CONF_USB1_DRVVBUS {
   CONF_USB1_DRVVBUS_MMODE,
@@ -1195,13 +1667,58 @@ enum class CONF_USB1_DRVVBUS {
   CONF_USB1_DRVVBUS_RXACTIVE,
   CONF_USB1_DRVVBUS_SLEWCTRL,
   RESERVED = -1,
-  OFFSET = 0XA34,
-  RESET = 0
+  offset = 0XA34,
+  reset = 0
 };
-enum class CQDETECT_STATUS { RESERVED = -1, OFFSET = 0XE00, RESET = 0 };
-enum class DDR_IO_CTRL { RESERVED = -1, OFFSET = 0XE04, RESET = 0 };
-enum class VTP_CTRL { RESERVED = -1, OFFSET = 0XE0C, RESET = 0 };
-enum class VREF_CTRL { RESERVED = -1, OFFSET = 0XE14, RESET = 0 };
+enum class CQDETECT_STATUS {
+  CQSTAT_GPMC,
+  CQSTAT_MMCSD_A,
+  CQSTAT_MMCSD_B,
+  CQSTAT_GEMAC_A,
+  CQSTAT_GEMAC_B,
+  CQSTAT_GENERAL,
+  RESERVED0,
+  CQERR_GPMC,
+  CQERR_MCCSD_A,
+  CQERR_MMCSD_B,
+  CQERR_GEMAC_A,
+  CQERR_GEMAC_B,
+  CQERR_GENERAL,
+  RESERVED = -1,
+  offset = 0XE00,
+  reset = 0
+};
+enum class DDR_IO_CTRL {
+  RESERVED0,
+  MDDR_SEL,
+  RESERVED1,
+  DDR_WUCLK_DISABLE,
+  DDR3_RST_DEF_VAL,
+  RESERVED = -1,
+  offset = 0XE04,
+  reset = 0
+};
+enum class VTP_CTRL {
+  FILTER,
+  LOCK,
+  READY,
+  ENABLE,
+  RESERVED0,
+  NCIN,
+  RESERVED1,
+  PCIN,
+  RESERVED = -1,
+  offset = 0XE0C,
+  reset = 0
+};
+enum class VREF_CTRL {
+  DDR_VREF_EN,
+  DDR_VREF_TAP,
+  DDR_VREF_CCAP,
+  RESERVED = -1,
+  offset = 0XE14,
+  reset = 0
+};
 enum class TPCC_EVT_MUX_0_3 {
   EVT_MUX_0,
   RESERVED0,
@@ -1211,8 +1728,8 @@ enum class TPCC_EVT_MUX_0_3 {
   RESERVED2,
   EVT_MUX_3,
   RESERVED = -1,
-  OFFSET = 0XF90,
-  RESET = 0
+  offset = 0XF90,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_4_7 {
   EVT_MUX_4,
@@ -1223,8 +1740,8 @@ enum class TPCC_EVT_MUX_4_7 {
   RESERVED2,
   EVT_MUX_7,
   RESERVED = -1,
-  OFFSET = 0XF94,
-  RESET = 0
+  offset = 0XF94,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_8_11 {
   EVT_MUX_8,
@@ -1235,8 +1752,8 @@ enum class TPCC_EVT_MUX_8_11 {
   RESERVED2,
   EVT_MUX_11,
   RESERVED = -1,
-  OFFSET = 0XF98,
-  RESET = 0
+  offset = 0XF98,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_12_15 {
   EVT_MUX_12,
@@ -1247,8 +1764,8 @@ enum class TPCC_EVT_MUX_12_15 {
   RESERVED2,
   EVT_MUX_15,
   RESERVED = -1,
-  OFFSET = 0XF9C,
-  RESET = 0
+  offset = 0XF9C,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_16_19 {
   EVT_MUX_16,
@@ -1259,8 +1776,8 @@ enum class TPCC_EVT_MUX_16_19 {
   RESERVED2,
   EVT_MUX_19,
   RESERVED = -1,
-  OFFSET = 0XFA0,
-  RESET = 0
+  offset = 0XFA0,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_20_23 {
   EVT_MUX_20,
@@ -1271,8 +1788,8 @@ enum class TPCC_EVT_MUX_20_23 {
   RESERVED2,
   EVT_MUX_23,
   RESERVED = -1,
-  OFFSET = 0XFA4,
-  RESET = 0
+  offset = 0XFA4,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_24_27 {
   EVT_MUX_24,
@@ -1283,8 +1800,8 @@ enum class TPCC_EVT_MUX_24_27 {
   RESERVED2,
   EVT_MUX_27,
   RESERVED = -1,
-  OFFSET = 0XFA8,
-  RESET = 0
+  offset = 0XFA8,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_28_31 {
   EVT_MUX_28,
@@ -1295,8 +1812,8 @@ enum class TPCC_EVT_MUX_28_31 {
   RESERVED2,
   EVT_MUX_31,
   RESERVED = -1,
-  OFFSET = 0XFAC,
-  RESET = 0
+  offset = 0XFAC,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_32_35 {
   EVT_MUX_32,
@@ -1307,8 +1824,8 @@ enum class TPCC_EVT_MUX_32_35 {
   RESERVED2,
   EVT_MUX_35,
   RESERVED = -1,
-  OFFSET = 0XFB0,
-  RESET = 0
+  offset = 0XFB0,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_36_39 {
   EVT_MUX_36,
@@ -1319,8 +1836,8 @@ enum class TPCC_EVT_MUX_36_39 {
   RESERVED2,
   EVT_MUX_39,
   RESERVED = -1,
-  OFFSET = 0XFB4,
-  RESET = 0
+  offset = 0XFB4,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_40_43 {
   EVT_MUX_40,
@@ -1331,8 +1848,8 @@ enum class TPCC_EVT_MUX_40_43 {
   RESERVED2,
   EVT_MUX_43,
   RESERVED = -1,
-  OFFSET = 0XFB8,
-  RESET = 0
+  offset = 0XFB8,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_44_47 {
   EVT_MUX_44,
@@ -1343,8 +1860,8 @@ enum class TPCC_EVT_MUX_44_47 {
   RESERVED2,
   EVT_MUX_47,
   RESERVED = -1,
-  OFFSET = 0XFBC,
-  RESET = 0
+  offset = 0XFBC,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_48_51 {
   EVT_MUX_48,
@@ -1355,8 +1872,8 @@ enum class TPCC_EVT_MUX_48_51 {
   RESERVED2,
   EVT_MUX_51,
   RESERVED = -1,
-  OFFSET = 0XFC0,
-  RESET = 0
+  offset = 0XFC0,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_52_55 {
   EVT_MUX_52,
@@ -1367,8 +1884,8 @@ enum class TPCC_EVT_MUX_52_55 {
   RESERVED2,
   EVT_MUX_55,
   RESERVED = -1,
-  OFFSET = 0XFC4,
-  RESET = 0
+  offset = 0XFC4,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_56_59 {
   EVT_MUX_56,
@@ -1379,8 +1896,8 @@ enum class TPCC_EVT_MUX_56_59 {
   RESERVED2,
   EVT_MUX_59,
   RESERVED = -1,
-  OFFSET = 0XFC8,
-  RESET = 0
+  offset = 0XFC8,
+  reset = 0
 };
 enum class TPCC_EVT_MUX_60_63 {
   EVT_MUX_60,
@@ -1391,70 +1908,194 @@ enum class TPCC_EVT_MUX_60_63 {
   RESERVED2,
   EVT_MUX_63,
   RESERVED = -1,
-  OFFSET = 0XFCC,
-  RESET = 0
+  offset = 0XFCC,
+  reset = 0
 };
-enum class TIMER_EVT_CAPT { RESERVED = -1, OFFSET = 0XFD0, RESET = 0 };
-enum class ECAP_EVT_CAPT { RESERVED = -1, OFFSET = 0XFD4, RESET = 0 };
-enum class ADC_EVT_CAPT { RESERVED = -1, OFFSET = 0XFD8, RESET = 0 };
-enum class RESET_ISO { RESERVED = -1, OFFSET = 0X1000, RESET = 0 };
-enum class DPLL_PWR_SW_CTRL { RESERVED = -1, OFFSET = 0X1318, RESET = 0 };
-enum class DDR_CKE_CTRL { RESERVED = -1, OFFSET = 0X131C, RESET = 0 };
-enum class SMA2 { RESERVED = -1, OFFSET = 0X1320, RESET = 0 };
-enum class M3_TXEV_EOI { RESERVED = -1, OFFSET = 0X1324, RESET = 0 };
+enum class TIMER_EVT_CAPT {
+  TIMER5_EVTCAPT,
+  RESERVED0,
+  TIMER6_EVTCAPT,
+  RESERVED1,
+  TIMER7_EVTCAPT,
+  RESERVED = -1,
+  offset = 0XFD0,
+  reset = 0
+};
+enum class ECAP_EVT_CAPT {
+  ECAP0_EVTCAPT,
+  RESERVED0,
+  ECAP1_EVTCAPT,
+  RESERVED1,
+  ECAP2_EVTCAPT,
+  RESERVED = -1,
+  offset = 0XFD4,
+  reset = 0
+};
+enum class ADC_EVT_CAPT {
+  ADC_EVTCAPT,
+  RESERVED = -1,
+  offset = 0XFD8,
+  reset = 0
+};
+enum class RESET_ISO { ISO_CONTROL, RESERVED = -1, offset = 0X1000, reset = 0 };
+enum class DPLL_PWR_SW_CTRL {
+  RESERVED0,
+  PONIN_PER,
+  PGOODIN_PER,
+  ISO_PER,
+  RESET_PER,
+  RET_PER,
+  ISOSCAN_PER,
+  RESERVED1,
+  SW_CTRL_PER_DPLL,
+  PONIN_DISP,
+  PGOODIN_DISP,
+  ISO_DISP,
+  RESET_DISP,
+  RET_DISP,
+  ISOSCAN_DISP,
+  SW_CTRL_DISP_PLL,
+  PONIN_DDR,
+  PGOODIN_DDR,
+  ISO_DDR,
+  RESET_DDR,
+  RET_DDR,
+  ISOSCAN_DDR,
+  RESERVED2,
+  SW_CTRL_DDR_PLL,
+  offset = 0X1318,
+  reset = 0
+};
+enum class DDR_CKE_CTRL {
+  DDR_CKE_CTRL,
+  RESERVED = -1,
+  offset = 0X131C,
+  reset = 0
+};
+enum class SMA2 {
+  RMII2_CRS_DV_MODE_SEL,
+  VSLDO_CORE_AUTO_RAMP_EN,
+  RESERVED = -1,
+  offset = 0X1320,
+  reset = 0
+};
+enum class M3_TXEV_EOI {
+  M3_TXEV_EOI,
+  RESERVED = -1,
+  offset = 0X1324,
+  reset = 0
+};
 enum class IPC_MSG_REG0 {
   IPC_MSG_REG0,
   RESERVED = -1,
-  OFFSET = 0X1328,
-  RESET = 0
+  offset = 0X1328,
+  reset = 0
 };
 enum class IPC_MSG_REG1 {
   IPC_MSG_REG1,
   RESERVED = -1,
-  OFFSET = 0X132C,
-  RESET = 0
+  offset = 0X132C,
+  reset = 0
 };
 enum class IPC_MSG_REG2 {
   IPC_MSG_REG2,
   RESERVED = -1,
-  OFFSET = 0X1330,
-  RESET = 0
+  offset = 0X1330,
+  reset = 0
 };
 enum class IPC_MSG_REG3 {
   IPC_MSG_REG3,
   RESERVED = -1,
-  OFFSET = 0X1334,
-  RESET = 0
+  offset = 0X1334,
+  reset = 0
 };
 enum class IPC_MSG_REG4 {
   IPC_MSG_REG4,
   RESERVED = -1,
-  OFFSET = 0X1338,
-  RESET = 0
+  offset = 0X1338,
+  reset = 0
 };
 enum class IPC_MSG_REG5 {
   IPC_MSG_REG5,
   RESERVED = -1,
-  OFFSET = 0X133C,
-  RESET = 0
+  offset = 0X133C,
+  reset = 0
 };
 enum class IPC_MSG_REG6 {
   IPC_MSG_REG6,
   RESERVED = -1,
-  OFFSET = 0X1340,
-  RESET = 0
+  offset = 0X1340,
+  reset = 0
 };
 enum class IPC_MSG_REG7 {
   IPC_MSG_REG7,
   RESERVED = -1,
-  OFFSET = 0X1344,
-  RESET = 0
+  offset = 0X1344,
+  reset = 0
 };
-enum class DDR_CMD0_IOCTRL { RESERVED = -1, OFFSET = 0X1404, RESET = 0 };
-enum class DDR_CMD1_IOCTRL { RESERVED = -1, OFFSET = 0X1408, RESET = 0 };
-enum class DDR_CMD2_IOCTRL { RESERVED = -1, OFFSET = 0X140C, RESET = 0 };
-enum class DDR_DATA0_IOCTRL { RESERVED = -1, OFFSET = 0X1440, RESET = 0 };
-enum class DDR_DATA1_IOCTRL { RESERVED = -1, OFFSET = 0X1444, RESET = 0 };
+enum class DDR_CMD0_IOCTRL {
+  IO_CONFIG_I,
+  IO_CONFIG_SR,
+  IO_CONFIG_I_CLK,
+  IO_CONFIG_SR_CLK,
+  IO_CONFIG_GP_WD0,
+  IO_CONFIG_GP_WD1,
+  RESERVED = -1,
+  offset = 0X1404,
+  reset = 0
+};
+enum class DDR_CMD1_IOCTRL {
+  IO_CONFIG_I,
+  IO_CONFIG_SR,
+  IO_CONFIG_I_CLK,
+  IO_CONFIG_SR_CLK,
+  IO_CONFIG_GP_WD0,
+  IO_CONFIG_GP_WD1,
+  RESERVED = -1,
+  offset = 0X1408,
+  reset = 0
+};
+enum class DDR_CMD2_IOCTRL {
+  IO_CONFIG_I,
+  IO_CONFIG_SR,
+  IO_CONFIG_I_CLK,
+  IO_CONFIG_SR_CLK,
+  IO_CONFIG_GP_WD0,
+  IO_CONFIG_GP_WD1,
+  RESERVED = -1,
+  offset = 0X140C,
+  reset = 0
+};
+enum class DDR_DATA0_IOCTRL {
+  IO_CONFIG_I,
+  IO_CONFIG_SR,
+  IO_CONFIG_I_CLK,
+  IO_CONFIG_SR_CLK,
+  IO_CONFIG_WD0_DQ,
+  IO_CONFIG_WD0_DM,
+  IO_CONFIG_WD0_DQS,
+  IO_CONFIG_WD1_DQ,
+  IO_CONFIG_WD1_DM,
+  IO_CONFIG_WD1_DQS,
+  RESERVED = -1,
+  offset = 0X1440,
+  reset = 0
+};
+enum class DDR_DATA1_IOCTRL {
+  IO_CONFIG_I,
+  IO_CONFIG_SR,
+  IO_CONFIG_I_CLK,
+  IO_CONFIG_SR_CLK,
+  IO_CONFIG_WD0_DQ,
+  IO_CONFIG_WD0_DM,
+  IO_CONFIG_WD0_DQS,
+  IO_CONFIG_WD1_DQ,
+  IO_CONFIG_WD1_DM,
+  IO_CONFIG_WD1_DQS,
+  RESERVED = -1,
+  offset = 0X1444,
+  reset = 0
+};
 
 using CONTROL_REVISION_REG = offset_register<CONTROL_REVISION, 1>;
 using CONTROL_HWINFO_REG = offset_register<CONTROL_HWINFO, 1>;
