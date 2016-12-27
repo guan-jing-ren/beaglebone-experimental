@@ -49,21 +49,82 @@ inline void set_stack_pointer() {
   asm volatile(R"(ldr sp, =%0)" ::"i"(BOOT_STACK_BASE));
 }
 
+template <typename Clkmode, typename Idlest, std::uintptr_t Address, typename F>
+inline void clock_configure(F f) {
+  // Set bypass mode
+  Clkmode clkmode{Address};
+  clkmode.template set<Clkmode::field_type::DPLL_EN>(4);
+  Idlest reg{Address};
+  while (!reg.template test<Idlest::field_type::ST_MN_BYPASS>(1))
+    ;
+  if (!reg.template test<Idlest::field_type::ST_DPLL_CLK>(
+          0)) /*Do nothing for now*/
+    ;
+
+  f();
+
+  // Set lock mode
+  clkmode.template set<Clkmode::field_type::DPLL_EN>(7);
+  while (!reg.template test<Idlest::field_type::ST_DPLL_CLK>(1))
+    ;
+  if (!reg.template test<Idlest::field_type::ST_MN_BYPASS>(
+          0)) /*Do nothing for now*/
+    ;
+}
+
 extern "C" void start() {
   set_stack_pointer();
 
-  fm::memory_mapped_register<GPIO::OE, 1> s = 0;
-  (void)s;
-  GPIO::OE_REG oe = GPIO::GPIO0;
-  oe.set<GPIO::OE::_12, GPIO::OE::_2>(1, 1);
-  oe.get<GPIO::OE::_12>();
+  {
+    using namespace clocks;
 
-  GPIO::REVISION_REG rev = GPIO::GPIO1;
-  (void)rev;
+    // Configure core PLL
+    clock_configure<CM_CLKMODE_DPLL_CORE_REG, CM_IDLEST_DPLL_CORE_REG,
+                    CM_WKUP>([]() {
+      // OPP100
 
-  UART::THR_REG thr = UART::UART0;
-  (void)thr;
+      // AM335x Rev O 8.1.6.7 p.1183
+      CM_CLKSEL_DPLL_CORE_REG{CM_WKUP}
+          .set<CM_CLKSEL_DPLL_CORE::DPLL_MULT, CM_CLKSEL_DPLL_CORE::DPLL_DIV>(
+              2000, 24      // AM335x Rev O 8.1.6.7 p.1183
+                        - 1 // AM335x Rev 0 8.1.12.2.27 p.1297
+              );
 
-  clocks::CM_PER_L4LS_CLKSTCTRL_REG l4ls = clocks::CM_PER;
-  (void)l4ls;
+      // AM335x Rev O 8.1.6.7 p.1183
+      CM_DIV_M4_DPLL_CORE_REG{CM_WKUP}
+          .set<CM_DIV_M4_DPLL_CORE::HSDIVIDER_CLKOUT1_DIV>(10);
+      CM_DIV_M5_DPLL_CORE_REG{CM_WKUP}
+          .set<CM_DIV_M5_DPLL_CORE::HSDIVIDER_CLKOUT2_DIV>(8);
+      CM_DIV_M6_DPLL_CORE_REG{CM_WKUP}
+          .set<CM_DIV_M6_DPLL_CORE::HSDIVIDER_CLKOUT3_DIV>(4);
+    });
+
+    // Configure peripheral PLL
+    clock_configure<CM_CLKMODE_DPLL_PER_REG, CM_IDLEST_DPLL_PER_REG, CM_PER>(
+        []() {
+          // OPP100
+
+          // AM335x Rev O 8.1.6.8 p.1185
+          CM_CLKSEL_DPLL_PERIPH_REG{CM_PER}
+              .set<CM_CLKSEL_DPLL_PERIPH::DPLL_MULT,
+                   CM_CLKSEL_DPLL_PERIPH::DPLL_DIV>(960, 24 - 1);
+
+          // AM335x Rev O 8.1.6.8 p.1185
+          CM_DIV_M2_DPLL_PER_REG{CM_PER}
+              .set<CM_DIV_M2_DPLL_PER::DPLL_CLKOUT_DIV>(5);
+        });
+
+    // Configure MPU PLL
+    clock_configure<CM_CLKMODE_DPLL_MPU_REG, CM_IDLEST_DPLL_PER_REG,
+                    CM_MPU>([]() {
+      // OPP100
+      CM_CLKSEL_DPLL_MPU_REG{CM_MPU}
+          .set<CM_CLKSEL_DPLL_MPU::DPLL_MULT, CM_CLKSEL_DPLL_MPU::DPLL_DIV>(
+              1000, // AM335x Rev O 9.2.1.49 p.1467
+              // Get max freq from efuse_sma, figure out voltage requirements
+              24      // AM335x Rev O 8.1.6.7 p.1183
+                  - 1 // AM335x Rev 0 8.1.12.2.27 p.1297
+              );
+    });
+  }
 }
