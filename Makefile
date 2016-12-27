@@ -1,7 +1,7 @@
 include ../automation/diag.mk 
 include ../automation/lang.mk
 
-CC = /home/kykwan/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-g++ -O3
+CC = /home/kykwan/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-g++ -O3 -Os
 COPY = ~/gcc-arm-none-eabi-5_4-2016q3/bin/arm-none-eabi-objcopy
 LINK_FLAGS = -ffreestanding -nostartfiles -nodefaultlibs -fno-rtti -static -T experiment.ld
 DEBUG_FLAGS = -gsplit-dwarf -g3 -gdwarf-4 -fdump-translation-unit
