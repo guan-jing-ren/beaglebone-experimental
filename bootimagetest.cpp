@@ -101,23 +101,23 @@ extern "C" void start() {
     });
 
     // Configure peripheral PLL
-    clock_configure<CM_CLKMODE_DPLL_PER_REG, CM_IDLEST_DPLL_PER_REG, CM_PER>(
+    clock_configure<CM_CLKMODE_DPLL_PER_REG, CM_IDLEST_DPLL_PER_REG, CM_WKUP>(
         []() {
           // OPP100
 
           // AM335x Rev O 8.1.6.8 p.1185
-          CM_CLKSEL_DPLL_PERIPH_REG{CM_PER}
+          CM_CLKSEL_DPLL_PERIPH_REG{CM_WKUP}
               .set<CM_CLKSEL_DPLL_PERIPH::DPLL_MULT,
                    CM_CLKSEL_DPLL_PERIPH::DPLL_DIV>(960, 24 - 1);
 
           // AM335x Rev O 8.1.6.8 p.1185
-          CM_DIV_M2_DPLL_PER_REG{CM_PER}
+          CM_DIV_M2_DPLL_PER_REG{CM_WKUP}
               .set<CM_DIV_M2_DPLL_PER::DPLL_CLKOUT_DIV>(5);
         });
 
     // Configure MPU PLL
     clock_configure<CM_CLKMODE_DPLL_MPU_REG, CM_IDLEST_DPLL_PER_REG,
-                    CM_MPU>([]() {
+                    CM_WKUP>([]() {
       //   auto package_type =
       //   control_module::EFUSE_SMA_REG{control_module::CONTROL_REGISTERS}
       //   .get<control_module::EFUSE_SMA::PACKAGE_TYPE>();
@@ -149,7 +149,7 @@ extern "C" void start() {
       };
 
       // OPP100
-      CM_CLKSEL_DPLL_MPU_REG{CM_MPU}
+      CM_CLKSEL_DPLL_MPU_REG{CM_WKUP}
           .set<CM_CLKSEL_DPLL_MPU::DPLL_MULT, CM_CLKSEL_DPLL_MPU::DPLL_DIV>(
               max_frequency, // AM335x Rev O 9.2.1.49 p.1467
               // Get max freq from efuse_sma, figure out voltage requirements
