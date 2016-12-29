@@ -156,6 +156,24 @@ extern "C" void start() {
               24      // AM335x Rev O 8.1.6.7 p.1183
                   - 1 // AM335x Rev 0 8.1.12.2.27 p.1297
               );
+
+      CM_DIV_M2_DPLL_MPU_REG{CM_WKUP}.set<CM_DIV_M2_DPLL_MPU::DPLL_CLKOUT_DIV>(
+          32 // Find where this comes from, currently taken from StarterWare
+             // source
+          - 1 // AM335x Rev 0 8.1.12.2.27 p.1297
+          );
     });
+
+    // Configure DDR PLL
+    clock_configure<CM_CLKMODE_DPLL_DDR_REG, CM_IDLEST_DPLL_DDR_REG, CM_WKUP>(
+        []() {
+          CM_CLKSEL_DPLL_DDR_REG{CM_WKUP}
+              .set<CM_CLKSEL_DPLL_DDR::DPLL_MULT, CM_CLKSEL_DPLL_DDR::DPLL_DIV>(
+                  400, // BBB Rev 0.9 6.2.6 p.52 DDR3L runs at 400
+                  24 - 1);
+
+          CM_DIV_M2_DPLL_DDR_REG{CM_WKUP}
+              .set<CM_DIV_M2_DPLL_DDR::DPLL_CLKOUT_DIV>(32 - 1);
+        });
   }
 }
