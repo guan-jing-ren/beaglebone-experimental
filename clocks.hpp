@@ -1446,6 +1446,7 @@ using CM_CEFUSE_CLKSTCTRL_REG =
 using CM_CEFUSE_CEFUSE_CLKCTRL_REG =
     offset_register<CM_CEFUSE_CEFUSE_CLKCTRL, 2, 14, 2, 14>;
 
+// AM335x Rev O 2.1 p.177
 constexpr std::uintptr_t CM_PER = 0x0'44E0'0000;
 constexpr std::uintptr_t CM_WKUP = 0x0'44E0'0400;
 constexpr std::uintptr_t CM_DPLL = 0x0'44E0'0500;
