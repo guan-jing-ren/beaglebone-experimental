@@ -101,6 +101,7 @@ using WDT_WIRQSTAT_REG = offset_register<WDT_WIRQSTAT, 1, 1, 30>;
 using WDT_WIRQENSET_REG = offset_register<WDT_WIRQENSET, 1, 1, 30>;
 using WDT_WIRQENCLR_REG = offset_register<WDT_WIRQENCLR, 1, 1, 30>;
 
+// AM335x Rev O 2.1 p.178
 constexpr std::uintptr_t WDT1 = 0x0'44E3'5000;
 }
 

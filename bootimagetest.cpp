@@ -81,6 +81,9 @@ extern "C" void start() {
     using namespace watchdog;
     WDT_WSPR_REG watchdog{WDT1};
     WDT_WWPS_REG pending{WDT1};
+
+    // AM335x Rev O 20.4.3.8 p.4498
+    // AM335x Rev O 20.4.3.14.2 p.4502
     watchdog.set<WDT_WSPR::WSPR_VALUE>(0xAAAAu);
     while (!pending.test<WDT_WWPS::W_PEND_WSPR>(0))
       ;
