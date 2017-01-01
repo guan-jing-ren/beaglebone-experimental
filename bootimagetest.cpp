@@ -42,6 +42,7 @@ struct {
 } const volatile boot_header;
 
 #include "control_module.hpp"
+#include "watchdog.hpp"
 #include "clocks.hpp"
 #include "gpio.hpp"
 #include "uart.hpp"
@@ -75,6 +76,18 @@ inline void clock_configure(F f) {
 
 extern "C" void start() {
   set_stack_pointer();
+
+  {
+    using namespace watchdog;
+    WDT_WSPR_REG watchdog{WDT1};
+    WDT_WWPS_REG pending{WDT1};
+    watchdog.set<WDT_WSPR::WSPR_VALUE>(0xAAAAu);
+    while (!pending.test<WDT_WWPS::W_PEND_WSPR>(0))
+      ;
+    watchdog.set<WDT_WSPR::WSPR_VALUE>(0x5555u);
+    while (!pending.test<WDT_WWPS::W_PEND_WSPR>(0))
+      ;
+  }
 
   {
     using namespace clocks;
@@ -158,8 +171,8 @@ extern "C" void start() {
               );
 
       CM_DIV_M2_DPLL_MPU_REG{CM_WKUP}.set<CM_DIV_M2_DPLL_MPU::DPLL_CLKOUT_DIV>(
-          32 // Find where this comes from, currently taken from StarterWare
-             // source
+          32  // Find where this comes from, currently taken from StarterWare
+              // source
           - 1 // AM335x Rev 0 8.1.12.2.27 p.1297
           );
     });
